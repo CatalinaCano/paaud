@@ -1,0 +1,161 @@
+<div class="col-md-3">
+    <div class="list-group">
+        <a class="list-group-item active"><span class="glyphicon glyphicon-map-marker"></span> Información Importante</a>
+        <a href="#" class="list-group-item" data-toggle="modal" data-target="#condiciones"> <span class="glyphicon glyphicon-check"></span> Conozca las condiciones </a>
+        <a href="#" class="list-group-item" data-toggle="modal" data-target="#puntaje"> <span class="glyphicon glyphicon-pencil"></span> ¿Cómo se Calcula el puntaje? </a>
+    </div>
+</div>
+
+<!--Ventana Emergente Condiciones-->
+<div class="modal fade" id="condiciones" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-info-sign"></span> DOCUMENTOS REQUERIDOS PARA LA INSCRIPCIÓN</h4>
+            </div>
+            <div class="modal-body">
+
+                <img src="../../assets/condiciones.png" alt="" class="center-block">
+
+                <ol>
+                    <li>Formulario de Solicitud de Adjudicación del Subsidio e ingreso al Programa Apoyo Alimentario diligenciado completamente.</li>
+                    <br>
+                    <li>Carta dirigida a la Directora de Bienestar Institucional (Dra. ASTRID XIMENA PARSONS DELGADO) donde explique de manera clara las razones porque solicita el apoyo alimentario.</li>
+                    <br>
+                    <li>Certificado de estratificación del lugar de residencia del estudiante expedido por Catastro o Supercade o por las Alcaldías Municipales para quienes residen fuera de Bogotá (no superior a un año). <br>
+                        <a href="http://sinupotp.sdp.gov.co/sinupot/index.jsf" target="_blank"><strong>Saque aquí su certificado de Estratifiación online</strong></a></li>
+                    <br>
+                    <li>Fotocopia de la factura de un recibo de servicio público (con una vigencia de 3 meses) del domicilio donde reside el estudiante (agua, luz, gas o teléfono), que coincida con la dirección del certificado de estratificación.</li>
+                    <br>
+                    <li>Fotocopia del Recibo de Pago de la Universidad cancelado.</li>
+                    <br>
+                    <li>Si el estudiante o su grupo familiar son desplazados deben presentar el Certificado de desplazamientos forzoso por violencia del Departamento de la Prosperidad Social - DPS.</li>
+                    <br>
+                    <li>Si el estudiante es padre o madre debe presentar certificado de nacimiento de los o las hijas.</li>
+                    <br>
+                    <li>Certificado de ingresos. Tener en cuenta:
+                        <ul>
+                            <li>Si la persona de quien depende económicamente el estudiante es trabajador independiente o el estudiante trabaja como independiente, debe redactar una carta donde especifique la labor que desempeña y los ingresos que recibe
+                                mensuales, firmada, con número de cédula, número de teléfono y dirección.</li>
+                            <br>
+                            <li>Si la persona de la que depende el estudiante es empleado o el estudiante es empleado debe presentar carta laboral de la empresa especificando el ingreso mensual (expedida en este año).</li>
+                            <br>
+                            <li> Si presenta certificado de ingresos y retenciones debe corresponder al año en curso</li>
+
+                        </ul>
+                    </li>
+                    <br>
+                    <li>ExamenMédico: Para los estudiantes que presenten algún tipo de enfermedad como: Hipoglicemia, bajo peso, baja talla, gastritis, anemia o desordenes alimenticios, deben solicitar cita con el médico de la facultad y presentar la certificación
+                        con los documentos.</li>
+                    <br>
+                    <li>Si es estudiante o su familia, paga arriendo debe presentar fotocopia del contrato de arrendamiento.</li>
+                </ol>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--Ventana Como se calcula el puntaje-->
+<div class="modal fade" id="puntaje" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><span class="glyphicon glyphicon-comment"></span>¿Cómo se Calcula el puntaje?</h4>
+            </div>
+            <div class="modal-body">
+
+                <img src="../../assets/puntaje.png" alt="" class="center-block">
+                <hr> De acuerdo a la resolución 256 de 2005, se establece que la asignación del subsidio se adjudicará teniendo en cuenta la condición socioeconómica del estudiante
+                <br>
+                <hr>
+                <table class="table table-striped table-bordered table-hover ">
+                    <thead>
+                        <tr class="success">
+                            <th class="text-center">Variables</th>
+                            <th colspan="2" class="text-center">Puntaje</th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td rowspan="4">Ingresos familiares</td>
+                        <td>0-1 SMMLV</td>
+                        <td> 30</td>
+                    </tr>
+                    <tr>
+                        <td>&gt;1-2 SMMLV</td>
+                        <td>20</td>
+                    </tr>
+                    <tr>
+                        <td>&gt;2-3 SMMLV</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>&gt; 3 SMMLV</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4"><br><br><br>Condiciones Familiares<br>(Se evalúan aditivamente<br>hasta un máximo de 30<br>puntos)</td>
+                        <td>Sostiene el hogar en el que vive</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>Se sostiene a sí mismo</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>Vive fuera de su núcleo familiar</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>Tiene cónyuge, hijos y/u otras<br>personas a cargo</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="4"><br><br>Procedencia y lugar de <br>residencia (Se evalúan<br>aditivamente hasta un <br>máximo de 30 puntos)</td>
+                        <td>Vive en casa del empleador</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>Se encuentra en condición de <br>desplazamiento forzado</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>Proviene de municipios distintos<br>a Bogotá</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>Reside en zonas de alto grado de<br>vulnerabilidad social y económica</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">Condiciones de Salud<br>(Se evalúan aditivamente<br>hasta un máximo de 10<br>puntos)</td>
+                        <td>Presenta algún tipo de discapacidad<br>fisíca o mental</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>Sufre alguna patología asociada con<br>problemas de alimentación</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="text-center">
+                            <strong>Total Máximo Posible</strong>
+                        </td>
+                        <td>100</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

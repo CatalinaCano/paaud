@@ -1,0 +1,344 @@
+<app-nav></app-nav>
+
+<div class="container">
+    <!--Barra de navegacion-->
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            <li><a routerLink="/landing"><span class="glyphicon glyphicon-home"></span> PAAUD</a></li>
+            <li><span class="glyphicon glyphicon-duplicate"></span> Solicitud</li>
+            <li class="active"><span class="glyphicon glyphicon-pencil"></span> Registrar Solicitud</li>
+        </ul>
+    </div>
+
+    <app-informacion></app-informacion>
+
+    <div class="col-md-9 jumbotron">
+        <h1>Registrar Solicitud </h1>
+        <hr class="my-4">
+        <br>
+
+        <form class="form-horizontal">
+            <fieldset>
+                <legend><span class="glyphicon glyphicon-user"></span> Datos Personales</legend>
+
+
+                <div class="form-group">
+                    <label for="nombres" class="col-lg-2 control-label">Nombres </label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" name="nombres" id="nombres" readonly="readonly" placeholder="Nombres del Estudiante" required/>
+                    </div>
+
+                    <label for="apellidos" class="col-lg-2 control-label">Apellidos</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" name="apellidos" id="apellidos" readonly="readonly" placeholder="Apellidos del Estudiante" required/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="codigo" class="col-lg-2 control-label">Código </label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" name="codigo" id="codigo" readonly="readonly" placeholder="Código del Estudiante" required/>
+                    </div>
+
+                    <label for="documento" class="col-lg-2 control-label">Documento de Identidad</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" name="documento" id="documento" readonly="readonly" placeholder="Documento del Estudiante" required/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="facultad" class="col-lg-2 control-label">Facultad </label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" name="facultad" id="facultad" readonly="readonly" placeholder="Nombre Facultad" required/>
+                    </div>
+
+                    <label for="proyecto" class="col-lg-2 control-label">Proyecto Curricular</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" name="proyecto" id="proyecto" readonly="readonly" placeholder="Carrera del Estudiante" required/>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="localidad" class="col-lg-2 control-label">Localidad</label>
+                    <div class="col-lg-4">
+                        <select class="form-control" id="localidad" required>
+                            <option>Usaquén</option>
+                            <option>Chapinero</option>
+                            <option>Santa Fe</option>
+                            <option>San Cristóbal</option>
+                            <option>Usme</option>
+                            <option>Tunjuelito</option>
+                            <option>Bosa</option>
+                            <option>Kennedy</option>
+                            <option>Fontibón</option>
+                            <option>Engativá</option>
+                            <option>Suba</option>
+                            <option>Barrios Unidos</option>
+                            <option>Teusaquillo</option>
+                            <option>Los Mártires</option>
+                            <option>Antonio Nariño</option>
+                            <option>Puente Aranda</option>
+                            <option>La Candelaria</option>
+                            <option>Rafael Uribe Uribe</option>
+                            <option>Ciudad Bolívar</option>
+                            <option>Sumapaz</option>                        
+                        </select>
+                    </div>
+                    <label for="barrio" class="col-lg-2 control-label">Barrio</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" name="barrio" id="barrio" placeholder="Barrio del Estudiante" required/>
+                    </div>
+                </div>
+
+
+                <legend><span class="glyphicon glyphicon-phone-alt"></span> Datos de Contacto </legend>
+
+                <div class="form-group">
+                    <label for="celular" class="col-lg-2 control-label"><span class="glyphicon glyphicon-phone"></span> Número Celular</label>
+                    <div class="col-lg-4">
+                        <input type="number" class="form-control" id="celular" placeholder="300123456" required>
+                    </div>
+
+                    <label for="fijo" class="col-lg-2 control-label"><span class="glyphicon glyphicon-phone-alt"></span> Número Fijo</label>
+                    <div class="col-lg-4">
+                        <input type="number" class="form-control" id="fijo" placeholder="1234567" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="col-lg-4 control-label">e-mail</label>
+                    <div class="col-lg-6 input-group">
+                        <span class="input-group-addon">@</span>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Correo Electrónico">
+                    </div>
+                </div>
+
+                <legend><span class="glyphicon glyphicon-usd"></span> Información Socioeconómica</legend>
+
+                <div class="form-group">
+                    <label for="estadoCivil" class="col-lg-2 control-label">Estado Civil</label>
+                    <div class="col-lg-4">
+                        <select class="form-control" id="estadoCivil" required>
+                            <option>Soltero</option>
+                            <option>Casado</option>
+                            <option>Separado/Divorciado</option>
+                            <option>Viudo</option>
+                            <option>Unión Libre</option>                                          
+                        </select>
+                    </div>
+
+                    <label for="estadoCivil" class="col-lg-2 control-label">Estrato</label>
+                    <div class="col-lg-4">
+                        <select class="form-control" id="estadoCivil" required>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>                                          
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="matricula" class="col-lg-6 control-label">Valor de la Matrícula</label>
+                    <div class="col-lg-6 input-group">
+                        <span class="input-group-addon">$</span>
+                        <input type="number" class="form-control" id="matricula" required placeholder="100.000">
+                        <span class="input-group-addon">.00</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="ingresos" class="col-lg-6 control-label">Valor mensual de los ingresos</label>
+                    <div class="col-lg-6 input-group">
+                        <span class="input-group-addon">$</span>
+                        <input type="number" class="form-control" id="ingresos" required placeholder="100.000">
+                        <span class="input-group-addon">.00</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="sostenimientoEconomico" class="col-lg-4 control-label">Se sostiene económicamente a si mismo</label>
+                    <div class="col-lg-2">
+                        <select class="form-control" id="sostenimientoEconomico" required>
+                            <option>Si</option>
+                            <option>No</option>                                         
+                        </select>
+                    </div>
+
+                    <label for="sostenimientoHogar" class="col-lg-4 control-label">Sostiene actualmente su hogar</label>
+                    <div class="col-lg-2">
+                        <select class="form-control" id="sostenimientoHogar" required>
+                            <option>Si</option>
+                            <option>No</option>                                         
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="viveFuera" class="col-lg-4 control-label">Vive fuera de su núcleo familiar</label>
+                    <div class="col-lg-2">
+                        <select class="form-control" id="viveFuera" required>
+                            <option>Si</option>
+                            <option>No</option>                                         
+                        </select>
+                    </div>
+
+                    <label for="sostenimientoHogar" class="col-lg-4 control-label">Tiene personas a cargo económicamente</label>
+                    <div class="col-lg-2">
+                        <select class="form-control" id="sostenimientoHogar" required>
+                            <option>Si</option>
+                            <option>No</option>                                         
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="pagaArriendo" class="col-lg-4 control-label">Actualmente paga arriendo</label>
+                    <div class="col-lg-2">
+                        <select class="form-control" id="pagaArriendo" required>
+                            <option>Si</option>
+                            <option>No</option>                                         
+                        </select>
+                    </div>
+
+                    <label for="origen" class="col-lg-4 control-label">Proviene de Municipios o ciudades distintos a Bogotá</label>
+                    <div class="col-lg-2">
+                        <select class="form-control" id="origen" required>
+                            <option>Si</option>
+                            <option>No</option>                                         
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="tipoPoblacion" class="col-lg-7 control-label">Usted o su grupo familiar esta certificado como alguna de las siguientes poblaciones </label>
+                    <div class="col-lg-5 input-group">
+                        <select class="form-control" id="tipoPoblacion" required>
+                            <option>Desplazado</option>
+                            <option>Indigena</option>      
+                            <option>Minorias ëtnicas</option>
+                            <option>Afrodescendiente - Afrocolombiano</option>     
+                            <option>Mujer cabeza de hogar</option>
+                            <option>Ninguna</option>                              
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="discapacidad" class="col-lg-4 control-label">Presenta algún tipo de discapacidad física o mental</label>
+                    <div class="col-lg-2">
+                        <select class="form-control" id="discapacidad" required>
+                            <option>Si</option>
+                            <option>No</option>                                         
+                        </select>
+                    </div>
+
+                    <label for="patologia" class="col-lg-4 control-label">Presenta alguna patología asociada a su alimentación</label>
+                    <div class="col-lg-2">
+                        <select class="form-control" id="patologia" required>
+                            <option>Si</option>
+                            <option>No</option>                                         
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="subsidio" class="col-lg-9 control-label"> Actualmente pertenece a algún programa de subsidio de indole nacional o departamental </label>
+                    <div class="col-lg-2 input-group">
+                        <select class="form-control" id="subsidio" required>
+                            <option>Si</option>
+                            <option>No</option>                           
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="seguridadSocial" class="col-lg-7 control-label">  Que tipo de seguridad social  posee actualmente </label>
+                    <div class="col-lg-5 input-group">
+                        <select class="form-control" id="seguridadSocial" required>
+                            <option>Sisben</option>
+                            <option>EPS</option>      
+                            <option>Médicina Prepagada</option>                      
+                        </select>
+                    </div>
+                </div>
+
+                <legend><span class="glyphicon glyphicon-paperclip"></span> Documentación Requerida</legend>
+                <div class="form-group">
+                    <label for="carta" class="col-lg-5 control-label"> Carta dirigida a la Directora de Bienestar Institucional </label>
+                    <div class="col-lg-7">
+                        <input type="file" class="form-control" id="carta" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="certificadoEstratificacion" class="col-lg-5 control-label">Certificado de Estratifiación (No superior a un Año) </label>
+                    <div class="col-lg-7">
+                        <input type="file" class="form-control" id="certificadoEstratificacion" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="reciboPublico" class="col-lg-5 control-label">Factura de un   recibo de servicio  público (con una vigencia de 3 meses)  </label>
+                    <div class="col-lg-7">
+                        <input type="file" class="form-control" id="reciboPublico" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="reciboUniversidad" class="col-lg-5 control-label">Fotocopia del Recibo de Pago de la Universidad cancelado.</label>
+                    <div class="col-lg-7">
+                        <input type="file" class="form-control" id="reciboUniversidad" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cerDesplazamiento" class="col-lg-5 control-label">Certificado de desplazamientos forzoso </label>
+                    <div class="col-lg-7">
+                        <input type="file" class="form-control" id="cerDesplazamiento">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cerNacimiento" class="col-lg-5 control-label">Certificado de Nacimiento de sus hijos</label>
+                    <div class="col-lg-7">
+                        <input type="file" class="form-control" id="cerNacimiento">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cerIngresos" class="col-lg-5 control-label">Certificado de Ingresos</label>
+                    <div class="col-lg-7">
+                        <input type="file" class="form-control" id="cerIngresos" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="examenes" class="col-lg-5 control-label">Exámenes Médicos</label>
+                    <div class="col-lg-7">
+                        <input type="file" class="form-control" id="examenes">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="conArrendamiento" class="col-lg-5 control-label">Contrato de Arrendamiento</label>
+                    <div class="col-lg-7">
+                        <input type="file" class="form-control" id="conArrendamiento">
+                    </div>
+                </div>
+
+
+                <div class="form-group block-center">
+                    <div class="col-lg-10 col-lg-offset-4">
+                        <button type="reset" class="btn btn-default"> <span class="glyphicon glyphicon-remove-sign"></span> Cancelar</button>
+                        <button type="submit" class="btn btn-success"> <span class="glyphicon glyphicon-ok-circle"></span> Enviar</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+</div>

@@ -1,0 +1,98 @@
+<nav class="navbar navbar-default navbar-custom">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header navbar-custom">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a routerLink="/landing"><img class="navbar-bran navbar-custom" src="../../assets/logoblanco.png" width="55" height="55" /></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-custom" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-custom">
+                <!--item Convocatoria-->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-bullhorn"></span> Convocatoria<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a routerLink="/implementar"><span class="glyphicon glyphicon-calendar"></span> Publicar Convocatoria</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a routerLink="/implementar"><span class="glyphicon glyphicon-flag"></span> Ver Convocatoria Actual</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a routerLink="/implementar"><span class="glyphicon glyphicon-book"></span> Listado de Beneficiarios</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!--item Solicitud-->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-duplicate"></span> Solicitud <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a routerLink="/historico-solicitudes"> <span class="glyphicon glyphicon-qrcode"></span> Ver Historico de Solicitudes</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a routerLink="/registrar-solicitud"> <span class="glyphicon glyphicon-pencil"></span> Registrar Solicitud</a>
+                        </li>
+                        <li>
+                            <a routerLink="/implementar"> <span class="glyphicon glyphicon-bookmark"></span> Ver Solicitudes Radicadas </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!--item Tareas Asignadas-->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-briefcase"></span> Tareas Asignadas <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>
+                            <a routerLink="/implementar"> <span class="glyphicon glyphicon-plus-sign"></span> Registrar Tarea Nueva</a>
+                        </li>
+                        <li>
+                            <a routerLink="/implementar"> <span class="glyphicon glyphicon-dashboard"></span> Asignar Tarea</a>
+                        </li>
+                        <li>
+                            <a routerLink="/implementar"> <span class="glyphicon glyphicon-wrench"></span> Modificar Tarea</a>
+                        </li>
+                        <li>
+                            <a routerLink="/implementar"> <span class="glyphicon glyphicon-trash"></span> Eliminar Tarea</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a routerLink="/implementar"> <span class="glyphicon glyphicon-search"></span> Ver Tareas Asignadas</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a routerLink="/implementar"><span class="glyphicon glyphicon-signal"></span> Calcular Puntaje </a>
+                </li>
+                <li>
+                    <a routerLink="/implementar"><span class="glyphicon glyphicon-warning-sign"></span> Retirar Estudiante</a>
+                </li>
+
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right navbar-custom">
+                <li>
+                    <a routerLink="/nuevas-solicitudes"> <span class="badge"> 3 </span> Solicitudes Nuevas </a>
+                </li>
+                <li>
+                    <a routerLink="/implementar"><span class="glyphicon glyphicon-off"></span> Salir</a>
+                </li>
+            </ul>
+
+        </div>
+        <!-- /.navbar-collapse -->
+
+    </div>
+    <!-- /.container-fluid -->
+</nav>

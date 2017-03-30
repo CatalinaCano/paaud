@@ -1,0 +1,66 @@
+<app-nav></app-nav>
+
+<div class="container">
+
+    <!--Barra de navegacion-->
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            <li><a routerLink="/landing"><span class="glyphicon glyphicon-home"></span> PAAUD</a></li>
+            <li><span class="glyphicon glyphicon-duplicate"></span> Solicitud</li>
+            <li class="active"><span class="glyphicon glyphicon-bell"></span> Solicitudes Nuevas</li>
+        </ul>
+    </div>
+
+    <div class="col-md-12 jumbotron">
+        <h1>Solicitudes Nuevas</h1>
+        <hr class="my-4">
+
+        <div class="row" id="barraDeBusqueda">
+            <div class="col-md-12">
+                <form class="navbar-form navbar-center" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Código del Estudiante" id="codigo" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Buscar</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="table table-striped table-bordered table-hover ">
+                <thead>
+                    <tr class="success">
+                        <th>Nº</th>
+                        <th>Código</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Facultad</th>
+                        <th>Carrera</th>
+                        <th>Fecha de Radicado</th>
+                        <th>Estado</th>
+                        <th>Validar</th>
+                        <th>Responsable</th>
+                    </tr>
+                </thead>
+
+                <tr>
+                    <td>1</td>
+                    <td>20121020079</td>
+                    <td>Maria</td>
+                    <td>Castillo</td>
+                    <td>Ingeniería</td>
+                    <td>Ing. Catastral</td>
+                    <td>08/07/2017</td>
+                    <td>
+                        <span class="label label-warning text-center">En Proceso</span>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-success btn-xs center-block" data-toggle="modal" data-target="#rechazado"><span class="glyphicon glyphicon-check"></span> validar</button>
+                    </td>
+                    <td>Nicolás Bernal</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -5,6 +5,7 @@ import { LandingComponent } from './components/landing/landing.component';
 import { HistoricoSolicitudesComponent } from './components/historico-solicitudes/historico-solicitudes.component';
 import { RegistrarSolicitudComponent } from './components/registrar-solicitud/registrar-solicitud.component';
 import { NuevasSolicitudesComponent } from './components/nuevas-solicitudes/nuevas-solicitudes.component';
+import { PublicarConvocatoriaComponent } from './components/publicar-convocatoria/publicar-convocatoria.component';
 
 export const routes: Route[] = [
     { path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -12,6 +13,7 @@ export const routes: Route[] = [
     { path: 'landing', component: LandingComponent },
     { path: 'historico-solicitudes', component: HistoricoSolicitudesComponent },
     { path: 'registrar-solicitud', component: RegistrarSolicitudComponent },
-    { path: 'nuevas-solicitudes', component: NuevasSolicitudesComponent }
+    { path: 'nuevas-solicitudes', component: NuevasSolicitudesComponent },
+    { path: 'publicar-convocatoria', component: PublicarConvocatoriaComponent }
 
 ];

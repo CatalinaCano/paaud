@@ -5,8 +5,10 @@ import { LandingComponent } from './components/landing/landing.component';
 import { HistoricoSolicitudesComponent } from './components/historico-solicitudes/historico-solicitudes.component';
 import { RegistrarSolicitudComponent } from './components/registrar-solicitud/registrar-solicitud.component';
 import { NuevasSolicitudesComponent } from './components/nuevas-solicitudes/nuevas-solicitudes.component';
-import { PublicarConvocatoriaComponent } from './components/publicar-convocatoria/publicar-convocatoria.component';
-import { ConsultarConvocatoriaComponent } from './components/consultar-convocatoria/consultar-convocatoria.component';
+import { TiqueteraComponent } from './components/tiquetera/tiquetera.component';
+import { ConsultarConvocatoriaComponent } from "app/components/consultar-convocatoria/consultar-convocatoria.component";
+import { PublicarConvocatoriaComponent } from "app/components/publicar-convocatoria/publicar-convocatoria.component";
+
 
 export const routes: Route[] = [
     { path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -16,6 +18,7 @@ export const routes: Route[] = [
     { path: 'registrar-solicitud', component: RegistrarSolicitudComponent },
     { path: 'nuevas-solicitudes', component: NuevasSolicitudesComponent },
     { path: 'publicar-convocatoria', component: PublicarConvocatoriaComponent },
-    { path: 'consultar-convocatoria', component:ConsultarConvocatoriaComponent }
+    { path: 'consultar-convocatoria', component:ConsultarConvocatoriaComponent },
+    { path: 'tiquetera', component: TiqueteraComponent },
 
 ];

@@ -14,6 +14,7 @@ import { RegistrarSolicitudComponent } from './components/registrar-solicitud/re
 import { NuevasSolicitudesComponent } from './components/nuevas-solicitudes/nuevas-solicitudes.component';
 import { PublicarConvocatoriaComponent } from './components/publicar-convocatoria/publicar-convocatoria.component';
 import { ConsultarConvocatoriaComponent } from './components/consultar-convocatoria/consultar-convocatoria.component';
+import { TiqueteraComponent } from './components/tiquetera/tiquetera.component';
 import { routes } from './app.routes';
 
 @NgModule({
@@ -27,7 +28,8 @@ import { routes } from './app.routes';
     RegistrarSolicitudComponent,
     NuevasSolicitudesComponent,
     PublicarConvocatoriaComponent,
-    ConsultarConvocatoriaComponent
+    ConsultarConvocatoriaComponent,
+    TiqueteraComponent
   ],
   imports: [
     BrowserModule,

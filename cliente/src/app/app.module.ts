@@ -13,6 +13,7 @@ import { HistoricoSolicitudesComponent } from './components/historico-solicitude
 import { RegistrarSolicitudComponent } from './components/registrar-solicitud/registrar-solicitud.component';
 import { NuevasSolicitudesComponent } from './components/nuevas-solicitudes/nuevas-solicitudes.component';
 import { PublicarConvocatoriaComponent } from './components/publicar-convocatoria/publicar-convocatoria.component';
+import { ConsultarConvocatoriaComponent } from './components/consultar-convocatoria/consultar-convocatoria.component';
 import { routes } from './app.routes';
 
 @NgModule({
@@ -25,7 +26,8 @@ import { routes } from './app.routes';
     HistoricoSolicitudesComponent,
     RegistrarSolicitudComponent,
     NuevasSolicitudesComponent,
-    PublicarConvocatoriaComponent
+    PublicarConvocatoriaComponent,
+    ConsultarConvocatoriaComponent
   ],
   imports: [
     BrowserModule,

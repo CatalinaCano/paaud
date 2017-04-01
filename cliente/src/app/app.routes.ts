@@ -6,6 +6,7 @@ import { HistoricoSolicitudesComponent } from './components/historico-solicitude
 import { RegistrarSolicitudComponent } from './components/registrar-solicitud/registrar-solicitud.component';
 import { NuevasSolicitudesComponent } from './components/nuevas-solicitudes/nuevas-solicitudes.component';
 import { PublicarConvocatoriaComponent } from './components/publicar-convocatoria/publicar-convocatoria.component';
+import { ConsultarConvocatoriaComponent } from './components/consultar-convocatoria/consultar-convocatoria.component';
 
 export const routes: Route[] = [
     { path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -14,6 +15,7 @@ export const routes: Route[] = [
     { path: 'historico-solicitudes', component: HistoricoSolicitudesComponent },
     { path: 'registrar-solicitud', component: RegistrarSolicitudComponent },
     { path: 'nuevas-solicitudes', component: NuevasSolicitudesComponent },
-    { path: 'publicar-convocatoria', component: PublicarConvocatoriaComponent }
+    { path: 'publicar-convocatoria', component: PublicarConvocatoriaComponent },
+    { path: 'consultar-convocatoria', component:ConsultarConvocatoriaComponent }
 
 ];

@@ -8,13 +8,23 @@
 
             <img id="profile-img" class="profile-img-card center-block" src="../assets/avatar_2x.png" />
 
-            <form class="form-signin" method="post" action="">
+            <form class="form-signin" method="post" action="" #form="ngForm">
                 <h2 class="form-signin-heading text-center">Ingrese sus Datos</h2>
-                <label for="usuario" class="sr-only">Usuario</label>
-                <input type="text" name="usuario" class="form-control" placeholder="Nombre de Usuario" required autofocus>
+                <label for="codigo" class="sr-only">Código</label>
+                <input type="text" name="codigo" id="codigo" class="form-control" placeholder="Código del Estudiante"  autofocus ngModel #codigo="ngModel" required>
+                
+                <!--DIV PARA EL MENSAJE DE ALERTA-->
+                <div *ngIf="codigo.touched && !codigo.valid"class="alert alert-danger">
+                    *El Código es Requerido
+                </div>
+    
+                
                 <br>
                 <label for="contrasenia" class="sr-only">Contraseña</label>
-                <input type="password" name="contrasenia" class="form-control" placeholder="Contraseña" required>
+                <input type="password" name="contrasenia" id="contrasenia" class="form-control" placeholder="Contraseña"  ngModel #contrasenia="ngModel" required>
+                <div *ngIf=" contrasenia.touched &&!contrasenia.valid" class="alert alert-danger">
+                    * La contraseaña es Requerida
+                </div>
                 <br>
 
                 <a routerLink="/landing"><button type="submit" name="enviar" class="btn btn-lg btn-primary center-block"> Ingresar </button></a>
@@ -24,3 +34,7 @@
         </div>
     </div>
 </div>
+valores: <br>
+codigo: {{codigo.value}} <br>
+Contrasenia: {{contrasenia.value}} <br>
+Formulario: {{form.value| json}} 

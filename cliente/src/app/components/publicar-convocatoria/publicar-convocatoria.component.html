@@ -19,29 +19,29 @@
            </div>
 
            <div class="col-md-9">
-                <form class="form-horizontal">
+                <form class="form-horizontal" #form="ngForm">
                     <fieldset>
                         <legend><span class="glyphicon glyphicon-time"></span> Periodo de la Convocatoria</legend>
                                 <div class="form-group">             
                                   <label for="fechaIncio" class="col-lg-2 control-label">Fecha Inicio</label>
                                       <div class="col-lg-4">
-                                        <input type="date" class="form-control" id="fechaInicio" required>
+                                        <input type="date" class="form-control" id="fechaInicio" required ngModel #fechaInicio>
                                       </div>
                                  <label for="fechaFin" class="col-lg-2 control-label">Fecha Fin</label>  
                                       <div class="col-lg-4">
-                                        <input type="date" class="form-control" id="fechaFin" required>
+                                        <input type="date" class="form-control" id="fechaFin" required ngModel #fechaFin>
                                       </div>  
                                 </div>
 
                                 <div class="form-group">
                                     <label for="anio" class="col-lg-2 control-label">Año</label>  
                                       <div class="col-lg-4">
-                                        <input type="number" class="form-control" name="anio" id="anio" placeholder="Año de la Convocatoria" readonly required/>
+                                        <input type="number" class="form-control" name="anio" id="anio" placeholder="Año de la Convocatoria" readonly required ngModel #anio/>
                                       </div>    
 
                                       <label for="Periodo" class="col-lg-2 control-label">Periodo</label>  
                                       <div class="col-lg-4">
-                                        <select class="form-control" id="Periodo" name="Periodo">
+                                        <select class="form-control" id="Periodo" name="Periodo" ngModel #periodo>
                                           <option>1</option>
                                           <option>2</option>
                                         </select>
@@ -52,25 +52,25 @@
                                 <div class="form-group">             
                                  <label for="subTotal" class="col-lg-2 control-label">Subsidio total</label>  
                                       <div class="col-lg-4">
-                                        <input type="number" class="form-control" name="subTotal" id="subTotal" placeholder="Cupos Subsidio Total" required/>
+                                        <input type="number" class="form-control" name="subTotal" id="subTotal" placeholder="Cupos Subsidio Total" required ngModel #subTotal/>
                                       </div>                      
 
 
                                  <label for="subB" class="col-lg-2 control-label">Subsidio tipo A </label>  
                                       <div class="col-lg-4">
-                                        <input type="number" class="form-control" name="subA" id="subA" placeholder="Cupos Subsidio tipo A" required/>
+                                        <input type="number" class="form-control" name="subA" id="subA" placeholder="Cupos Subsidio tipo A" required ngModel #subA/>
                                       </div>
                                 </div>   
 
                                 <div class="form-group">
                                     <label for="subC" class="col-lg-2 control-label">Subsidio tipo B </label>  
                                       <div class="col-lg-4">
-                                        <input type="number" class="form-control" name="subB" id="subB" placeholder="Cupos Subsidio tipo B" required/>
+                                        <input type="number" class="form-control" name="subB" id="subB" placeholder="Cupos Subsidio tipo B" required ngModel #subB />
                                       </div> 
 
                                       <label for="documento" class="col-lg-2 control-label">Total Cupos</label>  
                                       <div class="col-lg-4">
-                                        <input type="text" class="form-control" name="total" id="total" readonly="readonly" placeholder="Total de Cupos" required/>
+                                        <input type="text" class="form-control" name="total" id="total" readonly="readonly" placeholder="Total de Cupos" required ngModel #total />
                                       </div> 
                                 </div>
 
@@ -86,10 +86,11 @@
            </div>
 
 
-     </div>      
+     </div>  
+       
  </div>     
 
-       
-      
+Tota: {{subTotal.value}}
+
        
      

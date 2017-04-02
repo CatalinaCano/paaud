@@ -15,7 +15,10 @@ import { NuevasSolicitudesComponent } from './components/nuevas-solicitudes/nuev
 import { PublicarConvocatoriaComponent } from './components/publicar-convocatoria/publicar-convocatoria.component';
 import { ConsultarConvocatoriaComponent } from './components/consultar-convocatoria/consultar-convocatoria.component';
 import { TiqueteraComponent } from './components/tiquetera/tiquetera.component';
+/**Importamos la directiva que valida el login*/
+import {SinEspacios} from './components/login/validacion.directive';
 import { routes } from './app.routes';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { routes } from './app.routes';
     NuevasSolicitudesComponent,
     PublicarConvocatoriaComponent,
     ConsultarConvocatoriaComponent,
-    TiqueteraComponent
+    TiqueteraComponent,
+    SinEspacios
   ],
   imports: [
     BrowserModule,

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     moduleId: module.id,
@@ -8,7 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class LoginComponent implements OnInit {
-    constructor() { }
+    
+    constructor(
+        private router: Router
+    ) {}
 
     ngOnInit() { }
+
+    credenciales={
+        "nombre":"",
+        "contasenia":""
+    };
+
+    ingresar(){
+    // Mostramos el objeto usuario
+    this.router.navigate(['/landing']);
+  }
 }

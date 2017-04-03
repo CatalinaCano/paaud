@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { LoginEstudianteService } from './../../services/login-estudiante.service';
+
 @Component({
     moduleId: module.id,
     selector: 'app-landing',
@@ -8,7 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class LandingComponent implements OnInit {
-    constructor() { }
 
-    ngOnInit() { }
+     datos_usuario = {};
+
+    constructor(
+        private loginEstudianteService: LoginEstudianteService
+    ) { }
+
+    ngOnInit() { 
+        this.datos_usuario = this.loginEstudianteService.getDatosUsuario();
+        console.log(this.datos_usuario);
+    }
 }

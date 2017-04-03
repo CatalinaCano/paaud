@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { LoginEstudianteService } from './../../services/login-estudiante.service';
+
 @Component({
     moduleId: module.id,
     selector: 'app-login',
@@ -11,18 +13,29 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
     
     constructor(
-        private router: Router
+        private router: Router,
+        private loginEstudianteService: LoginEstudianteService
     ) {}
 
     ngOnInit() { }
 
     credenciales={
         "nombre":"",
-        "contasenia":""
+        "contrasenia":""
     };
 
+    error="";
+
     ingresar(){
-    // Mostramos el objeto usuario
-    this.router.navigate(['/landing']);
+        this.loginEstudianteService
+            .getEstudiante(this.credenciales.nombre,this.credenciales.contrasenia)
+            .then(data => {
+                console.log(data);
+                this.router.navigate(['/landing']);
+            })
+            .catch( error => {
+                this.error = error;
+                console.log("Error: "+error)
+            })
   }
 }

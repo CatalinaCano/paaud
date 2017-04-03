@@ -8,39 +8,38 @@
 
             <img id="profile-img" class="profile-img-card center-block" src="../assets/avatar_2x.png" />
 
-            <form class="form-signin" method="post" action="" #form="ngForm">
+            <form class="form-signin" method="post" #form="ngForm">
                 <h2 class="form-signin-heading text-center">Ingrese sus Datos</h2>
                 <label for="nombreUsuario" class="sr-only">Nombre de usuario</label>
-                <input type="text" name="nombreUsuario" id="nombreUsuario" class="form-control" placeholder="Nombre de usuario"  autofocus
-                   [(ngModel)]="credenciales.nombre" #nombreUsuario="ngModel" sin-espacios required
-                    
-                >
-                
+                <input type="text" name="nombreUsuario" id="nombreUsuario" class="form-control" placeholder="Nombre de usuario" autofocus [(ngModel)]="credenciales.nombre" #nombreUsuario="ngModel" sin-espacios required>
+
                 <!--DIV PARA EL MENSAJE DE ALERTA-->
                 <div *ngIf="nombreUsuario.errors">
                     <div *ngIf="nombreUsuario.errors.sinEspacios" class="alert alert-danger col-md-6">
                         *No se admiten espacios en blanco en el nombre de usuario
                     </div>
                     <div *ngIf=" nombreUsuario.touched &&!nombreUsuario.valid" class="alert alert-danger col-md-6">
-                         * El nombre de usuario es Requerido
-                     </div>
+                        * El nombre de usuario es Requerido
+                    </div>
                 </div>
-    
-                
+
+
                 <br>
                 <label for="contrasenia" class="sr-only">Contraseña</label>
-                <input type="password" name="contrasenia" id="contrasenia" class="form-control" placeholder="Contraseña" 
-                  [(ngModel)]="credenciales.contrasenia"  #contrasenia="ngModel" required>
+                <input type="password" name="contrasenia" id="contrasenia" class="form-control" placeholder="Contraseña" [(ngModel)]="credenciales.contrasenia" #contrasenia="ngModel" required>
                 <div *ngIf=" contrasenia.touched &&!contrasenia.valid" class="alert alert-danger col-md-6">
                     * La contraseaña es Requerida
                 </div>
                 <br>
 
-                <button type="submit" name="enviar" class="btn btn-lg btn-primary center-block" [disabled]="!form.form.valid" (click)="ingresar(); form.reset()" > Ingresar </button>
+                <div *ngIf="error != ''" class="alert alert-danger col-md-12">
+                    * {{error}}
+                </div>
+
+                <button type="submit" name="enviar" class="btn btn-lg btn-primary center-block" [disabled]="!form.form.valid" (click)="ingresar(); form.reset()"> Ingresar </button>
 
                 <hr>
             </form>
         </div>
     </div>
 </div>
-

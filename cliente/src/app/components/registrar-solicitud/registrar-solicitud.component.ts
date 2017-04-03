@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { LoginEstudianteService } from './../../services/login-estudiante.service';
+
 @Component({
     moduleId: module.id,
     selector: 'app-registrar-solicitud',
@@ -7,18 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class RegistrarSolicitudComponent implements OnInit {
-    constructor() { }
 
-    ngOnInit() { }
+    datos_usuario = {};
 
-    estudiante =[
-        {
-            "n_nomeestudiante": "Nicolas",
-            "n_apellestudiante":"Bernal",
-            "k_codestudiente":"20121020079",
-            "q_identificacionestu":"1018478847",
-            "n_facultad":"Ingeniería",
-            "n_proyectocurric":"Sistemas"
-        }
-    ];
+    constructor(
+        private loginEstudianteService: LoginEstudianteService
+    ) { }
+
+    ngOnInit() {
+        this.datos_usuario = this.loginEstudianteService.getDatosUsuario();
+        console.log(this.datos_usuario);
+     }
+
 }

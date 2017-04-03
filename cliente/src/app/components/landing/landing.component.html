@@ -13,15 +13,15 @@
             <div class="alert alert-success">
                 <img src="../../assets/logoblanco.png" width="100px" class="center-block" />
                 <br>
-                <h3 class="text-center">Bienvenida Catalina</h3>
+                <h3 class="text-center">Bienvenid@ {{datos_usuario.n_usuario}}</h3>
             </div>
         </div>
 
         <div class="col-md-7 jumbotron">
-            <h1 class="text-center">Hola!!</h1>
+            <h1 class="text-center">Hola {{datos_usuario.n_nomeestudiante}}!!</h1>
             <hr class="my-4">
             <p class="text-center"> <small>Aquí podrás conocer todo lo relacionado con el Programa de Apoyo Alimentario de la Universidad Distrital</small></p>
-            <p class="text-center"><a class="btn btn-primary btn-lg " routerLink="/implementar">Registra una Solicitud</a></p>
+            <p class="text-center"><a class="btn btn-primary btn-lg " routerLink="/registrar-solicitud">Registra una Solicitud</a></p>
         </div>
 
         <app-informacion></app-informacion>

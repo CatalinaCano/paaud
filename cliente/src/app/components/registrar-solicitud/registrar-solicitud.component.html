@@ -17,7 +17,7 @@
         <hr class="my-4">
         <br>
 
-        <form class="form-horizontal">
+        <form class="form-horizontal" #formulario="ngForm">
             <fieldset>
                 <legend><span class="glyphicon glyphicon-user"></span> Datos Personales</legend>
 
@@ -25,86 +25,50 @@
                 <div class="form-group">
                     <label for="nombres" class="col-lg-2 control-label">Nombres </label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="nombres" id="nombres" readonly="readonly" placeholder="Nombres del Estudiante" />
-                          
-      
+                        <input type="text" class="form-control" name="nombres" id="nombres" readonly [(ngModel)]='datos_usuario.n_nomeestudiante' #nombres="ngModel" />
                     </div>
 
-                    <label for="apellidos" class="col-lg-2 control-label">Apellidos</label>
+                    <label for="apellidos" class="col-lg-2 control-label">Apellidos </label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="apellidos" id="apellidos" readonly="readonly" placeholder="Apellidos del Estudiante" required/>
+                        <input type="text" class="form-control" name="apellidos" id="apellidos" readonly [(ngModel)]='datos_usuario.n_apellestudiante' #apellidos="ngModel" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="codigo" class="col-lg-2 control-label">Código </label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="codigo" id="codigo" readonly="readonly" placeholder="Código del Estudiante" required/>
+                        <input type="text" class="form-control" name="codigo" id="codigo" readonly [(ngModel)]='datos_usuario.k_codeestudiante' #codigo="ngModel" />
                     </div>
 
                     <label for="documento" class="col-lg-2 control-label">Documento de Identidad</label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="documento" id="documento" readonly="readonly" placeholder="Documento del Estudiante" required/>
+                        <input type="text" class="form-control" name="documento" id="documento" readonly [(ngModel)]='datos_usuario.q_identificacionestu' #documento="ngModel" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="facultad" class="col-lg-2 control-label">Facultad </label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="facultad" id="facultad" readonly="readonly" placeholder="Nombre Facultad" required/>
+                        <input type="text" class="form-control" name="facultad" id="facultad" readonly [(ngModel)]='datos_usuario.n_facultad' #facultad="ngModel" />
                     </div>
 
                     <label for="proyecto" class="col-lg-2 control-label">Proyecto Curricular</label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="proyecto" id="proyecto" readonly="readonly" placeholder="Carrera del Estudiante" required/>
+                        <input type="text" class="form-control" name="proyecto" id="proyecto" readonly [(ngModel)]='datos_usuario.n_proyectocurric' #proyecto="ngModel" />
                     </div>
                 </div>
-
-
-                <div class="form-group">
-                    <label for="localidad" class="col-lg-2 control-label">Localidad</label>
-                    <div class="col-lg-4">
-                        <select class="form-control" id="localidad" required>
-                            <option>Usaquén</option>
-                            <option>Chapinero</option>
-                            <option>Santa Fe</option>
-                            <option>San Cristóbal</option>
-                            <option>Usme</option>
-                            <option>Tunjuelito</option>
-                            <option>Bosa</option>
-                            <option>Kennedy</option>
-                            <option>Fontibón</option>
-                            <option>Engativá</option>
-                            <option>Suba</option>
-                            <option>Barrios Unidos</option>
-                            <option>Teusaquillo</option>
-                            <option>Los Mártires</option>
-                            <option>Antonio Nariño</option>
-                            <option>Puente Aranda</option>
-                            <option>La Candelaria</option>
-                            <option>Rafael Uribe Uribe</option>
-                            <option>Ciudad Bolívar</option>
-                            <option>Sumapaz</option>                        
-                        </select>
-                    </div>
-                    <label for="barrio" class="col-lg-2 control-label">Barrio</label>
-                    <div class="col-lg-4">
-                        <input type="text" class="form-control" name="barrio" id="barrio" placeholder="Barrio del Estudiante" required/>
-                    </div>
-                </div>
-
 
                 <legend><span class="glyphicon glyphicon-phone-alt"></span> Datos de Contacto </legend>
 
                 <div class="form-group">
                     <label for="celular" class="col-lg-2 control-label"><span class="glyphicon glyphicon-phone"></span> Número Celular</label>
                     <div class="col-lg-4">
-                        <input type="number" class="form-control" id="celular" placeholder="300123456" required>
+                        <input type="text" class="form-control" id="celular" readonly/>
                     </div>
 
                     <label for="fijo" class="col-lg-2 control-label"><span class="glyphicon glyphicon-phone-alt"></span> Número Fijo</label>
                     <div class="col-lg-4">
-                        <input type="number" class="form-control" id="fijo" placeholder="1234567" required>
+                        <input type="text" class="form-control" id="fijo" readonly />
                     </div>
                 </div>
 
@@ -112,7 +76,7 @@
                     <label for="email" class="col-lg-4 control-label">e-mail</label>
                     <div class="col-lg-6 input-group">
                         <span class="input-group-addon">@</span>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Correo Electrónico">
+                        <input type="text" class="form-control" id="email" name="email" readonly />
                     </div>
                 </div>
 
@@ -145,7 +109,7 @@
                     <label for="matricula" class="col-lg-6 control-label">Valor de la Matrícula</label>
                     <div class="col-lg-6 input-group">
                         <span class="input-group-addon">$</span>
-                        <input type="number" class="form-control" id="matricula" required placeholder="100.000">
+                        <input type="number" class="form-control" id="matricula" readonly>
                         <span class="input-group-addon">.00</span>
                     </div>
                 </div>
@@ -268,31 +232,31 @@
                     </div>
                 </div>
 
-                 <legend><span class="glyphicon glyphicon-calendar"></span> Horario de Almuerzo</legend>
-                  <div class="table-responsive">
-              
-              <table class="table table-striped table-bordered  ">
-                          <thead>
+                <legend><span class="glyphicon glyphicon-calendar"></span> Horario de Almuerzo</legend>
+                <div class="table-responsive">
+
+                    <table class="table table-striped table-bordered  ">
+                        <thead>
                             <tr class="success block-center">
-                             
-                                    <th class="text-center">LUNES</th>
-                                    <th class="text-center">MARTES</th>
-                                    <th class="text-center">MIÉRCOLES</th>
-                                    <th class="text-center">JUEVES</th>
-                                    <th class="text-center">VIERNES</th>
+
+                                <th class="text-center">LUNES</th>
+                                <th class="text-center">MARTES</th>
+                                <th class="text-center">MIÉRCOLES</th>
+                                <th class="text-center">JUEVES</th>
+                                <th class="text-center">VIERNES</th>
                             </tr>
-                          </thead>
-                          
-                          <tr>
-                               <th class="text-center"><input type="checkbox" value=""></th>
-                               <th class="text-center"> <input type="checkbox" value=""></th>                               
-                               <th class="text-center"><input type="checkbox" value=""></th>
-                               <th class="text-center"><input type="checkbox" value=""></th>
-                               <th class="text-center"><input type="checkbox" value=""></th>                            
-                          </tr>
-                        </table>                
-           
-            </div>
+                        </thead>
+
+                        <tr>
+                            <th class="text-center"><input type="checkbox" value=""></th>
+                            <th class="text-center"> <input type="checkbox" value=""></th>
+                            <th class="text-center"><input type="checkbox" value=""></th>
+                            <th class="text-center"><input type="checkbox" value=""></th>
+                            <th class="text-center"><input type="checkbox" value=""></th>
+                        </tr>
+                    </table>
+
+                </div>
 
 
 

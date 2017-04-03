@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-
+/**Componentes */
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { LandingComponent } from './components/landing/landing.component';
@@ -15,6 +15,8 @@ import { NuevasSolicitudesComponent } from './components/nuevas-solicitudes/nuev
 import { PublicarConvocatoriaComponent } from './components/publicar-convocatoria/publicar-convocatoria.component';
 import { ConsultarConvocatoriaComponent } from './components/consultar-convocatoria/consultar-convocatoria.component';
 import { TiqueteraComponent } from './components/tiquetera/tiquetera.component';
+/**Servicios */
+import { LoginEstudianteService } from './services/login-estudiante.service';
 /**Importamos la directiva que valida el login*/
 import {SinEspacios} from './components/login/validacion.directive';
 import { routes } from './app.routes';
@@ -39,9 +41,12 @@ import { routes } from './app.routes';
     BrowserModule,
     FormsModule,
     HttpModule,
+    JsonpModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    LoginEstudianteService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

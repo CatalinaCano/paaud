@@ -86,22 +86,23 @@
                     <label for="estadoCivil" class="col-lg-2 control-label">Estado Civil</label>
                     <div class="col-lg-4">
                         <select class="form-control" id="estadoCivil" required>
-                            <option>Soltero</option>
-                            <option>Casado</option>
-                            <option>Separado/Divorciado</option>
-                            <option>Viudo</option>
-                            <option>Unión Libre</option>                                          
+                            <option value="soltero">Soltero</option>
+                            <option value="casado">Casado</option>
+                            <option value="separado">Separado/Divorciado</option>
+                            <option value="viudo">Viudo</option>
+                            <option value="union libre">Unión Libre</option>
                         </select>
                     </div>
 
-                    <label for="estadoCivil" class="col-lg-2 control-label">Estrato</label>
+                    <label for="estrato" class="col-lg-2 control-label">Estrato</label>
                     <div class="col-lg-4">
-                        <select class="form-control" id="estadoCivil" required>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>                                          
+                        <select class="form-control" name="estrato" id="estrato" required [(ngModel)]="zona_riesgo.q_numerico" #estrato="ngModel">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
                         </select>
+                        <p>{{zona_riesgo.k_camposolicitud}}-{{zona_riesgo.q_numerico}}</p>
                     </div>
                 </div>
 
@@ -109,7 +110,7 @@
                     <label for="matricula" class="col-lg-6 control-label">Valor de la Matrícula</label>
                     <div class="col-lg-6 input-group">
                         <span class="input-group-addon">$</span>
-                        <input type="number" class="form-control" name="matricula" id="matricula" disabled [(ngModel)]='datos_usuario.q_valormatricula' #matricula="ngModel">
+                        <input type="number" class="form-control" name="matricula" id="matricula" readonly [(ngModel)]='datos_usuario.q_valormatricula' #matricula="ngModel">
                         <span class="input-group-addon">.00</span>
                     </div>
                 </div>
@@ -118,96 +119,106 @@
                     <label for="ingresos" class="col-lg-6 control-label">Valor mensual de los ingresos</label>
                     <div class="col-lg-6 input-group">
                         <span class="input-group-addon">$</span>
-                        <input type="number" class="form-control" id="ingresos" required placeholder="100.000">
+                        <input type="number" class="form-control" name="ingresos" id="ingresos" required placeholder="100.000" [(ngModel)]="ingresos_familiares.q_numerico" #ingresos="ngModel">
                         <span class="input-group-addon">.00</span>
                     </div>
+                    <p>{{ingresos_familiares.k_camposolicitud}}-{{ingresos_familiares.q_numerico}}</p>
                 </div>
 
                 <div class="form-group">
-                    <label for="sostenimientoEconomico" class="col-lg-4 control-label">Se sostiene económicamente a si mismo</label>
+                    <label for="sostenimientoeconomico" class="col-lg-4 control-label">Se sostiene económicamente a si mismo</label>
                     <div class="col-lg-2">
-                        <select class="form-control" id="sostenimientoEconomico" required>
-                            <option>Si</option>
-                            <option>No</option>                                         
+                        <select class="form-control" name="sostenimientoeconomico" id="sostenimientoeconomico" required [(ngModel)]="sostenimiento_economico.i_booleano" #sostenimientoeconomico="ngModel">
+                            <option value="f" selected>No</option>
+                            <option value="t">Si</option>
                         </select>
+                        <p>{{sostenimiento_economico.k_camposolicitud}}-{{sostenimiento_economico.i_booleano}}</p>
                     </div>
 
-                    <label for="sostenimientoHogar" class="col-lg-4 control-label">Sostiene actualmente su hogar</label>
+                    <label for="sostenimientohogar" class="col-lg-4 control-label">Sostiene actualmente su hogar</label>
                     <div class="col-lg-2">
-                        <select class="form-control" id="sostenimientoHogar" required>
-                            <option>Si</option>
-                            <option>No</option>                                         
+                        <select class="form-control" name="sostenimientohogar" id="sostenimientohogar" required [(ngModel)]="sostiene_su_hogar.i_booleano" #sostenimientohogar="ngModel">
+                            <option value="f" selected>No</option>
+                            <option value="t">Si</option>
                         </select>
+                        <p>{{sostiene_su_hogar.k_camposolicitud}}-{{sostiene_su_hogar.i_booleano}}</p>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="viveFuera" class="col-lg-4 control-label">Vive fuera de su núcleo familiar</label>
+                    <label for="vivefuera" class="col-lg-4 control-label">Vive fuera de su núcleo familiar</label>
                     <div class="col-lg-2">
-                        <select class="form-control" id="viveFuera" required>
-                            <option>Si</option>
-                            <option>No</option>                                         
+                        <select class="form-control" name="vivefuera" id="vivefuera" required [(ngModel)]="vive_fuera.i_booleano" #vivefuera="ngModel">
+                            <option value="f" selected>No</option>
+                            <option value="t">Si</option>                                        
                         </select>
+                        <p>{{vive_fuera.k_camposolicitud}}-{{vive_fuera.i_booleano}}</p>
                     </div>
 
-                    <label for="sostenimientoHogar" class="col-lg-4 control-label">Tiene personas a cargo económicamente</label>
+                    <label for="sostenimientopersonas" class="col-lg-4 control-label">Tiene personas a cargo económicamente</label>
                     <div class="col-lg-2">
-                        <select class="form-control" id="sostenimientoHogar" required>
-                            <option>Si</option>
-                            <option>No</option>                                         
+                        <select class="form-control" name="sostenimientopersonas" id="sostenimientopersonas" required [(ngModel)]="sostenimiento_personas.i_booleano" #sostenimientopersonas="ngModel">
+                            <option value="f" selected>No</option>
+                            <option value="t">Si</option>                                           
                         </select>
                     </div>
+                    <p>{{sostenimiento_personas.k_camposolicitud}}-{{sostenimiento_personas.i_booleano}}</p>
                 </div>
 
 
                 <div class="form-group">
-                    <label for="pagaArriendo" class="col-lg-4 control-label">Actualmente paga arriendo</label>
+                    <label for="pagaarriendo" class="col-lg-4 control-label">Actualmente paga arriendo</label>
                     <div class="col-lg-2">
-                        <select class="form-control" id="pagaArriendo" required>
-                            <option>Si</option>
-                            <option>No</option>                                         
+                        <select class="form-control" name="pagaarriendo" id="pagaarriendo" required [(ngModel)]="vive_en_arriendo.i_booleano" #pagaarriendo="ngModel">
+                            <option value="f" selected>No</option>
+                            <option value="t">Si</option>
                         </select>
+                        <p>{{vive_en_arriendo.k_camposolicitud}}-{{vive_en_arriendo.i_booleano}}</p>
                     </div>
 
                     <label for="origen" class="col-lg-4 control-label">Proviene de Municipios o ciudades distintos a Bogotá</label>
                     <div class="col-lg-2">
-                        <select class="form-control" id="origen" required>
-                            <option>Si</option>
-                            <option>No</option>                                         
+                        <select class="form-control" name="origen" id="origen" required [(ngModel)]="origen.i_booleano" #pagaarriendo="ngModel">
+                            <option value="f" selected>No</option>
+                            <option value="t">Si</option>                                        
                         </select>
                     </div>
+                    <p>{{origen.k_camposolicitud}}-{{origen.i_booleano}}</p>
                 </div>
 
 
                 <div class="form-group">
-                    <label for="tipoPoblacion" class="col-lg-7 control-label">Usted o su grupo familiar esta certificado como alguna de las siguientes poblaciones </label>
+                    <label for="tipopoblacion" class="col-lg-7 control-label">Usted o su grupo familiar esta certificado como alguna de las siguientes poblaciones </label>
                     <div class="col-lg-5 input-group">
-                        <select class="form-control" id="tipoPoblacion" required>
-                            <option>Desplazado</option>
-                            <option>Indigena</option>      
-                            <option>Minorias ëtnicas</option>
-                            <option>Afrodescendiente - Afrocolombiano</option>     
-                            <option>Mujer cabeza de hogar</option>
-                            <option>Ninguna</option>                              
+                        <select class="form-control" name="tipopoblacion" id="tipopoblacion" required [(ngModel)]="desplazamiento_forzado.n_valorcampo" #tipopoblacion="ngModel">
+                            <option value="ninguna">Ninguna</option>
+                            <option value="desplazado">Desplazado</option>
+                            <option value="indigena">Indigena</option>      
+                            <option value="minoria">Minorias étnicas</option>
+                            <option value="afrodescendiente">Afrodescendiente - Afrocolombiano</option>     
+                            <option value=" mujer cabeza de hogar">Mujer cabeza de hogar</option>
                         </select>
                     </div>
+                    <p>{{desplazamiento_forzado.k_camposolicitud}}-{{desplazamiento_forzado.n_valorcampo}}</p>
                 </div>
 
                 <div class="form-group">
                     <label for="discapacidad" class="col-lg-4 control-label">Presenta algún tipo de discapacidad física o mental</label>
                     <div class="col-lg-2">
-                        <select class="form-control" id="discapacidad" required>
-                            <option>Si</option>
-                            <option>No</option>                                         
+                        <select class="form-control" name="discapacidad" id="discapacidad" required [(ngModel)]="discapacidad_fisica.i_booleano" #discapacidad="ngModel">
+                            <option value="f" selected>No</option>
+                            <option value="t">Si</option>                                         
                         </select>
+                        <p>{{discapacidad_fisica.k_camposolicitud}}-{{discapacidad_fisica.i_booleano}}</p>
                     </div>
 
                     <label for="patologia" class="col-lg-4 control-label">Presenta alguna patología asociada a su alimentación</label>
                     <div class="col-lg-2">
-                        <select class="form-control" id="patologia" required>
-                            <option>Si</option>
-                            <option>No</option>                                         
+                        <select class="form-control" name="patologia" id="patologia" required [(ngModel)]="patologia_medica.i_booleano" #patologia="ngModel">
+                            <option value="f" selected>No</option>
+                            <option value="t">Si</option>                                          
                         </select>
+                        <p>{{patologia_medica.k_camposolicitud}}-{{patologia_medica.i_booleano}}</p>
                     </div>
                 </div>
 
@@ -264,28 +275,28 @@
                 <div class="form-group">
                     <label for="carta" class="col-lg-5 control-label"> Carta dirigida a la Directora de Bienestar Institucional </label>
                     <div class="col-lg-7">
-                        <input type="file" class="form-control" id="carta" required>
+                        <input type="file" class="form-control" id="carta">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="certificadoEstratificacion" class="col-lg-5 control-label">Certificado de Estratifiación (No superior a un Año) </label>
                     <div class="col-lg-7">
-                        <input type="file" class="form-control" id="certificadoEstratificacion" required>
+                        <input type="file" class="form-control" id="certificadoEstratificacion">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="reciboPublico" class="col-lg-5 control-label">Factura de un   recibo de servicio  público (con una vigencia de 3 meses)  </label>
                     <div class="col-lg-7">
-                        <input type="file" class="form-control" id="reciboPublico" required>
+                        <input type="file" class="form-control" id="reciboPublico">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="reciboUniversidad" class="col-lg-5 control-label">Fotocopia del Recibo de Pago de la Universidad cancelado.</label>
                     <div class="col-lg-7">
-                        <input type="file" class="form-control" id="reciboUniversidad" required>
+                        <input type="file" class="form-control" id="reciboUniversidad">
                     </div>
                 </div>
 
@@ -306,7 +317,7 @@
                 <div class="form-group">
                     <label for="cerIngresos" class="col-lg-5 control-label">Certificado de Ingresos</label>
                     <div class="col-lg-7">
-                        <input type="file" class="form-control" id="cerIngresos" required>
+                        <input type="file" class="form-control" id="cerIngresos">
                     </div>
                 </div>
 
@@ -328,7 +339,7 @@
                 <div class="form-group block-center">
                     <div class="col-lg-10 col-lg-offset-4">
                         <button type="reset" class="btn btn-default"> <span class="glyphicon glyphicon-remove-sign"></span> Cancelar</button>
-                        <button type="submit" class="btn btn-success"> <span class="glyphicon glyphicon-ok-circle"></span> Enviar</button>
+                        <button type="submit" class="btn btn-success" (click)="enviarSolicitud()"> <span class="glyphicon glyphicon-ok-circle"></span> Enviar</button>
                     </div>
                 </div>
             </fieldset>

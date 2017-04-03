@@ -63,12 +63,12 @@
                 <div class="form-group">
                     <label for="celular" class="col-lg-2 control-label"><span class="glyphicon glyphicon-phone"></span> Número Celular</label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" id="celular" readonly/>
+                        <input type="text" class="form-control" name="celular" id="celular" readonly [(ngModel)]='datos_usuario.q_numcelular' #celular="ngModel" />
                     </div>
 
                     <label for="fijo" class="col-lg-2 control-label"><span class="glyphicon glyphicon-phone-alt"></span> Número Fijo</label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" id="fijo" readonly />
+                        <input type="text" class="form-control" name="fijo" id="fijo" readonly [(ngModel)]='datos_usuario.q_numefijo' #fijo="ngModel" />
                     </div>
                 </div>
 
@@ -76,7 +76,7 @@
                     <label for="email" class="col-lg-4 control-label">e-mail</label>
                     <div class="col-lg-6 input-group">
                         <span class="input-group-addon">@</span>
-                        <input type="text" class="form-control" id="email" name="email" readonly />
+                        <input type="text" class="form-control" name="email" id="email" readonly [(ngModel)]='datos_usuario.n_email' #email="ngModel" />
                     </div>
                 </div>
 
@@ -109,7 +109,7 @@
                     <label for="matricula" class="col-lg-6 control-label">Valor de la Matrícula</label>
                     <div class="col-lg-6 input-group">
                         <span class="input-group-addon">$</span>
-                        <input type="number" class="form-control" id="matricula" readonly>
+                        <input type="number" class="form-control" name="matricula" id="matricula" disabled [(ngModel)]='datos_usuario.q_valormatricula' #matricula="ngModel">
                         <span class="input-group-addon">.00</span>
                     </div>
                 </div>

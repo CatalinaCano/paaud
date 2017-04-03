@@ -15,11 +15,14 @@ import { NuevasSolicitudesComponent } from './components/nuevas-solicitudes/nuev
 import { PublicarConvocatoriaComponent } from './components/publicar-convocatoria/publicar-convocatoria.component';
 import { ConsultarConvocatoriaComponent } from './components/consultar-convocatoria/consultar-convocatoria.component';
 import { TiqueteraComponent } from './components/tiquetera/tiquetera.component';
+import { InscribirConvocatoriaComponent } from "app/components/inscribir-convocatoria/inscribir-convocatoria.component";
+
 /**Servicios */
 import { LoginEstudianteService } from './services/login-estudiante.service';
 /**Importamos la directiva que valida el login*/
 import {SinEspacios} from './components/login/validacion.directive';
 import { routes } from './app.routes';
+
 
 
 @NgModule({
@@ -35,7 +38,8 @@ import { routes } from './app.routes';
     PublicarConvocatoriaComponent,
     ConsultarConvocatoriaComponent,
     TiqueteraComponent,
-    SinEspacios
+    SinEspacios,
+    InscribirConvocatoriaComponent
   ],
   imports: [
     BrowserModule,

@@ -12,7 +12,18 @@ export class InscribirConvocatoriaComponent implements OnInit {
 
     ngOnInit() { }
     
+      convocatorias =[
+         {
+            "f_inicio": "01/02/2017",
+            "f_fin":"20/03/2017",
+            "k_idfacultad":"Ingeniería"
+        }
+    ];
     volver(){
         this.router.navigate(['/landing']);
+    }
+
+    registrarse(){
+        this.router.navigate(['/registrar-solicitud']);
     }
 }

@@ -19,6 +19,7 @@ import { InscribirConvocatoriaComponent } from "app/components/inscribir-convoca
 
 /**Servicios */
 import { LoginEstudianteService } from './services/login-estudiante.service';
+import { RegistrarSolicitudService } from './services/registrar-solicitud.service';
 /**Importamos la directiva que valida el login*/
 import {SinEspacios} from './components/login/validacion.directive';
 import { routes } from './app.routes';
@@ -49,7 +50,8 @@ import { routes } from './app.routes';
     RouterModule.forRoot(routes)
   ],
   providers: [
-    LoginEstudianteService
+    LoginEstudianteService,
+    RegistrarSolicitudService
   ],
   bootstrap: [AppComponent]
 })

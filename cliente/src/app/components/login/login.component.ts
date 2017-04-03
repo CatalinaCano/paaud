@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
     error="";
 
     ingresar(){
+        console.log(this.credenciales);
         this.loginEstudianteService
             .getEstudiante(this.credenciales.nombre,this.credenciales.contrasenia)
             .then(data => {

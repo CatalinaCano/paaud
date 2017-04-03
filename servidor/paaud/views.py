@@ -12,7 +12,6 @@ def get_estudiante(request):
 		try:
 			db = cx_Oracle.connect(usuario, password, 'localhost:1522/XE')
 			cursor = db.cursor()
-			respuesta = []
 			for c in cursor.execute("select * from estudiante where n_usuario='"+usuario+"'"):
 				context = {}
 				context['k_codeestudiante'] = c[0]
@@ -27,10 +26,29 @@ def get_estudiante(request):
 				context['q_numefijo'] = c[9]
 				context['n_facultad'] = c[10]
 				context['n_usuario'] = c[11]
-				respuesta.append(context)
 		except cx_Oracle.DatabaseError as e:
 			error, = e.args
 			return HttpResponseBadRequest('Error: '+error.message)
 		return JsonResponse(context, safe=False) 
 	else:
 		return HttpResponseBadRequest('No get method')
+
+def post_solicitud(request):
+	if request.method == 'POST':
+		data = request.body
+		solicitud = json.loads(data)
+		usuario = solicitud["usuario"]
+		password = solicitud["password"]
+		codigo = solicitud["codigo"]
+		try:
+			db = cx_Oracle.connect(usuario, password, 'localhost:1522/XE')
+			cursor = db.cursor()
+			cursor.execute("insert into solicitud (k_codestudiante,k_subsidio,k_idconvocatoria,f_solicitud,i_estadosolicitud) values ("+codigo+",4,1,sysdate,'solicitada')")
+			db.commit()
+			db.close()
+		except cx_Oracle.DatabaseError as e:
+			error, = e.args
+			return HttpResponseBadRequest('Error: '+error.message)
+		return HttpResponse('successful') 
+	else:
+		return HttpResponseBadRequest('No post method')

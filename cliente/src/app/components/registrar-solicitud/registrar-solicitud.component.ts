@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { LoginEstudianteService } from './../../services/login-estudiante.service';
+import { RegistrarSolicitudService } from './../../services/registrar-solicitud.service';
 
 @Component({
     moduleId: module.id,
@@ -13,13 +14,16 @@ export class RegistrarSolicitudComponent implements OnInit {
     datos_usuario = {};
 
     constructor(
-        private loginEstudianteService: LoginEstudianteService
+        private loginEstudianteService: LoginEstudianteService,
+        private registrarSolicitudService: RegistrarSolicitudService
     ) { }
 
     ngOnInit() {
         this.datos_usuario = this.loginEstudianteService.getDatosUsuario();
         console.log(this.datos_usuario);
      }
+
+     error = "";
 
      ingresos_familiares = {
          "k_camposolicitud": 1
@@ -75,8 +79,22 @@ export class RegistrarSolicitudComponent implements OnInit {
          "i_booleano": 'f'
      }
 
-     enviarSolicitud(){
-         console.log("enviar solicitud");
+     enviarSolicitud(usuario, codigo){
+         let solicitud = {
+            "usuario": usuario,
+            "password": String(codigo),
+            "codigo": String(codigo)
+         }
+         console.log(solicitud);
+         this.registrarSolicitudService
+            .postSolicitud(solicitud)
+            .then(data => {
+                console.log(data);
+            })
+            .catch( error => {
+                this.error = error;
+                console.log("Error: "+error)
+            })
      }
 
 }

@@ -16,10 +16,10 @@
                 <!--DIV PARA EL MENSAJE DE ALERTA-->
                 <div *ngIf="nombreUsuario.errors">
                     <div *ngIf="nombreUsuario.errors.sinEspacios" class="alert alert-danger col-md-6">
-                        *No se admiten espacios en blanco en el nombre de usuario
+                        * <span class="glyphicon glyphicon-warning"></span>No se admiten espacios en blanco en el nombre de usuario
                     </div>
                     <div *ngIf=" nombreUsuario.touched &&!nombreUsuario.valid" class="alert alert-danger col-md-6">
-                        * El nombre de usuario es Requerido
+                        * <span class="glyphicon glyphicon-warning"></span>E l nombre de usuario es Requerido
                     </div>
                 </div>
 
@@ -28,12 +28,12 @@
                 <label for="contrasenia" class="sr-only">Contraseña</label>
                 <input type="password" name="contrasenia" id="contrasenia" class="form-control" placeholder="Contraseña" [(ngModel)]="credenciales.contrasenia" #contrasenia="ngModel" required>
                 <div *ngIf=" contrasenia.touched &&!contrasenia.valid" class="alert alert-danger col-md-6">
-                    * La contraseaña es Requerida
+                    * <span class="glyphicon glyphicon-warning"></span> La contraseaña es Requerida
                 </div>
                 <br>
 
                 <div *ngIf="error != ''" class="alert alert-danger col-md-12">
-                    * {{error}}
+                    * <span class="glyphicon glyphicon-warning"></span>{{error}}
                 </div>
 
                 <button type="submit" name="enviar" class="btn btn-lg btn-primary center-block" [disabled]="!form.form.valid" (click)="ingresar(); form.reset()"> Ingresar </button>

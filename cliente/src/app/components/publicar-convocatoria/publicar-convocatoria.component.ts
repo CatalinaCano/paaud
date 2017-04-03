@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     moduleId: module.id,
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class PublicarConvocatoriaComponent implements OnInit {
-    constructor() { }
+    constructor(private router: Router) { }
     ngOnInit() { }
     //Array del tipo de Subsidios
     subsidios =[
@@ -24,4 +25,34 @@ export class PublicarConvocatoriaComponent implements OnInit {
             "t_porcentajesub":"40",
         }
     ];
+
+    facultades =[
+        {
+            "k_idfacultad": 1,
+            "n_nombrefacultad":"Ingenieria",
+        },
+         {
+            "k_idfacultad": 2,
+            "n_nombrefacultad":"Artes",
+        },
+         {
+            "k_idfacultad": 3,
+            "n_nombrefacultad":"Maca",
+        }
+    ];
+
+    facultad="";
+    fechaInicio="";
+    fechaFin="";
+    cupos="";
+
+    regresar(){
+        this.router.navigate(['/landing']);
+    }
+
+    enviardatos(){
+        console.log("AQUI SE ENVIAN LOS DATOS PARA LA BD");
+    }
+
+
 }

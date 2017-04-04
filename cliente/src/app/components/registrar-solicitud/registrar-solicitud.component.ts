@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
+import { FormsModule } from '@angular/forms';
 
 import { LoginEstudianteService } from './../../services/login-estudiante.service';
 import { RegistrarSolicitudService } from './../../services/registrar-solicitud.service';
+import { CustomFormsModule } from 'ng2-validation'
+
 
 @Component({
     moduleId: module.id,

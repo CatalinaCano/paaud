@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'^post_camponumerico', views.post_camponumerico, name='post_camponumerico'),
     url(r'^post_campobooleano', views.post_campobooleano, name='post_campobooleano'),
     url(r'^post_campostring', views.post_campostring, name='post_campostring'),
-    url(r'^get_solicitud', views.get_solicitud, name='get_solicitud')
+    url(r'^get_solicitudes', views.get_solicitudes, name='get_solicitudes'),
+    url(r'^get_facultades', views.get_facultades, name='get_facultades')
 ]

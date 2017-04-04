@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 
 import { LoginEstudianteService } from './../../services/login-estudiante.service';
 import { HistoricoSolicitudesService } from './../../services/historico-solicitudes.service';
+import { FacultadesService } from './../../services/facultades.service';
 
 @Component({
     moduleId: module.id,
@@ -18,6 +19,7 @@ export class NavComponent implements OnInit {
     constructor(
         private loginEstudianteService: LoginEstudianteService,
         private historicoSolicitudesService: HistoricoSolicitudesService,
+        private facultadesService: FacultadesService,
         private router: Router
     ) { }
 
@@ -29,6 +31,13 @@ export class NavComponent implements OnInit {
         this.historicoSolicitudesService.getSolicitudes(usuario,password)
             .then(data => {
                 this.router.navigate(['/historico-solicitudes']);
+            });
+    }
+
+    consultarFacultades(usuario:string,password:string) {
+        this.facultadesService.getFacultades(usuario,password)
+            .then(data => {
+                this.router.navigate(['/publicar-convocatoria']);
             });
     }
 }

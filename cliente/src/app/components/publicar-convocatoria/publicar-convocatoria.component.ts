@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { LoginEstudianteService } from './../../services/login-estudiante.service';
+import { FacultadesService } from './../../services/facultades.service';
+
 @Component({
     moduleId: module.id,
     selector: 'app-pulicar-convocatoria',
@@ -8,43 +11,42 @@ import { Router } from '@angular/router';
 })
 
 export class PublicarConvocatoriaComponent implements OnInit {
-    constructor(private router: Router) { }
-    ngOnInit() { }
+
+    datos_usuario = {};
+    facultades = [];
+
+    constructor(
+        private loginEstudianteService: LoginEstudianteService,
+        private facultadesService: FacultadesService,
+        private router: Router
+    ) { }
+
+    ngOnInit() { 
+        this.datos_usuario = this.loginEstudianteService.getDatosUsuario();
+        this.facultades = this.facultadesService.getDatosFacultades();
+    }
     //Array del tipo de Subsidios
     subsidios =[
         {
             "n_tiposubsidio": "Total",
             "t_porcentajesub":"100",
+            "cupos": null
         },
          {
             "n_tiposubsidio": "Tipo A",
             "t_porcentajesub":"70",
+            "cupos": null
         },
          {
             "n_tiposubsidio": "Tipo B",
             "t_porcentajesub":"40",
-        }
-    ];
-
-    facultades =[
-        {
-            "k_idfacultad": 1,
-            "n_nombrefacultad":"Ingenieria",
-        },
-         {
-            "k_idfacultad": 2,
-            "n_nombrefacultad":"Artes",
-        },
-         {
-            "k_idfacultad": 3,
-            "n_nombrefacultad":"Maca",
+            "cupos": null
         }
     ];
 
     facultad="";
     fechaInicio="";
     fechaFin="";
-    cupos="";
 
     regresar(){
         this.router.navigate(['/landing']);

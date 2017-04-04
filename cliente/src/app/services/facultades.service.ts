@@ -4,19 +4,19 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class HistoricoSolicitudesService {
+export class FacultadesService {
 
-    private obtener_solicitudesURL = 'http://localhost:8000/get_solicitudes/';
-    solicitudes = [];
+    private obtener_facultadesURL = 'http://localhost:8000/get_facultades/';
+    facultades = [];
 
     constructor(private http: Http) { }
 
-    getSolicitudes(usuario:string,password:string){
-        return this.http.get(this.obtener_solicitudesURL+'?usuario='+usuario+'&password='+password)
+    getFacultades(usuario:string,password:string){
+        return this.http.get(this.obtener_facultadesURL+'?usuario='+usuario+'&password='+password)
             .toPromise()
             .then(response => {
                 response.json();
-                this.solicitudes = response.json();
+                this.facultades = response.json();
             })
             .catch(this.handleError);
     }
@@ -26,7 +26,7 @@ export class HistoricoSolicitudesService {
         return Promise.reject(error._body || error);
     }
 
-    getDatosSolicitudes() {
-        return this.solicitudes;
+    getDatosFacultades() {
+        return this.facultades;
     }
 }

@@ -139,7 +139,7 @@ def post_campostring(request):
 	else:
 		return HttpResponseBadRequest('No post method')
 
-def get_solicitud(request):
+def get_solicitudes(request):
 	if request.method == 'GET':
 		r = request.GET.get
 		usuario = (r('usuario'))
@@ -155,6 +155,28 @@ def get_solicitud(request):
 				context['f_solicitud'] = c[1]
 				context['k_idconvocatoria'] = c[2]
 				context['i_estadosolicitud'] = c[3]
+				respuesta.append(context)
+			db.close()
+		except cx_Oracle.DatabaseError as e:
+			error, = e.args
+			return HttpResponseBadRequest('Error: '+error.message)
+		return JsonResponse(respuesta, safe=False) 
+	else:
+		return HttpResponseBadRequest('No get method')
+
+def get_facultades(request):
+	if request.method == 'GET':
+		r = request.GET.get
+		usuario = (r('usuario'))
+		password = (r('password'))
+		try:
+			db = cx_Oracle.connect(usuario, password, 'localhost:1522/XE')
+			cursor = db.cursor()
+			respuesta = []
+			for c in cursor.execute("select k_idfacultad,n_nombrefacultad from facultad"):
+				context = {}
+				context['k_idfacultad'] = c[0]
+				context['n_nombrefacultad'] = c[1]
 				respuesta.append(context)
 			db.close()
 		except cx_Oracle.DatabaseError as e:

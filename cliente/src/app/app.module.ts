@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { CustomFormsModule } from 'ng2-validation';
 /**Componentes */
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -21,6 +22,7 @@ import { ConfirmacionSolicitudComponent } from "app/components/confirmacion-soli
 import { LoginEstudianteService } from './services/login-estudiante.service';
 import { RegistrarSolicitudService } from './services/registrar-solicitud.service';
 import { HistoricoSolicitudesService } from './services/historico-solicitudes.service';
+import { FacultadesService } from './services/facultades.service';
 /**Importamos la directiva que valida el login*/
 import {SinEspacios} from './components/login/validacion.directive';
 import { routes } from './app.routes';
@@ -49,12 +51,14 @@ import { routes } from './app.routes';
     FormsModule,
     HttpModule,
     JsonpModule,
+    CustomFormsModule,
     RouterModule.forRoot(routes)
   ],
   providers: [
     LoginEstudianteService,
     RegistrarSolicitudService,
-    HistoricoSolicitudesService
+    HistoricoSolicitudesService,
+    FacultadesService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,88 +1,85 @@
 <app-nav></app-nav>
 
 <div class="container">
-      
-       <!--Barra de navegacion-->
-        <div class="col-md-12">
-          <ul class="breadcrumb">
-              <li><a routerLink="/landing"><span class="glyphicon glyphicon-home"></span> PAAUD</a></li>
-              <li><span class="glyphicon glyphicon-bullhorn"></span> Convocatoria</li>
-              <li class="active"><span class="glyphicon glyphicon-calendar"></span> Publicar Convocatoria
-          </ul>
-      </div>
 
-      <div class="col-md-12 jumbotron">         
-          <h1>Publicar Convocatoria</h1>
-           <hr class="my-4">
-           <div class="col-md-3 block-center">
-                <img src="../../assets/convocatoria.png" alt="">                    
-           </div>
+    <!--Barra de navegacion-->
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            <li><a routerLink="/landing"><span class="glyphicon glyphicon-home"></span> PAAUD</a></li>
+            <li><span class="glyphicon glyphicon-bullhorn"></span> Convocatoria</li>
+            <li class="active"><span class="glyphicon glyphicon-calendar"></span> Publicar Convocatoria
+        </ul>
+    </div>
 
-           <div class="col-md-9">
-                <form class="form-horizontal" #form="ngForm">
-                    <fieldset>
-                        <legend><span class="glyphicon glyphicon-time"></span> Periodo de la Convocatoria</legend>
-                               
-                                <div class="form-group">             
-                                  <label for="fechaIncio" class="col-lg-2 control-label">Fecha Inicio</label>
-                                      <div class="col-lg-4">
-                                        <input type="date" class="form-control" id="fechaInicio" required name="fechaInicio" [(ngModel)]="fechaInicio">
-                                      </div>
-                                 <label for="fechaFin" class="col-lg-2 control-label">Fecha Fin</label>  
-                                      <div class="col-lg-4">
-                                        <input type="date" class="form-control" id="fechaFin" required name="fechaFin" [(ngModel)]="fechaFin">
-                                      </div>  
-                                </div>
-                               
-                                <legend><span class="glyphicon glyphicon-book"></span> Facultad de la Convocatoria </legend>
-                                <div class="form-group" >                                          
-                                  <label for="fechaIncio" class="col-md-5 control-label">Facultad </label>
-                                      <div class="col-md-4">                                        
-                                        <select required class="form-control" name="facultad" [(ngModel)]="facultad" >
-                                          <option value="" selected>Seleccione una facultad</option>
-                                          <option *ngFor="let fac of facultades" [ngValue]="fac.k_idfacultad">{{fac.n_nombrefacultad}}</option>
-                                        </select>
-                                      </div>                              
-                                </div>
+    <div class="col-md-12 jumbotron">
+        <h1>Publicar Convocatoria</h1>
+        <hr class="my-4">
+        <div class="col-md-3 block-center">
+            <img src="../../assets/convocatoria.png" alt="">
+        </div>
 
-                          
+        <div class="col-md-9">
+            <form class="form-horizontal" #formulario="ngForm">
+                <fieldset>
+                    <legend><span class="glyphicon glyphicon-time"></span> Periodo de la Convocatoria</legend>
 
-                              <legend><span class="glyphicon glyphicon-pencil"></span> Número de Cupos </legend>
-                             
-                              <div class="table-responsive">              
-                                <table class="table table-striped table-bordered  ">
-                                    <thead>
-                                        <tr class="success block-center">                                           
-                                          <th class="text-center">SUBSIDIO</th>
-                                          <th class="text-center">% SUBSIDIADO</th>                                          
-                                          <th class="text-center">CUPOS</th>                                        
-                                        </tr>
-                                    </thead>
-                                        <tr *ngFor="let sub of subsidios">
-                                          <th class="text-center">Subsidio: {{sub["n_tiposubsidio"]}}</th>
-                                          <th class="text-center"> {{sub["t_porcentajesub"]}} </th>
-                                          <th class="text-center"><input type="number" class="form-control" value="" placeholder="cupos" name="cupos" [(ngModel)]="cupos" ></th>                                          
-                                        </tr>
-                                </table>   
-                                           
-                             </div>
+                    <div class="form-group">
+                        <label for="fechaIncio" class="col-lg-2 control-label">Fecha Inicio {{fechaInicio}}</label>
+                        <div class="col-lg-4">
+                            <input type="date" class="form-control" id="fechaInicio" required name="fechaInicio" [(ngModel)]="fechaInicio">
+                        </div>
+                        <label for="fechaFin" class="col-lg-2 control-label">Fecha Fin {{fechaFin}}</label>
+                        <div class="col-lg-4">
+                            <input type="date" class="form-control" id="fechaFin" required name="fechaFin" [(ngModel)]="fechaFin">
+                        </div>
+                    </div>
 
-                                <div class= "form-group block-center">
-                                  <div class="col-lg-10 col-lg-offset-4">
-                                    <button type="reset" class="btn btn-default" (click)="regresar(); form.reset()"> <span class="glyphicon glyphicon-remove-sign"></span> Cancelar</button>
-                                    <button type="submit" class="btn btn-success" (click) ="enviardatos()"> <span class="glyphicon glyphicon-ok-circle"></span> Enviar</button>
-                                  </div>
-                                </div> 
-
-                    </fieldset>
-                </form>
-           </div>
+                    <legend><span class="glyphicon glyphicon-book"></span> Facultad de la Convocatoria </legend>
+                    <div class="form-group">
+                        <label for="fechaIncio" class="col-md-5 control-label">Facultad </label>
+                        <div class="col-md-4">
+                            <select class="form-control" name="facultad" required [(ngModel)]="facultad">
+                              <option value="" selected>Seleccione una facultad</option>
+                              <option *ngFor="let fac of facultades" [ngValue]="fac.k_idfacultad">{{fac.n_nombrefacultad}}</option>
+                            </select>
+                        </div>
+                    </div>
 
 
-     </div>  
-       
- </div>     
+
+                    <legend><span class="glyphicon glyphicon-pencil"></span> Número de Cupos </legend>
+
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered  ">
+                            <thead>
+                                <tr class="success block-center">
+                                    <th class="text-center">SUBSIDIO</th>
+                                    <th class="text-center">% SUBSIDIADO</th>
+                                    <th class="text-center">CUPOS</th>
+                                </tr>
+                            </thead>
+                            <tr *ngFor="let sub of subsidios">
+                                <th class="text-center">Subsidio: {{sub.n_tiposubsidio}}</th>
+                                <th class="text-center"> {{sub.t_porcentajesub}} </th>
+                                <th class="text-center"><input type="number" class="form-control" placeholder="cupos" name="cupos" required [(ngModel)]="sub.cupos"></th>
+                                {{sub.cupos}}
+                            </tr>
+                        </table>
+
+                    </div>
+
+                    <div class="form-group block-center">
+                        <div class="col-lg-10 col-lg-offset-4">
+                            <button type="reset" class="btn btn-default" (click)="regresar(); formulario.reset()"> <span class="glyphicon glyphicon-remove-sign"></span> Cancelar</button>
+                            <button type="submit" class="btn btn-success" (click)="enviardatos()" [disabled]="!formulario.form.valid"> <span class="glyphicon glyphicon-ok-circle"></span> Enviar</button>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
 
 
-       
-     
+    </div>
+
+</div>

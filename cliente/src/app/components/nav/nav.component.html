@@ -37,7 +37,7 @@
                     <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-duplicate"></span> Solicitud <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li>
-                            <a routerLink="/historico-solicitudes"> <span class="glyphicon glyphicon-qrcode"></span> Ver Historico de Solicitudes</a>
+                            <a (click)="consultarSolicitudes(datos_usuario.n_usuario, datos_usuario.k_codeestudiante)"> <span class="glyphicon glyphicon-qrcode"></span> Ver Historico de Solicitudes</a>
                         </li>
                         <li class="divider"></li>
                         <li>

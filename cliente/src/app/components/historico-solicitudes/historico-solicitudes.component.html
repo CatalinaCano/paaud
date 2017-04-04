@@ -34,34 +34,34 @@
             <table class="table table-striped table-bordered table-hover ">
                 <thead>
                     <tr class="success">
-                        <th>Nº</th>
-                        <th>Código</th>
-                        <th>Nombres</th>
-                        <th>Apellidos</th>
-                        <th>Facultad</th>
-                        <th>Carrera</th>
-                        <th>Fecha de Radicado</th>
-                        <th>Estado</th>
-                        <th>Motivo del Estado</th>
-                        <th>Responsable</th>
+                        <th class="text-center">Nº Radicado</th>
+                        <th class="text-center">Código</th>
+                        <th class="text-center">Nombres</th>
+                        <th class="text-center">Apellidos</th>
+                        <th class="text-center">Facultad</th>
+                        <th class="text-center">Carrera</th>
+                        <th class="text-center">Fecha de Radicado</th>
+                        <th class="text-center">Estado</th>
+                        <th class="text-center">Motivo del Estado</th>
+                        <th class="text-center">Convocatoria</th>
                     </tr>
                 </thead>
 
-                <tr>
-                    <td>1</td>
-                    <td>20121020079</td>
-                    <td>Maria</td>
-                    <td>Castillo</td>
-                    <td>Ingeniería</td>
-                    <td>Ing. Catastral</td>
-                    <td>08/07/2017</td>
+                <tr *ngFor="let solicitud of solicitudes">
+                    <td class="text-center">{{solicitud.k_solicitud}}</td>
+                    <td class="text-center">{{datos_usuario.k_codeestudiante}}</td>
+                    <td class="text-center">{{datos_usuario.n_nomeestudiante}}</td>
+                    <td class="text-center">{{datos_usuario.n_apellestudiante}}</td>
+                    <td class="text-center">{{datos_usuario.n_facultad}}</td>
+                    <td class="text-center">{{datos_usuario.n_proyectocurric}}</td>
+                    <td class="text-center">{{solicitud.f_solicitud}}</td>
                     <td>
-                        <span class="label label-info text-center">Aceptado</span>
+                        <span class="label label-info text-center">{{solicitud.i_estadosolicitud}}</span>
                     </td>
                     <td>
                         <button type="button" class="btn btn-warning btn-xs center-block"><span class="glyphicon glyphicon-search"></span> Ver</button>
                     </td>
-                    <td>Nicolás Bernal</td>
+                    <td class="text-center">{{solicitud.k_idconvocatoria}}</td>
                 </tr>
 
             </table>

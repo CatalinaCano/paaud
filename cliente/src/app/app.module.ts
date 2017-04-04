@@ -16,10 +16,11 @@ import { PublicarConvocatoriaComponent } from './components/publicar-convocatori
 import { ConsultarConvocatoriaComponent } from './components/consultar-convocatoria/consultar-convocatoria.component';
 import { TiqueteraComponent } from './components/tiquetera/tiquetera.component';
 import { InscribirConvocatoriaComponent } from "app/components/inscribir-convocatoria/inscribir-convocatoria.component";
-
+import { ConfirmacionSolicitudComponent } from "app/components/confirmacion-solicitud/confirmacion-solicitud.component";
 /**Servicios */
 import { LoginEstudianteService } from './services/login-estudiante.service';
 import { RegistrarSolicitudService } from './services/registrar-solicitud.service';
+import { HistoricoSolicitudesService } from './services/historico-solicitudes.service';
 /**Importamos la directiva que valida el login*/
 import {SinEspacios} from './components/login/validacion.directive';
 import { routes } from './app.routes';
@@ -40,7 +41,8 @@ import { routes } from './app.routes';
     ConsultarConvocatoriaComponent,
     TiqueteraComponent,
     SinEspacios,
-    InscribirConvocatoriaComponent
+    InscribirConvocatoriaComponent,
+    ConfirmacionSolicitudComponent
   ],
   imports: [
     BrowserModule,
@@ -51,7 +53,8 @@ import { routes } from './app.routes';
   ],
   providers: [
     LoginEstudianteService,
-    RegistrarSolicitudService
+    RegistrarSolicitudService,
+    HistoricoSolicitudesService
   ],
   bootstrap: [AppComponent]
 })

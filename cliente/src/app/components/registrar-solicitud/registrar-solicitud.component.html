@@ -102,7 +102,6 @@
                             <option value="3">3</option>
                             <option value="4">4</option>
                         </select>
-                        <p>{{zona_riesgo.k_camposolicitud}}-{{zona_riesgo.q_numerico}}</p>
                     </div>
                 </div>
 
@@ -122,7 +121,6 @@
                         <input type="number" class="form-control" name="ingresos" id="ingresos" required placeholder="100.000" [(ngModel)]="ingresos_familiares.q_numerico" #ingresos="ngModel">
                         <span class="input-group-addon">.00</span>
                     </div>
-                    <p>{{ingresos_familiares.k_camposolicitud}}-{{ingresos_familiares.q_numerico}}</p>
                 </div>
 
                 <div class="form-group">
@@ -132,7 +130,6 @@
                             <option value="f" selected>No</option>
                             <option value="t">Si</option>
                         </select>
-                        <p>{{sostenimiento_economico.k_camposolicitud}}-{{sostenimiento_economico.i_booleano}}</p>
                     </div>
 
                     <label for="sostenimientohogar" class="col-lg-4 control-label">Sostiene actualmente su hogar</label>
@@ -141,7 +138,6 @@
                             <option value="f" selected>No</option>
                             <option value="t">Si</option>
                         </select>
-                        <p>{{sostiene_su_hogar.k_camposolicitud}}-{{sostiene_su_hogar.i_booleano}}</p>
                     </div>
                 </div>
 
@@ -152,7 +148,6 @@
                             <option value="f" selected>No</option>
                             <option value="t">Si</option>                                        
                         </select>
-                        <p>{{vive_fuera.k_camposolicitud}}-{{vive_fuera.i_booleano}}</p>
                     </div>
 
                     <label for="sostenimientopersonas" class="col-lg-4 control-label">Tiene personas a cargo económicamente</label>
@@ -162,7 +157,6 @@
                             <option value="t">Si</option>                                           
                         </select>
                     </div>
-                    <p>{{sostenimiento_personas.k_camposolicitud}}-{{sostenimiento_personas.i_booleano}}</p>
                 </div>
 
 
@@ -173,7 +167,6 @@
                             <option value="f" selected>No</option>
                             <option value="t">Si</option>
                         </select>
-                        <p>{{vive_en_arriendo.k_camposolicitud}}-{{vive_en_arriendo.i_booleano}}</p>
                     </div>
 
                     <label for="origen" class="col-lg-4 control-label">Proviene de Municipios o ciudades distintos a Bogotá</label>
@@ -183,7 +176,6 @@
                             <option value="t">Si</option>                                        
                         </select>
                     </div>
-                    <p>{{origen.k_camposolicitud}}-{{origen.i_booleano}}</p>
                 </div>
 
 
@@ -199,7 +191,6 @@
                             <option value=" mujer cabeza de hogar">Mujer cabeza de hogar</option>
                         </select>
                     </div>
-                    <p>{{desplazamiento_forzado.k_camposolicitud}}-{{desplazamiento_forzado.n_valorcampo}}</p>
                 </div>
 
                 <div class="form-group">
@@ -209,7 +200,6 @@
                             <option value="f" selected>No</option>
                             <option value="t">Si</option>                                         
                         </select>
-                        <p>{{discapacidad_fisica.k_camposolicitud}}-{{discapacidad_fisica.i_booleano}}</p>
                     </div>
 
                     <label for="patologia" class="col-lg-4 control-label">Presenta alguna patología asociada a su alimentación</label>
@@ -218,7 +208,6 @@
                             <option value="f" selected>No</option>
                             <option value="t">Si</option>                                          
                         </select>
-                        <p>{{patologia_medica.k_camposolicitud}}-{{patologia_medica.i_booleano}}</p>
                     </div>
                 </div>
 
@@ -338,8 +327,8 @@
 
                 <div class="form-group block-center">
                     <div class="col-lg-10 col-lg-offset-4">
-                        <button type="reset" class="btn btn-default"> <span class="glyphicon glyphicon-remove-sign"></span> Cancelar</button>
-                        <button type="submit" class="btn btn-success" (click)="enviarSolicitud(datos_usuario.n_usuario,datos_usuario.k_codeestudiante)"> <span class="glyphicon glyphicon-ok-circle"></span> Enviar</button>
+                        <button type="reset" class="btn btn-default" (click)="volver()"> <span class="glyphicon glyphicon-remove-sign"></span> Cancelar</button>
+                        <button type="submit" class="btn btn-success" (click)="enviarSolicitud(datos_usuario.n_usuario,datos_usuario.k_codeestudiante)" [disabled]="!formulario.form.valid"> <span class="glyphicon glyphicon-ok-circle"></span> Enviar</button>
                     </div>
                 </div>
             </fieldset>

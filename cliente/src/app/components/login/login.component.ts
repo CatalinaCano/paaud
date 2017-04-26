@@ -37,4 +37,8 @@ export class LoginComponent implements OnInit {
                 console.log("Error: "+error)
             })
   }
+
+  registrarse(){
+      this.router.navigate(['/registro-estudiantes']);
+  }
 }

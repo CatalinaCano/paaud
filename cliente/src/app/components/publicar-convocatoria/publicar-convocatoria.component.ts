@@ -6,7 +6,7 @@ import { FacultadesService } from './../../services/facultades.service';
 
 @Component({
     moduleId: module.id,
-    selector: 'app-pulicar-convocatoria',
+    selector: 'publicar-convocatoria',
     templateUrl: 'publicar-convocatoria.component.html'
 })
 

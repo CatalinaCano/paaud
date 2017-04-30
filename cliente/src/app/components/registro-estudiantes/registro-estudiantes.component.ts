@@ -16,15 +16,16 @@ export class RegistroEstudiantesComponent implements OnInit {
         private router: Router
     ) { }
     
-     proyectos=[
-        {"n_proyecto": "Ingeniería de Sistemas"},
-        {"n_proyecto": "Licenciatura en Biología"},
-        {"n_proyecto": "Arte Escenico"},
-    ];
+   
     ngOnInit() { 
          //this.facultades = this.facultadesService.getDatosFacultades();
     }   
 
+  proyectos=[
+        {"n_proyecto":"Ingeniería de Sistemas"},
+        {"n_proyecto":"Licenciatura en Biología"},
+        {"n_proyecto":"Arte Escenico"}
+    ];
     regresar(){
         console.log('llego Aqui');
         this.router.navigate(['/login']);

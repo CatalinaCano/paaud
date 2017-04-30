@@ -65,9 +65,9 @@
 
                     <label for="proyecto" class="col-lg-2 control-label">Proyecto Curricular</label>
                     <div class="col-lg-4">
-                        <select class="form-control" name="proyecto" required autofocus ="proyecto">
+                        <select class="form-control" name="proyecto" required autofocus [(ngModel)]="proyecto">
                               <option value="" selected>Seleccione un Proyecto</option>
-                              <option *ngFor="let pro of proyectos" [ngValue]="pro.n_proyecto">{{pro.n_proyecto}}</option>
+                              <option *ngFor="let p of proyectos" [ngValue]="p.n_proyecto">{{p.n_proyecto}}</option>
                             </select>
                     </div>
                 </div>

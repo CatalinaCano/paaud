@@ -45,7 +45,7 @@
                         </div>
                         <label for="periodo" class="col-md-2 control-label">Periodo </label>
                         <div class="col-md-4">
-                            <select class="form-control" name="facultad" required autofocus [(ngModel)]="facultad">
+                            <select class="form-control" name="facultad" required autofocus [(ngModel)]="periodo">
                               <option value="" selected>Seleccione una periodo</option>
                               <option *ngFor="let p of periodos" [ngValue]="p.n_periodo">{{p.n_periodo}}</option>
                             </select>
@@ -54,9 +54,9 @@
 
                     <legend><span class="glyphicon glyphicon-bullhorn"></span> Estado de la Convocatoria </legend>
                     
-                         <label for="periodo" class="col-md-4 control-label">Estado </label>
+                         <label for="estado" class="col-md-4 control-label">Estado </label>
                          <div class="col-md-4">
-                            <select class="form-control" name="facultad" required autofocus [(ngModel)]="facultad">
+                            <select class="form-control" name="estado" required autofocus [(ngModel)]="estado">
                               <option value="" selected>Seleccione una Estado</option>
                               <option *ngFor="let e of estados" [ngValue]="e.n_estado">{{e.n_estado}}</option>
                             </select>                       

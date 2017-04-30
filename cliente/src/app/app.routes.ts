@@ -11,6 +11,7 @@ import { PublicarConvocatoriaComponent } from "app/components/publicar-convocato
 import {InscribirConvocatoriaComponent} from "app/components/inscribir-convocatoria/inscribir-convocatoria.component";
 import { ConfirmacionSolicitudComponent } from "app/components/confirmacion-solicitud/confirmacion-solicitud.component";
 import { RegistroEstudiantesComponent } from "app/components/registro-estudiantes/registro-estudiantes.component"
+import { VerHistoricoSolicitudesComponent } from "app/components/ver-historico-solicitudes/ver-historico-solicitudes.component";
 
 export const routes: Route[] = [
     { path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -24,5 +25,6 @@ export const routes: Route[] = [
     { path: 'tiquetera', component: TiqueteraComponent },
     { path: 'inscribir-convocatoria', component: InscribirConvocatoriaComponent },
     { path: 'confirmacion-solicitud', component: ConfirmacionSolicitudComponent },
-    { path: 'registro-estudiantes', component: RegistroEstudiantesComponent}
+    { path: 'registro-estudiantes', component: RegistroEstudiantesComponent},
+    { path: 'ver-historico-solicitudes', component:VerHistoricoSolicitudesComponent}
 ];

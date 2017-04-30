@@ -19,6 +19,7 @@ import { TiqueteraComponent } from './components/tiquetera/tiquetera.component';
 import { InscribirConvocatoriaComponent } from "app/components/inscribir-convocatoria/inscribir-convocatoria.component";
 import { ConfirmacionSolicitudComponent } from "app/components/confirmacion-solicitud/confirmacion-solicitud.component";
 import { RegistroEstudiantesComponent } from "app/components/registro-estudiantes/registro-estudiantes.component";
+import { VerHistoricoSolicitudesComponent } from "app/components/ver-historico-solicitudes/ver-historico-solicitudes.component";
 
 /**Servicios */
 import { LoginEstudianteService } from './services/login-estudiante.service';
@@ -28,7 +29,7 @@ import { FacultadesService } from './services/facultades.service';
 /**Importamos la directiva que valida el login*/
 import { SinEspacios } from "./directives/validacionSinEspacios.directive";
 import { routes } from './app.routes';
-import { VerHistoricoSolicitudesComponent } from "app/components/ver-historico-solicitudes/ver-historico-solicitudes.component";
+
 
 
 

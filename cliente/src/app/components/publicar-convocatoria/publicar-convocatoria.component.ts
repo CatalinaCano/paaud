@@ -44,6 +44,18 @@ export class PublicarConvocatoriaComponent implements OnInit {
         }
     ];
 
+    periodos=[
+        {"n_periodo":"1"},
+        {"n_periodo":"2"}
+    ];
+
+    estados=[
+        {"n_estado":"Abierta"},
+        {"n_estado":"Cancelada"},
+        {"n_estado":"En validación"},
+        {"n_estado":"Cerrada"}
+    ];
+
     facultad="";
     fechaInicio="";
     fechaFin="";

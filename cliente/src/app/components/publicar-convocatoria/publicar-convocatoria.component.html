@@ -26,25 +26,41 @@
                     <div class="form-group">
                         <label for="fechaIncio" class="col-lg-2 control-label">Fecha Inicio {{fechaInicio}}</label>
                         <div class="col-lg-4">
-                            <input type="date" class="form-control" id="fechaInicio" required name="fechaInicio" [(ngModel)]="fechaInicio">
+                            <input type="date" class="form-control" id="fechaInicio" required autofocus name="fechaInicio" [(ngModel)]="fechaInicio">
                         </div>
                         <label for="fechaFin" class="col-lg-2 control-label">Fecha Fin {{fechaFin}}</label>
                         <div class="col-lg-4">
-                            <input type="date" class="form-control" id="fechaFin" required name="fechaFin" [(ngModel)]="fechaFin">
+                            <input type="date" class="form-control" id="fechaFin" required autofocus name="fechaFin" [(ngModel)]="fechaFin">
                         </div>
                     </div>
 
                     <legend><span class="glyphicon glyphicon-book"></span> Facultad de la Convocatoria </legend>
                     <div class="form-group">
-                        <label for="facultad" class="col-md-5 control-label">Facultad </label>
+                        <label for="facultad" class="col-md-2 control-label">Facultad </label>
                         <div class="col-md-4">
-                            <select class="form-control" name="facultad" required [(ngModel)]="facultad">
+                            <select class="form-control" name="facultad" required autofocus [(ngModel)]="facultad">
                               <option value="" selected>Seleccione una facultad</option>
                               <option *ngFor="let fac of facultades" [ngValue]="fac.k_idfacultad">{{fac.n_nombrefacultad}}</option>
                             </select>
                         </div>
+                        <label for="periodo" class="col-md-2 control-label">Periodo </label>
+                        <div class="col-md-4">
+                            <select class="form-control" name="facultad" required autofocus [(ngModel)]="facultad">
+                              <option value="" selected>Seleccione una periodo</option>
+                              <option *ngFor="let p of periodos" [ngValue]="p.n_periodo">{{p.n_periodo}}</option>
+                            </select>
+                        </div>
                     </div>
 
+                    <legend><span class="glyphicon glyphicon-bullhorn"></span> Estado de la Convocatoria </legend>
+                    
+                         <label for="periodo" class="col-md-4 control-label">Estado </label>
+                         <div class="col-md-4">
+                            <select class="form-control" name="facultad" required autofocus [(ngModel)]="facultad">
+                              <option value="" selected>Seleccione una Estado</option>
+                              <option *ngFor="let e of estados" [ngValue]="e.n_estado">{{e.n_estado}}</option>
+                            </select>                       
+                        </div>
 
 
                     <legend><span class="glyphicon glyphicon-pencil"></span> Número de Cupos </legend>

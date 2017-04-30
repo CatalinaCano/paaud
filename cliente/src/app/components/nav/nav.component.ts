@@ -30,7 +30,7 @@ export class NavComponent implements OnInit {
     consultarSolicitudes(usuario:string,password:string) {
         this.historicoSolicitudesService.getSolicitudes(usuario,password)
             .then(data => {
-                this.router.navigate(['/historico-solicitudes']);
+                this.router.navigate(['/ver-historico-solicitudes']);
             });
     }
 

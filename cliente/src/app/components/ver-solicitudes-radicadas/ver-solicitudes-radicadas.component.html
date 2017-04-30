@@ -7,22 +7,16 @@
         <ul class="breadcrumb">
             <li><a routerLink="/landing"><span class="glyphicon glyphicon-home"></span> PAAUD</a></li>
             <li><span class="glyphicon glyphicon-duplicate"></span> Solicitud</li>
-            <li class="active"><span class="glyphicon glyphicon-qrcode"></span> Historico Solicitudes</li>
+            <li class="active"><span class="glyphicon glyphicon-folder-open"></span> &nbsp; Solicitudes Radicadas</li>
         </ul>
     </div>
 
     <div class="col-md-12 jumbotron">
-        <h1><span class="glyphicon glyphicon-qrcode"></span> Historico de Solicitudes </h1>
+        <h1><span class="glyphicon glyphicon-folder-open"></span> &nbsp; Solicitudes Radicadas </h1>
         <hr class="my-4">
 
 
         <div class="table-responsive">
-            <form class="navbar-form navbar-left" role="search" #formulario="ngForm">
-                <div class="form-group">
-                    <input type="text" class="form-control" autofocus placeholder="Buscar"> 
-                </div>
-                <button type="submit" class="btn btn-primary " (click)="buscar()"><span class="glyphicon glyphicon-search"></span> Buscar</button>
-            </form>
 
             <table class="table table-striped table-bordered table-hover text-center">
                 <thead class="text-center">
@@ -46,7 +40,7 @@
                     <td class="text-center">{{con.n_facultad}} </td>
                     <td class="text-center">{{con.n_carrera}} </td>
                     <td class="text-center">{{con.n_fecha_r}} </td>
-                    <td class="text-center"><span class="label label-warning ">{{con.n_estado}}</span></td>
+                    <td class="text-center"><span class="label label-primary ">{{con.n_estado}}</span></td>
                     <td class="text-center">{{con.n_responsable}} </td>
                 </tr>
             </table>

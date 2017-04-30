@@ -25,11 +25,11 @@ export class VerHistoricoSolicitudesComponent implements OnInit {
         },
          {
             "n_solicitud": "2",
-            "n_codigo":"20121020079",
-            "n_nombres":"Diana Catalina",
-            "n_apellidos":"Cano Narvaez",
-            "n_facultad":"Ingeniería",
-            "n_carrera":"Ing. Sistemas",
+            "n_codigo":"20151020009",
+            "n_nombres":"Leonardo",
+            "n_apellidos":"Ramirez",
+            "n_facultad":"Artes",
+            "n_carrera":"Arte Dramatico",
             "n_fecha_r":"16/08/2016",
             "n_estado":"Aprobada",
             "n_responsable": "Camilo Velandia"
@@ -46,4 +46,8 @@ export class VerHistoricoSolicitudesComponent implements OnInit {
             "n_responsable": "Nicolas Bernal"
         }
     ];
+
+    buscar(){
+        console.log("AQUI LLEGO A BUSCAR");
+    }
 }

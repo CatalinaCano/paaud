@@ -12,6 +12,7 @@ import {InscribirConvocatoriaComponent} from "app/components/inscribir-convocato
 import { ConfirmacionSolicitudComponent } from "app/components/confirmacion-solicitud/confirmacion-solicitud.component";
 import { RegistroEstudiantesComponent } from "app/components/registro-estudiantes/registro-estudiantes.component"
 import { VerHistoricoSolicitudesComponent } from "app/components/ver-historico-solicitudes/ver-historico-solicitudes.component";
+import { VerSolicitudesRadicadasComponent } from "app/components/ver-solicitudes-radicadas/ver-solicitudes-radicadas.component";
 
 export const routes: Route[] = [
     { path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -26,5 +27,6 @@ export const routes: Route[] = [
     { path: 'inscribir-convocatoria', component: InscribirConvocatoriaComponent },
     { path: 'confirmacion-solicitud', component: ConfirmacionSolicitudComponent },
     { path: 'registro-estudiantes', component: RegistroEstudiantesComponent},
-    { path: 'ver-historico-solicitudes', component:VerHistoricoSolicitudesComponent}
+    { path: 'ver-historico-solicitudes', component:VerHistoricoSolicitudesComponent},
+    { path: 'ver-solicitudes-radicadas', component:VerSolicitudesRadicadasComponent}
 ];

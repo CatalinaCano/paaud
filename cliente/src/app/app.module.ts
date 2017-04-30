@@ -26,9 +26,12 @@ import { LoginEstudianteService } from './services/login-estudiante.service';
 import { RegistrarSolicitudService } from './services/registrar-solicitud.service';
 import { HistoricoSolicitudesService } from './services/historico-solicitudes.service';
 import { FacultadesService } from './services/facultades.service';
+import { VerSolicitudesRadicadasComponent } from "app/components/ver-solicitudes-radicadas/ver-solicitudes-radicadas.component";
+
 /**Importamos la directiva que valida el login*/
 import { SinEspacios } from "./directives/validacionSinEspacios.directive";
 import { routes } from './app.routes';
+
 
 
 
@@ -50,7 +53,8 @@ import { routes } from './app.routes';
     InscribirConvocatoriaComponent,
     ConfirmacionSolicitudComponent,
     RegistroEstudiantesComponent,
-    VerHistoricoSolicitudesComponent 
+    VerHistoricoSolicitudesComponent,
+    VerSolicitudesRadicadasComponent 
   ],
   imports: [
     BrowserModule,

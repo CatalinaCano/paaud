@@ -13,6 +13,7 @@ import { ConfirmacionSolicitudComponent } from "app/components/confirmacion-soli
 import { RegistroEstudiantesComponent } from "app/components/registro-estudiantes/registro-estudiantes.component"
 import { VerHistoricoSolicitudesComponent } from "app/components/ver-historico-solicitudes/ver-historico-solicitudes.component";
 import { VerSolicitudesRadicadasComponent } from "app/components/ver-solicitudes-radicadas/ver-solicitudes-radicadas.component";
+import { RegistrarTareaComponent } from "app/components/registrar-tarea/registrar-tarea.component";
 
 export const routes: Route[] = [
     { path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -28,5 +29,6 @@ export const routes: Route[] = [
     { path: 'confirmacion-solicitud', component: ConfirmacionSolicitudComponent },
     { path: 'registro-estudiantes', component: RegistroEstudiantesComponent},
     { path: 'ver-historico-solicitudes', component:VerHistoricoSolicitudesComponent},
-    { path: 'ver-solicitudes-radicadas', component:VerSolicitudesRadicadasComponent}
+    { path: 'ver-solicitudes-radicadas', component:VerSolicitudesRadicadasComponent},
+    { path: 'registrar-tarea', component:RegistrarTareaComponent},
 ];

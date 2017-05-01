@@ -10,7 +10,7 @@ import { FacultadesService } from './../../services/facultades.service';
 })
 
 export class RegistroEstudiantesComponent implements OnInit {
-    facultades = [];
+    
     constructor(
        // private facultadesService: FacultadesService,
         private router: Router
@@ -19,7 +19,19 @@ export class RegistroEstudiantesComponent implements OnInit {
    
     ngOnInit() { 
          //this.facultades = this.facultadesService.getDatosFacultades();
-    }   
+    }
+     facultades=[
+        {"n_facultad":"Ingeniería"},
+        {"n_facultad":"Tecnologíca"},
+        {"n_facultad":"Artes"}
+    ];
+
+    estados=[
+        {"n_estado":"Activo"},
+        {"n_estado":"En Vaciones"},
+        {"n_estado":"En prueba academica"}        
+    ];
+      
 
   proyectos=[
         {"n_proyecto":"Ingeniería de Sistemas"},

@@ -14,6 +14,8 @@ import { RegistroEstudiantesComponent } from "app/components/registro-estudiante
 import { VerHistoricoSolicitudesComponent } from "app/components/ver-historico-solicitudes/ver-historico-solicitudes.component";
 import { VerSolicitudesRadicadasComponent } from "app/components/ver-solicitudes-radicadas/ver-solicitudes-radicadas.component";
 import { RegistrarTareaComponent } from "app/components/registrar-tarea/registrar-tarea.component";
+import { AsignarTareaComponent } from "app/components/asignar-tarea/asignar-tarea.component";
+import { ModificarTareaComponent } from "app/components/modificar-tarea/modificar-tarea.component";
 
 export const routes: Route[] = [
     { path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -31,4 +33,6 @@ export const routes: Route[] = [
     { path: 'ver-historico-solicitudes', component:VerHistoricoSolicitudesComponent},
     { path: 'ver-solicitudes-radicadas', component:VerSolicitudesRadicadasComponent},
     { path: 'registrar-tarea', component:RegistrarTareaComponent},
+    { path: 'asignar-tarea', component:AsignarTareaComponent},
+    { path: 'modificar-tarea', component:ModificarTareaComponent}
 ];

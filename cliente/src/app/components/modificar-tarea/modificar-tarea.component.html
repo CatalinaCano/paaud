@@ -1,0 +1,104 @@
+<app-nav></app-nav>
+
+<div class="container">
+
+    <!--Barra de navegacion-->
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            <li><a routerLink="/landing"><span class="glyphicon glyphicon-home"></span> PAAUD</a></li>
+            <li><span class="glyphicon glyphicon-briefcase"></span> Tareas Asignadas</li>
+            <li class="active"><span class="glyphicon glyphicon-wrench"></span> Modificar Tarea</li>
+        </ul>
+    </div>
+    <!--Esta interfaz debe cargar los datos de una actividad en especifico-->
+    <div class="col-md-12 jumbotron">
+       
+       <ul class="nav navbar-nav navbar-left">
+            <h1><span class="glyphicon glyphicon-wrench"></span> Modificar Tarea</h1>
+       </ul>
+         <ul class="nav navbar-nav navbar-right">
+            <br>
+            <br>
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Buscar...">
+                    </div>
+                    <button type="button" class="btn btn-primary"(click)="buscar()">
+            	<span class="glyphicon glyphicon-search"></span> Buscar
+            </button>
+                </form>                
+            </ul>
+        <div class="row">
+           
+        </div>
+        <hr class="my-4">
+
+
+
+        <form class="form-horizontal" #formulario="ngForm">
+            <fieldset>
+                <legend><span class="glyphicon glyphicon-book"></span> Datos de Actividad </legend>
+                <div class="form-group">
+                    <label for="nombre" class="col-md-2 control-label">Nombre Actividad </label>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" name="nombre" id="nombre" required autofocus placeholder="Nombre Actividad" [(ngModel)]="nombre"
+                        />
+                    </div>
+                    <label for="periodo" class="col-md-2 control-label">Tipo de actividad </label>
+                    <div class="col-md-4">
+                        <select class="form-control" name="tipo_actividades" required autofocus [(ngModel)]="tipo_actividades">
+                              <option value="" selected>Seleccione un tipo de actividad</option>
+                              <option *ngFor="let p of tipo_actividades" [ngValue]="p.n_actividad">{{p.n_actividad}}</option>
+                            </select>
+                    </div>
+                </div>
+
+                <legend><span class="glyphicon glyphicon-bullhorn"></span> Estado de la actividad</legend>
+
+                <label for="estado" class="col-md-4 control-label">Estado </label>
+                <div class="col-md-4">
+                    <select class="form-control" name="estado" required autofocus [(ngModel)]="estado">
+                              <option value="" selected>Seleccione un Estado</option>
+                              <option *ngFor="let e of estados" [ngValue]="e.n_estado">{{e.n_estado}}</option>
+                            </select>
+                </div>
+                <legend><span class="glyphicon glyphicon-user"></span> Responsable de la Actividad </legend>
+                <div class="form-group">
+                    <label for="nombre" class="col-md-2 control-label"> Nombres y apellidos </label>
+                    <div class="col-md-4">
+                        <select class="form-control" name="tipo_actividades" required autofocus [(ngModel)]="tipo_actividades">
+                              <option value="" selected>Seleccione un Responsable</option>
+                              <option *ngFor="let r of responsables" [ngValue]="r.n_responsable">{{r.n_responsable}}</option>
+                            </select>
+                    </div>
+
+                    <label for="periodo" class="col-md-2 control-label"> Dependencia </label>
+                    <div class="col-md-4">
+                        <select class="form-control" name="tipo_actividades" required autofocus [(ngModel)]="tipo_actividades">
+                              <option value="" selected>Seleccione una dependencia</option>
+                              <option *ngFor="let d of dependencias" [ngValue]="d.n_dependencia"> {{d.n_dependencia}}</option>
+                            </select>
+                    </div>
+                </div>
+                <legend><span class="glyphicon glyphicon-pencil"></span> Descripción de la Actividad </legend>
+
+                <div class="form-group">
+                    <label for="textArea" class="col-lg-3 control-label">Descripción</label>
+                    <div class="col-lg-8">
+                        <textarea class="form-control" rows="3" id="textArea"></textarea>
+                        <span class="help-block">Describa brevemente de que se trata la actividad.</span>
+                    </div>
+                </div>
+
+                <div class="form-group block-center">
+                    <div class="col-lg-10 col-lg-offset-5">
+                        <button type="reset" class="btn btn-default btn-lg" (click)="regresar(); formulario.reset()"> <span class="glyphicon glyphicon-remove-sign"></span> Cancelar</button>
+                        <button type="submit" class="btn btn-success btn-lg" (click)="enviardatos()" [disabled]="!formulario.form.valid"> <span class="glyphicon glyphicon-ok-circle"></span> Enviar</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+
+</div>

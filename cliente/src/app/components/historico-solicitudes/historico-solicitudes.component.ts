@@ -23,4 +23,8 @@ export class HistoricoSolicitudesComponent implements OnInit {
         this.solicitudes = this.historicoSolicitudesService.getDatosSolicitudes();
         this.datos_usuario = this.loginEstudianteService.getDatosUsuario();
     } 
+
+    buscar(){
+        
+    }
 }

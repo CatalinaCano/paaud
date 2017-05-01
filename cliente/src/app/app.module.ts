@@ -21,6 +21,8 @@ import { ConfirmacionSolicitudComponent } from "app/components/confirmacion-soli
 import { RegistroEstudiantesComponent } from "app/components/registro-estudiantes/registro-estudiantes.component";
 import { VerHistoricoSolicitudesComponent } from "app/components/ver-historico-solicitudes/ver-historico-solicitudes.component";
 import { RegistrarTareaComponent } from "app/components/registrar-tarea/registrar-tarea.component";
+import { AsignarTareaComponent } from "app/components/asignar-tarea/asignar-tarea.component";
+import { ModificarTareaComponent } from "app/components/modificar-tarea/modificar-tarea.component";
 
 /**Servicios */
 import { LoginEstudianteService } from './services/login-estudiante.service';
@@ -32,6 +34,8 @@ import { VerSolicitudesRadicadasComponent } from "app/components/ver-solicitudes
 /**Importamos la directiva que valida el login*/
 import { SinEspacios } from "./directives/validacionSinEspacios.directive";
 import { routes } from './app.routes';
+
+
 
 
 
@@ -57,7 +61,9 @@ import { routes } from './app.routes';
     RegistroEstudiantesComponent,
     VerHistoricoSolicitudesComponent,
     VerSolicitudesRadicadasComponent,
-    RegistrarTareaComponent 
+    RegistrarTareaComponent,
+    AsignarTareaComponent,
+    ModificarTareaComponent 
   ],
   imports: [
     BrowserModule,

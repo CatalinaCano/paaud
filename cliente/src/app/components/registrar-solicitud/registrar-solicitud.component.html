@@ -352,12 +352,17 @@
                         <input type="file" class="form-control" id="conArrendamiento">
                     </div>
                 </div>
-
-
+                &nbsp;
+                &nbsp;
                 <div class="form-group block-center">
-                    <div class="col-lg-10 col-lg-offset-4">
-                        <button type="reset" class="btn btn-default" (click)="volver()"> <span class="glyphicon glyphicon-remove-sign"></span> Cancelar</button>
-                        <button type="submit" class="btn btn-success" (click)="enviarSolicitud(datos_usuario.n_usuario,datos_usuario.k_codeestudiante)" [disabled]="!formulario.form.valid"> <span class="glyphicon glyphicon-ok-circle"></span> Enviar</button>
+                    <div class="col-lg-10 col-lg-offset-3">
+                        <button type="reset" class="btn btn-default btn-lg" (click)="volver()"> <span class="glyphicon glyphicon-remove-sign"></span> Cancelar</button>
+                         &nbsp;
+                         &nbsp;
+                        <button type="submit" class="btn btn-success btn-lg" (click)="enviarSolicitud(datos_usuario.n_usuario,datos_usuario.k_codeestudiante)" [disabled]="!formulario.form.valid"> <span class="glyphicon glyphicon-ok-circle"></span> Enviar</button>
+                        &nbsp;
+                         &nbsp;
+                        <button type="reset" class="btn btn-primary btn-lg" (click)="formulario.reset()"> <span class="glyphicon glyphicon-trash"></span> Limpiar</button>
                     </div>
                 </div>
             </fieldset>

@@ -1,0 +1,51 @@
+<app-nav></app-nav>
+<div class="container">
+
+    <!--Barra de navegacion-->
+    <div class="col-md-12">
+        <ul class="breadcrumb">
+            <li><a routerLink="/landing"><span class="glyphicon glyphicon-home"></span> PAAUD</a></li>
+            <li><span class="glyphicon glyphicon-briefcase"></span> Tareas Asignadas</li>
+            <li class="active"><span class="glyphicon glyphicon-search"></span> Ver Tareas Asignadas</li>
+        </ul>
+    </div>
+
+    <div class="col-md-12 jumbotron">
+        <h1><span class="glyphicon glyphicon-search"></span> &nbsp; Ver Tareas Asignadas </h1>
+        <hr class="my-4">
+
+
+        <div class="table-responsive">
+
+            <table class="table table-striped table-bordered table-hover text-center">
+                <thead class="text-center">
+                    <tr class="success text-center">
+                        <th class="text-center">Nº</th>
+                        <th class="text-center">Código</th>
+                        <th class="text-center">Nombres</th>
+                        <th class="text-center">Apellidos</th>
+                        <th class="text-center">Facultad</th>
+                        <th class="text-center">Carrera</th>
+                        <th class="text-center">Actividad</th>
+                        <th class="text-center">Tipo de Actividad</th>
+                        <th class="text-center">Dependencia</th>
+                        <th class="text-center">Responsable</th>
+                        
+                    </tr>
+                </thead>
+                <tr *ngFor="let a of actividades ">
+                    <td class="text-center">{{a.n_estudiante}}</td>
+                    <td class="text-center">{{a.n_codigo}} </td>
+                    <td class="text-center">{{a.n_nombres}} </td>
+                    <td class="text-center">{{a.n_apellidos}} </td>
+                    <td class="text-center">{{a.n_facultad}} </td>
+                    <td class="text-center">{{a.n_carrera}} </td>
+                    <td class="text-center">{{a.n_actividad}} </td>
+                    <td class="text-center">{{a.n_tipoActividad}}</td>
+                    <td class="text-center">{{a.n_dependencia}} </td>
+                    <td class="text-center">{{a.n_responsable}} </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -31,22 +31,27 @@ export class AsignarTareaComponent implements OnInit {
 
     actividades = [
         {
-            "n_actividad": "Investigación",
+            "n_actividad": "Archivo",
+            "n_tipoActividad": "Administrativa",
             "n_responsable": "Gloria Giraldo",
             "n_dependencia": "UIFI"
         },
 
         {
-            "n_actividad": "Académico",
+            "n_actividad": "Monitoria",
+            "n_tipoActividad": "Académica",
             "n_responsable": "Jaquelin Castillo",
             "n_dependencia": "Cordinación Sistemas"
         },
         {
             "n_actividad": "Aeropuerto",
+            "n_tipoActividad": "Externa",
             "n_responsable": "Alexis Granados",
             "n_dependencia": "CERI"
         },
     ];
+
+
     buscar() {
         console.log("Buscar aqui");
     }

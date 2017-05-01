@@ -35,6 +35,7 @@ import { VerSolicitudesRadicadasComponent } from "app/components/ver-solicitudes
 /**Importamos la directiva que valida el login*/
 import { SinEspacios } from "./directives/validacionSinEspacios.directive";
 import { routes } from './app.routes';
+import { VerTareasAsignadasComponent } from "app/components/ver-tareas-asignadas/ver-tareas-asignadas.component";
 
 
 
@@ -66,7 +67,8 @@ import { routes } from './app.routes';
     RegistrarTareaComponent,
     AsignarTareaComponent,
     ModificarTareaComponent,
-    EliminarTareaComponent, 
+    EliminarTareaComponent,
+    VerTareasAsignadasComponent,
   ],
   imports: [
     BrowserModule,

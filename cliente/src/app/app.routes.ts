@@ -16,6 +16,7 @@ import { RegistrarTareaComponent } from "app/components/registrar-tarea/registra
 import { AsignarTareaComponent } from "app/components/asignar-tarea/asignar-tarea.component";
 import { ModificarTareaComponent } from "app/components/modificar-tarea/modificar-tarea.component";
 import { EliminarTareaComponent } from "app/components/eliminar-tarea/eliminar-tarea.component";
+import { VerTareasAsignadasComponent } from "app/components/ver-tareas-asignadas/ver-tareas-asignadas.component";
 
 
 
@@ -38,5 +39,6 @@ export const routes: Route[] = [
     { path: 'registrar-tarea', component:RegistrarTareaComponent},
     { path: 'asignar-tarea', component:AsignarTareaComponent},
     { path: 'modificar-tarea', component:ModificarTareaComponent},
-    { path: 'eliminar-tarea',component:EliminarTareaComponent}
+    { path: 'eliminar-tarea',component:EliminarTareaComponent},
+    { path: 'ver-tareas-asignadas',component:VerTareasAsignadasComponent}
 ];

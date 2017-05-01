@@ -1,21 +1,24 @@
 import { Route } from '@angular/router';
-
-import { LoginComponent } from './components/login/login.component';
-import { LandingComponent } from './components/landing/landing.component';
-import { HistoricoSolicitudesComponent } from './components/historico-solicitudes/historico-solicitudes.component';
-import { RegistrarSolicitudComponent } from './components/registrar-solicitud/registrar-solicitud.component';
-import { NuevasSolicitudesComponent } from './components/nuevas-solicitudes/nuevas-solicitudes.component';
-import { TiqueteraComponent } from './components/tiquetera/tiquetera.component';
-import { ConsultarConvocatoriaComponent } from "app/components/consultar-convocatoria/consultar-convocatoria.component";
+import { LoginComponent } from "app/components/login/login.component";
+import { LandingComponent } from "app/components/landing/landing.component";
+import { HistoricoSolicitudesComponent } from "app/components/historico-solicitudes/historico-solicitudes.component";
+import { RegistrarSolicitudComponent } from "app/components/registrar-solicitud/registrar-solicitud.component";
+import { NuevasSolicitudesComponent } from "app/components/nuevas-solicitudes/nuevas-solicitudes.component";
 import { PublicarConvocatoriaComponent } from "app/components/publicar-convocatoria/publicar-convocatoria.component";
-import {InscribirConvocatoriaComponent} from "app/components/inscribir-convocatoria/inscribir-convocatoria.component";
+import { ConsultarConvocatoriaComponent } from "app/components/consultar-convocatoria/consultar-convocatoria.component";
+import { TiqueteraComponent } from "app/components/tiquetera/tiquetera.component";
+import { InscribirConvocatoriaComponent } from "app/components/inscribir-convocatoria/inscribir-convocatoria.component";
 import { ConfirmacionSolicitudComponent } from "app/components/confirmacion-solicitud/confirmacion-solicitud.component";
-import { RegistroEstudiantesComponent } from "app/components/registro-estudiantes/registro-estudiantes.component"
+import { RegistroEstudiantesComponent } from "app/components/registro-estudiantes/registro-estudiantes.component";
 import { VerHistoricoSolicitudesComponent } from "app/components/ver-historico-solicitudes/ver-historico-solicitudes.component";
 import { VerSolicitudesRadicadasComponent } from "app/components/ver-solicitudes-radicadas/ver-solicitudes-radicadas.component";
 import { RegistrarTareaComponent } from "app/components/registrar-tarea/registrar-tarea.component";
 import { AsignarTareaComponent } from "app/components/asignar-tarea/asignar-tarea.component";
 import { ModificarTareaComponent } from "app/components/modificar-tarea/modificar-tarea.component";
+import { EliminarTareaComponent } from "app/components/eliminar-tarea/eliminar-tarea.component";
+
+
+
 
 export const routes: Route[] = [
     { path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -34,5 +37,6 @@ export const routes: Route[] = [
     { path: 'ver-solicitudes-radicadas', component:VerSolicitudesRadicadasComponent},
     { path: 'registrar-tarea', component:RegistrarTareaComponent},
     { path: 'asignar-tarea', component:AsignarTareaComponent},
-    { path: 'modificar-tarea', component:ModificarTareaComponent}
+    { path: 'modificar-tarea', component:ModificarTareaComponent},
+    { path: 'eliminar-tarea',component:EliminarTareaComponent}
 ];

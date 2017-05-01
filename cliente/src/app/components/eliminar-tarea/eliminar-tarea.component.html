@@ -7,19 +7,19 @@
         <ul class="breadcrumb">
             <li><a routerLink="/landing"><span class="glyphicon glyphicon-home"></span> PAAUD</a></li>
             <li><span class="glyphicon glyphicon-briefcase"></span> Tareas Asignadas</li>
-            <li class="active"><span class="glyphicon glyphicon-wrench"></span> Modificar Tarea</li>
+            <li class="active"><span class="glyphicon glyphicon-trash"></span> Eliminar Tarea</li>
         </ul>
     </div>
     <!--Esta interfaz debe cargar los datos de una actividad en especifico-->
     <div class="col-md-12 jumbotron">
 
         <ul class="nav navbar-nav navbar-left">
-            <h1><span class="glyphicon glyphicon-wrench"></span> Modificar Tarea</h1>
+            <h1><span class="glyphicon glyphicon-trash"></span> Eliminar Tarea</h1>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <br>
-            <br>        
-             <form class="navbar-form navbar-left" role="search" #barra="ngForm">
+            <br>
+            <form class="navbar-form navbar-left" role="search">
                 <div class="form-group">
                     <input type="text" class="form-control" id="buscar" name="buscar" required placeholder="Buscar...">
                     <button type="button" class="btn btn-primary" (click)="buscar()"><span class="glyphicon glyphicon-search"></span> Buscar</button>
@@ -27,25 +27,20 @@
             </form>
         </ul>
         <div class="row">
-            
+
         </div>
         <hr class="my-4">
-
         <form class="form-horizontal" #formulario="ngForm">
             <fieldset>
                 <legend><span class="glyphicon glyphicon-book"></span> Datos de Actividad </legend>
                 <div class="form-group">
                     <label for="nombre" class="col-md-2 control-label">Nombre Actividad </label>
                     <div class="col-md-4">
-                        <input type="text" class="form-control" name="nombre" id="nombre" required autofocus placeholder="Nombre Actividad" [(ngModel)]="nombre"
-                        />
+                        <input type="text" class="form-control" name="nombre" id="nombre" required readonly autofocus placeholder="Nombre Actividad" [(ngModel)]="nombre"/>
                     </div>
-                    <label for="tipo_actividades" class="col-md-2 control-label">Tipo de actividad </label>
+                    <label for="tipoActividad" class="col-md-2 control-label">Tipo de actividad </label>
                     <div class="col-md-4">
-                        <select class="form-control" name="tipo_actividades" id="tipo_actividades" required autofocus [(ngModel)]="tipo_actividades">
-                              <option value="" selected>Seleccione un tipo de actividad</option>
-                              <option *ngFor="let p of tipo_actividades" [ngValue]="p.n_actividad">{{p.n_actividad}}</option>
-                            </select>
+                         <input type="text" class="form-control" name="tipoActividad" id="tipoActividad" required readonly autofocus placeholder="Tipo Actividad" [(ngModel)]="tipoActividad"/>
                     </div>
                 </div>
 
@@ -53,27 +48,18 @@
 
                 <label for="estado" class="col-md-4 control-label">Estado </label>
                 <div class="col-md-4">
-                    <select class="form-control" name="estado" required autofocus [(ngModel)]="estado">
-                              <option value="" selected>Seleccione un Estado</option>
-                              <option *ngFor="let e of estados" [ngValue]="e.n_estado">{{e.n_estado}}</option>
-                            </select>
+                    <input type="text" class="form-control" name="estado" id="estado" required readonly autofocus placeholder="Estado Actividad" [(ngModel)]="estado"/>
                 </div>
                 <legend><span class="glyphicon glyphicon-user"></span> Responsable de la Actividad </legend>
                 <div class="form-group">
                     <label for="responsable" class="col-md-2 control-label"> Nombres y apellidos </label>
                     <div class="col-md-4">
-                        <select class="form-control" name="responsable" required autofocus [(ngModel)]="responsable">
-                              <option value="" selected>Seleccione un Responsable</option>
-                              <option *ngFor="let r of responsables" [ngValue]="r.n_responsable">{{r.n_responsable}}</option>
-                            </select>
+                        <input type="text" class="form-control" name="responsable" id="responsable" required readonly autofocus placeholder="Responsable Actividad" [(ngModel)]="responsable"/>
                     </div>
 
                     <label for="dependencia" class="col-md-2 control-label"> Dependencia </label>
                     <div class="col-md-4">
-                        <select class="form-control" name="dependencia" required autofocus [(ngModel)]="dependencia">
-                              <option value="" selected>Seleccione una dependencia</option>
-                              <option *ngFor="let d of dependencias" [ngValue]="d.n_dependencia"> {{d.n_dependencia}}</option>
-                            </select>
+                        <input type="text" class="form-control" name="dependencia" id="dependencia" required readonly autofocus placeholder="Dependencia" [(ngModel)]="dependencia"/>
                     </div>
                 </div>
                 <legend><span class="glyphicon glyphicon-pencil"></span> Descripción de la Actividad </legend>
@@ -81,20 +67,16 @@
                 <div class="form-group">
                     <label for="descripcion" class="col-lg-3 control-label">Descripción</label>
                     <div class="col-lg-8">
-                        <textarea class="form-control" rows="3" id="descripcion" name="descripcion"></textarea>
-                        <span class="help-block">Describa brevemente de que se trata la actividad.</span>
+                        <textarea class="form-control" rows="3" id="descripcion" readonly ></textarea>                     
                     </div>
                 </div>
 
                 <div class="form-group block-center">
-                    <div class="col-lg-10 col-lg-offset-4">
+                    <div class="col-lg-10 col-lg-offset-5">
                         <button type="reset" class="btn btn-default btn-lg" (click)="regresar(); formulario.reset()"> <span class="glyphicon glyphicon-remove-sign"></span> Cancelar</button>
+                        &nbsp;
                          &nbsp;
-                         &nbsp;
-                        <button type="submit" class="btn btn-success btn-lg" (click)="enviardatos()" [disabled]="!formulario.form.valid"> <span class="glyphicon glyphicon-ok-circle"></span> Enviar</button>
-                         &nbsp;
-                         &nbsp;
-                        <button type="reset" class="btn btn-primary btn-lg" (click)="formulario.reset()"> <span class="glyphicon glyphicon-trash"></span> Limpiar</button>
+                        <button type="submit" class="btn btn-success btn-lg" (click)="enviardatos()" [disabled]="!formulario.form.valid"> <span class="glyphicon glyphicon-trash"></span> Eliminar</button>
                     </div>
                 </div>
             </fieldset>

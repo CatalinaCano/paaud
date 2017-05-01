@@ -23,6 +23,7 @@ import { VerHistoricoSolicitudesComponent } from "app/components/ver-historico-s
 import { RegistrarTareaComponent } from "app/components/registrar-tarea/registrar-tarea.component";
 import { AsignarTareaComponent } from "app/components/asignar-tarea/asignar-tarea.component";
 import { ModificarTareaComponent } from "app/components/modificar-tarea/modificar-tarea.component";
+import { EliminarTareaComponent } from "app/components/eliminar-tarea/eliminar-tarea.component";
 
 /**Servicios */
 import { LoginEstudianteService } from './services/login-estudiante.service';
@@ -34,6 +35,7 @@ import { VerSolicitudesRadicadasComponent } from "app/components/ver-solicitudes
 /**Importamos la directiva que valida el login*/
 import { SinEspacios } from "./directives/validacionSinEspacios.directive";
 import { routes } from './app.routes';
+
 
 
 
@@ -63,7 +65,8 @@ import { routes } from './app.routes';
     VerSolicitudesRadicadasComponent,
     RegistrarTareaComponent,
     AsignarTareaComponent,
-    ModificarTareaComponent 
+    ModificarTareaComponent,
+    EliminarTareaComponent, 
   ],
   imports: [
     BrowserModule,

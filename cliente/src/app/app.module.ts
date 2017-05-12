@@ -24,26 +24,18 @@ import { RegistrarTareaComponent } from "app/components/registrar-tarea/registra
 import { AsignarTareaComponent } from "app/components/asignar-tarea/asignar-tarea.component";
 import { ModificarTareaComponent } from "app/components/modificar-tarea/modificar-tarea.component";
 import { EliminarTareaComponent } from "app/components/eliminar-tarea/eliminar-tarea.component";
+import { VerSolicitudesRadicadasComponent } from "app/components/ver-solicitudes-radicadas/ver-solicitudes-radicadas.component";
+import { VerTareasAsignadasComponent } from "app/components/ver-tareas-asignadas/ver-tareas-asignadas.component";
 
 /**Servicios */
 import { LoginEstudianteService } from './services/login-estudiante.service';
 import { RegistrarSolicitudService } from './services/registrar-solicitud.service';
 import { HistoricoSolicitudesService } from './services/historico-solicitudes.service';
 import { FacultadesService } from './services/facultades.service';
-import { VerSolicitudesRadicadasComponent } from "app/components/ver-solicitudes-radicadas/ver-solicitudes-radicadas.component";
 
 /**Importamos la directiva que valida el login*/
 import { SinEspacios } from "./directives/validacionSinEspacios.directive";
 import { routes } from './app.routes';
-import { VerTareasAsignadasComponent } from "app/components/ver-tareas-asignadas/ver-tareas-asignadas.component";
-
-
-
-
-
-
-
-
 
 @NgModule({
   declarations: [

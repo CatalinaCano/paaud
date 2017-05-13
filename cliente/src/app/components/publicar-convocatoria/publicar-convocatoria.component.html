@@ -21,19 +21,49 @@
         <div class="col-md-9">
             <form class="form-horizontal" #formulario="ngForm">
                 <fieldset>
-                    <legend><span class="glyphicon glyphicon-time"></span> Periodo de la Convocatoria</legend>
+                    <legend><span class="glyphicon glyphicon-time"></span> Fechas de la Convocatoria</legend>
 
                     <div class="form-group">
-                        <label for="fechaIncio" class="col-lg-2 control-label">Fecha Inicio {{fechaInicio}}</label>
+                        <label for="fechaIncioConvocatoria" class="col-lg-2 control-label">Fecha Inicio Convocatoria {{fechaInicioConvocatoria}}</label>
                         <div class="col-lg-4">
-                            <input type="date" class="form-control" id="fechaInicio" required autofocus name="fechaInicio" [(ngModel)]="fechaInicio">
+                            <input type="date" class="form-control" id="fechaInicioConvocatoria" required autofocus name="fechaInicioConvocatoria" [(ngModel)]="fechaInicioConvocatoria">
                         </div>
-                        <label for="fechaFin" class="col-lg-2 control-label">Fecha Fin {{fechaFin}}</label>
+                        <label for="fechaFinConvocatoria" class="col-lg-2 control-label">Fecha Fin Convocatoria {{fechaFinConvocatoria}}</label>
                         <div class="col-lg-4">
-                            <input type="date" class="form-control" id="fechaFin" required autofocus name="fechaFin" [(ngModel)]="fechaFin">
+                            <input type="date" class="form-control" id="fechaFinConvocatoria" required autofocus name="fechaFinConvocatoria" [(ngModel)]="fechaFinConvocatoria">
                         </div>
                     </div>
 
+
+
+                    <div class="form-group">
+                        <label for="fechaIncioPublicacion" class="col-lg-2 control-label">Fecha Inicio Publicación {{fechaInicioPublicacion}}</label>
+                        <div class="col-lg-4">
+                            <input type="date" class="form-control" id="fechaInicioPublicacion" required autofocus name="fechaInicioPublicacion" [(ngModel)]="fechaInicioPublicacion">
+                        </div>
+                        <label for="fechaFinPublicacion" class="col-lg-2 control-label">Fecha Fin Publicación {{fechaFinPublicacion}}</label>
+                        <div class="col-lg-4">
+                            <input type="date" class="form-control" id="fechaFinPublicacion" required autofocus name="fechaFinPublicacion" [(ngModel)]="fechaFinPublicacion">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fechaIncioValidacion" class="col-lg-2 control-label">Fecha Inicio Validación {{fechaInicioValidacion}}</label>
+                        <div class="col-lg-4">
+                            <input type="date" class="form-control" id="fechaInicioValidacion" required autofocus name="fechaInicioValidacion" [(ngModel)]="fechaInicioValidacion">
+                        </div>
+                        <label for="fechaFinValidacion" class="col-lg-2 control-label">Fecha Fin Validación {{fechaFinValidacion}}</label>
+                        <div class="col-lg-4">
+                            <input type="date" class="form-control" id="fechaFinValidacion" required autofocus name="fechaFinValidacion" [(ngModel)]="fechaFinValidacion">
+                        </div>
+                    </div>
+
+                    <label for="fechaPublicacion" class="col-md-4 control-label center-block">Fecha de Publicación de Resultados:  </label>
+                    <div class="col-md-4">
+                        <input type="date" class="form-control" id="fechaPublicacion" required autofocus name="fechaPublicacion" [(ngModel)]="fechaFinPublicacion">
+                    </div>
+                    <br/>
+                    <br/>
                     <legend><span class="glyphicon glyphicon-book"></span> Facultad de la Convocatoria </legend>
                     <div class="form-group">
                         <label for="facultad" class="col-md-2 control-label">Facultad </label>
@@ -56,10 +86,9 @@
 
                     <label for="estado" class="col-md-4 control-label">Estado </label>
                     <div class="col-md-4">
-                        <select class="form-control" name="estado" required autofocus [(ngModel)]="estado">
+                        <select class="form-control" name="estado" required autofocus [(ngModel)]="estado" (change)="onChange($event.target.value)">
                               <option value="" selected>Seleccione una Estado</option>
                               <option *ngFor="let e of estados" [ngValue]="e.n_estado">{{e.n_estado}}</option>
-                               <!-- validarDatos({{e.n_estado}});-->
                             </select>
                     </div>
 
@@ -67,7 +96,7 @@
                     <legend><span class="glyphicon glyphicon-pencil"></span> Número de Cupos </legend>
 
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered  ">
+                        <table class="table table-striped table-bordered">
                             <thead>
                                 <tr class="success block-center">
                                     <th class="text-center">SUBSIDIO</th>
@@ -75,11 +104,12 @@
                                     <th class="text-center">CUPOS</th>
                                 </tr>
                             </thead>
-                            <tr *ngFor="let sub of subsidios">
-                                <th class="text-center">Subsidio: {{sub.n_tiposubsidio}}</th>
+                            <tr *ngFor="let sub of subsidios ; let i=index">
+                                <th class="text-center">Subsidio{{i + 1}}: {{sub.n_tiposubsidio}}</th>
                                 <th class="text-center"> {{sub.t_porcentajesub}} </th>
-                                <th *ngIf="editarCupos === true" class="text-center"><input type="number" class="form-control" placeholder="cupos" name="cupos" required [(ngModel)]="sub.cupos" readonly></th>
-                                {{sub.cupos}}
+                                <th class="text-center">{{sub.cupos}}</th>
+
+
                             </tr>
                         </table>
 

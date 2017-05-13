@@ -14,12 +14,15 @@ export class PublicarConvocatoriaComponent implements OnInit {
 
     datos_usuario = {};
     facultades = [];
-
-    constructor(
+   public editarCupos:boolean;
+    constructor(        
         private loginEstudianteService: LoginEstudianteService,
         private facultadesService: FacultadesService,
-        private router: Router
-    ) { }
+        private router: Router,        
+        
+    ) { 
+        this.editarCupos=false;
+    }
 
     ngOnInit() { 
         this.datos_usuario = this.loginEstudianteService.getDatosUsuario();

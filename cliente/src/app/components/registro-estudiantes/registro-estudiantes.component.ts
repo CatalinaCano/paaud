@@ -46,4 +46,14 @@ export class RegistroEstudiantesComponent implements OnInit {
     enviardatos(){
         console.log("AQUI SE ENVIAN LOS DATOS PARA LA BD");
     }
+
+    onChange(fac) {
+           console.log(fac);         
+            if (fac==="1: Ingeniería"){
+             for(var i=0;i<this.proyectos.length;i++){
+                 console.log(this.proyectos[i].n_proyecto);
+                document.getElementById("proyecto").innerHTML = "<option>"+ this.proyectos[i].n_proyecto +"</option>";             
+                }                            
+            }     
+    }
 }

@@ -127,29 +127,29 @@
                     <label for="ingresos" class="col-lg-6 control-label">Valor mensual de los ingresos</label>
                     <div class="col-lg-6 input-group">
                         <span class="input-group-addon">$</span>
-                        <input type="number" class="form-control" name="ingresos" id="ingresos" required placeholder="100.000"  autofocus  [(ngModel)]='ingresos_familiares.q_numerico' #ingresos="ngModel"/>
+                        <input type="number" class="form-control" name="ingresos" id="ingresos" required placeholder="100.000" autofocus [(ngModel)]='ingresos_familiares.q_numerico' #ingresos="ngModel" />
                         <span class="input-group-addon">.00</span>
                     </div>
-                    
-                     <!--DIV PARA EL MENSAJE DE ALERTA-->
-                    <div *ngIf= "ingresos.errors">
+
+                    <!--DIV PARA EL MENSAJE DE ALERTA-->
+                    <div *ngIf="ingresos.errors">
                         <div *ngIf="ingresos.errors.sinEspacios" class="alert alert-danger col-md-12">
-                           * No se admiten espacios en blanco en el valor de los ingresos_familiares
-                         </div>
-                   
-                        <div *ngIf="ingresos.touched &&!ingresos.valid" class="alert alert-danger col-md-12">                        
+                            * No se admiten espacios en blanco en el valor de los ingresos_familiares
+                        </div>
+
+                        <div *ngIf="ingresos.touched &&!ingresos.valid" class="alert alert-danger col-md-12">
                             * El valor de los ingresos es requerido
                         </div>
 
-                        <div *ngIf="ingresos.touched && ingresos_familiares.q_numerico<=0" class="alert alert-danger col-md-12">                        
+                        <div *ngIf="ingresos.touched && ingresos_familiares.q_numerico<=0" class="alert alert-danger col-md-12">
                             * 0
                         </div>
 
-                        
-                        
-                </div>
-                   
-                
+
+
+                    </div>
+
+
                 </div>
 
                 <div class="form-group">
@@ -277,11 +277,11 @@
                         </thead>
 
                         <tr>
-                            <th class="text-center"><input type="checkbox" value=""></th>
-                            <th class="text-center"> <input type="checkbox" value=""></th>
-                            <th class="text-center"><input type="checkbox" value=""></th>
-                            <th class="text-center"><input type="checkbox" value=""></th>
-                            <th class="text-center"><input type="checkbox" value=""></th>
+                            <th class="text-center"><input type="checkbox" value="LUNES"></th>
+                            <th class="text-center"> <input type="checkbox" value="MARTES"></th>
+                            <th class="text-center"><input type="checkbox" value="MIERCOLES"></th>
+                            <th class="text-center"><input type="checkbox" value="JUEVES"></th>
+                            <th class="text-center"><input type="checkbox" value="VIERNES"></th>
                         </tr>
                     </table>
 
@@ -352,16 +352,11 @@
                         <input type="file" class="form-control" id="conArrendamiento">
                     </div>
                 </div>
-                &nbsp;
-                &nbsp;
+                &nbsp; &nbsp;
                 <div class="form-group block-center">
                     <div class="col-lg-10 col-lg-offset-3">
-                        <button type="reset" class="btn btn-default btn-lg" (click)="volver()"> <span class="glyphicon glyphicon-remove-sign"></span> Cancelar</button>
-                         &nbsp;
-                         &nbsp;
-                        <button type="submit" class="btn btn-success btn-lg" (click)="enviarSolicitud(datos_usuario.n_usuario,datos_usuario.k_codeestudiante)" [disabled]="!formulario.form.valid"> <span class="glyphicon glyphicon-ok-circle"></span> Enviar</button>
-                        &nbsp;
-                         &nbsp;
+                        <button type="reset" class="btn btn-default btn-lg" (click)="volver()"> <span class="glyphicon glyphicon-remove-sign"></span> Cancelar</button> &nbsp; &nbsp;
+                        <button type="submit" class="btn btn-success btn-lg" (click)="enviarSolicitud(datos_usuario.n_usuario,datos_usuario.k_codeestudiante)" [disabled]="!formulario.form.valid"> <span class="glyphicon glyphicon-ok-circle"></span> Enviar</button>                        &nbsp; &nbsp;
                         <button type="reset" class="btn btn-primary btn-lg" (click)="formulario.reset()"> <span class="glyphicon glyphicon-trash"></span> Limpiar</button>
                     </div>
                 </div>

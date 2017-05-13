@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormsModule } from '@angular/forms';
 
-import { LoginEstudianteService } from './../../services/login-estudiante.service';
+import { LoginService } from './../../services/login.service';
 import { RegistrarSolicitudService } from './../../services/registrar-solicitud.service';
 import { CustomFormsModule } from 'ng2-validation'
 
@@ -18,13 +18,13 @@ export class RegistrarSolicitudComponent implements OnInit {
     datos_usuario = {};
 
     constructor(
-        private loginEstudianteService: LoginEstudianteService,
+        private loginService: LoginService,
         private registrarSolicitudService: RegistrarSolicitudService,
         private router: Router
     ) { }
 
     ngOnInit() {
-        this.datos_usuario = this.loginEstudianteService.getDatosUsuario();
+        this.datos_usuario = this.loginService.getDatosUsuario();
         console.log(this.datos_usuario);
      }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 
-import { LoginEstudianteService } from './../../services/login-estudiante.service';
+import { LoginService } from './../../services/login.service';
 import { HistoricoSolicitudesService } from './../../services/historico-solicitudes.service';
 import { FacultadesService } from './../../services/facultades.service';
 
@@ -17,14 +17,14 @@ export class NavComponent implements OnInit {
     datos_usuario = {};
 
     constructor(
-        private loginEstudianteService: LoginEstudianteService,
+        private loginService: LoginService,
         private historicoSolicitudesService: HistoricoSolicitudesService,
         private facultadesService: FacultadesService,
         private router: Router
     ) { }
 
     ngOnInit() { 
-        this.datos_usuario = this.loginEstudianteService.getDatosUsuario();
+        this.datos_usuario = this.loginService.getDatosUsuario();
     }
 
     consultarSolicitudes(usuario:string,password:string) {

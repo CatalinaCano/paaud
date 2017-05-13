@@ -3,6 +3,7 @@ from django.conf.urls import include, url
 from paaud import views
 
 urlpatterns = [
+    url(r'^login', views.login, name='login'),
     url(r'^get_estudiante', views.get_estudiante, name='get_estudiante'),
     url(r'^post_solicitud', views.post_solicitud, name='post_solicitud'),
     url(r'^get_ultimasolicitud', views.get_ultimasolicitud, name='get_ultimasolicitud'),

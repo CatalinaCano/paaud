@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LoginEstudianteService } from './../../services/login-estudiante.service';
+import { LoginService } from './../../services/login.service';
 import { FacultadesService } from './../../services/facultades.service';
 
 @Component({
@@ -15,8 +15,8 @@ export class PublicarConvocatoriaComponent implements OnInit {
     datos_usuario = {};
     facultades = [];
    public editarCupos:boolean;
-    constructor(        
-        private loginEstudianteService: LoginEstudianteService,
+    constructor(
+        private loginService: LoginService,
         private facultadesService: FacultadesService,
         private router: Router,        
         
@@ -25,7 +25,7 @@ export class PublicarConvocatoriaComponent implements OnInit {
     }
 
     ngOnInit() { 
-        this.datos_usuario = this.loginEstudianteService.getDatosUsuario();
+        this.datos_usuario = this.loginService.getDatosUsuario();
         this.facultades = this.facultadesService.getDatosFacultades();
     }
     //Array del tipo de Subsidios

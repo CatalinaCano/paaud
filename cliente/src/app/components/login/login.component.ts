@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LoginEstudianteService } from './../../services/login-estudiante.service';
+import { LoginService } from './../../services/login.service';
 
 @Component({
     moduleId: module.id,
@@ -14,21 +14,21 @@ export class LoginComponent implements OnInit {
     
     constructor(
         private router: Router,
-        private loginEstudianteService: LoginEstudianteService
+        private loginService: LoginService
     ) {}
 
     ngOnInit() { }
 
     credenciales={
         "nombre":"",
-        "contrasenia":""
+        "password":""
     };
 
     error="";
 
     ingresar(){
-        this.loginEstudianteService
-            .getEstudiante(this.credenciales.nombre,this.credenciales.contrasenia)
+        this.loginService
+            .getEstudiante(this.credenciales.nombre,this.credenciales.password)
             .then(data => {
                 this.router.navigate(['/landing']);
             })
@@ -36,9 +36,21 @@ export class LoginComponent implements OnInit {
                 this.error = error;
                 console.log("Error: "+error)
             })
-  }
+    }
 
-  registrarse(){
-      this.router.navigate(['/registro-estudiantes']);
-  }
+    login(){
+        this.loginService
+            .login(this.credenciales.nombre,this.credenciales.password)
+            .then(data => {
+                this.router.navigate(['/landing']);
+            })
+            .catch( error => {
+                this.error = error;
+                console.log("Error: "+error)
+            })
+    }
+
+    registrarse(){
+        this.router.navigate(['/registro-estudiantes']);
+    }
 }

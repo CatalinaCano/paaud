@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LoginEstudianteService } from './../../services/login-estudiante.service';
+import { LoginService } from './../../services/login.service';
 
 @Component({
     moduleId: module.id,
@@ -14,11 +14,11 @@ export class LandingComponent implements OnInit {
      datos_usuario = {};
 
     constructor(
-        private loginEstudianteService: LoginEstudianteService
+        private loginService: LoginService
     ) { }
 
     ngOnInit() { 
-        this.datos_usuario = this.loginEstudianteService.getDatosUsuario();
+        this.datos_usuario = this.loginService.getDatosUsuario();
         console.log(this.datos_usuario);
     }
 }

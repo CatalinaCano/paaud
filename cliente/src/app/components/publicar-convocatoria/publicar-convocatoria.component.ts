@@ -22,11 +22,13 @@ export class PublicarConvocatoriaComponent implements OnInit {
 
     ) {
         this.editarCupos = false;
+        
     }
 
     ngOnInit() {
         this.datos_usuario = this.loginService.getDatosUsuario();
         this.facultades = this.facultadesService.getDatosFacultades();
+        
        
     }
     //Array del tipo de Subsidios
@@ -73,15 +75,10 @@ export class PublicarConvocatoriaComponent implements OnInit {
     }
     onChange(estado) {
         console.log(estado);
-        if (estado === "1: Abierta") {
-         
-               document.getElementById("cupos").removeAttribute("readonly");
-
-            
+        if (estado === "1: Abierta") {         
+            document.getElementById("cupos").removeAttribute("readonly");            
         }else{
              document.getElementById("cupos").setAttribute("readonly","readonly");
         }
     }
-
-
 }

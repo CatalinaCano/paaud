@@ -28,7 +28,7 @@ import { VerSolicitudesRadicadasComponent } from "app/components/ver-solicitudes
 import { VerTareasAsignadasComponent } from "app/components/ver-tareas-asignadas/ver-tareas-asignadas.component";
 
 /**Servicios */
-import { LoginEstudianteService } from './services/login-estudiante.service';
+import { LoginService } from './services/login.service';
 import { RegistrarSolicitudService } from './services/registrar-solicitud.service';
 import { HistoricoSolicitudesService } from './services/historico-solicitudes.service';
 import { FacultadesService } from './services/facultades.service';
@@ -71,7 +71,7 @@ import { routes } from './app.routes';
     RouterModule.forRoot(routes)
   ],
   providers: [
-    LoginEstudianteService,
+    LoginService,
     RegistrarSolicitudService,
     HistoricoSolicitudesService,
     FacultadesService

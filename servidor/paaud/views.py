@@ -4,6 +4,35 @@ from django.db import connection
 from django.http import JsonResponse, HttpResponseBadRequest, HttpResponse
 import cx_Oracle
 
+def login(request):
+	if request.method == 'GET':
+		r = request.GET.get
+		usuario = (r('usuario'))
+		password = (r('password'))
+		try:
+			db = cx_Oracle.connect(usuario, password, 'localhost:1522/XE')
+			db.close()
+			db = cx_Oracle.connect('system', 'oracle', 'localhost:1522/XE')
+			cursor = db.cursor()
+			respuesta = []
+			for c in cursor.execute("select granted_role from dba_role_privs where grantee=upper('"+usuario+"')"):
+				respuesta.append(c[0])
+			db.close()
+			if "ESTUDIANTE_PAAUD" in respuesta:
+				print "estudiante"
+			elif "ADMIN_PAAUD" in respuesta:
+				print "admin"
+			elif "ASISTENTE_PAAUD" in respuesta:
+				print "asistente"
+			else:
+				print "superior"
+		except cx_Oracle.DatabaseError as e:
+			error, = e.args
+			return HttpResponseBadRequest('Error: '+error.message)
+		return JsonResponse(respuesta, safe=False) 
+	else:
+		return HttpResponseBadRequest('No get method')
+
 def get_estudiante(request):
 	if request.method == 'GET':
 		r = request.GET.get

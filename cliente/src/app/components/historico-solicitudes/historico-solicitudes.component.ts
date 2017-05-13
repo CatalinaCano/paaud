@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { LoginEstudianteService } from './../../services/login-estudiante.service';
+import { LoginService } from './../../services/login.service';
 import { HistoricoSolicitudesService } from './../../services/historico-solicitudes.service';
 
 @Component({
@@ -15,13 +15,13 @@ export class HistoricoSolicitudesComponent implements OnInit {
     solicitudes = [];
 
     constructor(
-        private loginEstudianteService: LoginEstudianteService,
+        private loginService: LoginService,
         private historicoSolicitudesService: HistoricoSolicitudesService
     ) { }
 
     ngOnInit() { 
         this.solicitudes = this.historicoSolicitudesService.getDatosSolicitudes();
-        this.datos_usuario = this.loginEstudianteService.getDatosUsuario();
+        this.datos_usuario = this.loginService.getDatosUsuario();
     } 
 
     buscar(){

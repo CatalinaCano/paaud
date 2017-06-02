@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { CustomFormsModule } from 'ng2-validation';
+
 /**Componentes */
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -18,7 +19,6 @@ import { ConsultarConvocatoriaComponent } from './components/consultar-convocato
 import { TiqueteraComponent } from './components/tiquetera/tiquetera.component';
 import { InscribirConvocatoriaComponent } from "app/components/inscribir-convocatoria/inscribir-convocatoria.component";
 import { ConfirmacionSolicitudComponent } from "app/components/confirmacion-solicitud/confirmacion-solicitud.component";
-import { RegistroEstudiantesComponent } from "app/components/registro-estudiantes/registro-estudiantes.component";
 import { VerHistoricoSolicitudesComponent } from "app/components/ver-historico-solicitudes/ver-historico-solicitudes.component";
 import { RegistrarTareaComponent } from "app/components/registrar-tarea/registrar-tarea.component";
 import { AsignarTareaComponent } from "app/components/asignar-tarea/asignar-tarea.component";
@@ -29,6 +29,7 @@ import { VerTareasAsignadasComponent } from "app/components/ver-tareas-asignadas
 
 /**Servicios */
 import { LoginService } from './services/login.service';
+import { SiginService } from './services/sigin.service';
 import { RegistrarSolicitudService } from './services/registrar-solicitud.service';
 import { HistoricoSolicitudesService } from './services/historico-solicitudes.service';
 import { FacultadesService } from './services/facultades.service';
@@ -53,7 +54,6 @@ import { routes } from './app.routes';
     SinEspacios,
     InscribirConvocatoriaComponent,
     ConfirmacionSolicitudComponent,
-    RegistroEstudiantesComponent,
     VerHistoricoSolicitudesComponent,
     VerSolicitudesRadicadasComponent,
     RegistrarTareaComponent,
@@ -72,6 +72,7 @@ import { routes } from './app.routes';
   ],
   providers: [
     LoginService,
+    SiginService,
     RegistrarSolicitudService,
     HistoricoSolicitudesService,
     FacultadesService

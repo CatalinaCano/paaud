@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { LoginService } from './../../services/login.service';
 import { RegistrarSolicitudService } from './../../services/registrar-solicitud.service';
-import { CustomFormsModule } from 'ng2-validation'
+import { CustomFormsModule } from 'ng2-validation';
 
 
 @Component({

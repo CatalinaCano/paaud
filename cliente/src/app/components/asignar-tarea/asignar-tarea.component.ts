@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     moduleId: module.id,
@@ -7,12 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AsignarTareaComponent implements OnInit {
-    constructor() { }
+    constructor(
+         private router: Router,
+    ) { }
 
     ngOnInit() { }
     estudiantes = [
         {
-            "n_estudiante": "1",
             "n_codigo": "20121020079",
             "n_nombres": "Diana Catalina",
             "n_apellidos": "Cano Narvaez",
@@ -20,13 +22,19 @@ export class AsignarTareaComponent implements OnInit {
             "n_carrera": "Ing. Sistemas"
         },
         {
-            "n_estudiante": "2",
-            "n_codigo": "20151020009",
-            "n_nombres": "Leonardo",
-            "n_apellidos": "Ramirez",
-            "n_facultad": "Artes",
-            "n_carrera": "Arte Dramatico"
-        }
+            "n_codigo": "20121020076",
+            "n_nombres": "Cristian Felipe",
+            "n_apellidos": "Riaño Cardenas",
+            "n_facultad": "Ingeniería",
+            "n_carrera": "Ing. Sistemas"
+        },
+        {
+            "n_codigo": "20121020109",
+            "n_nombres": "Diego Fernando",
+            "n_apellidos": "Sanchez",
+            "n_facultad": "Ingeniería",
+            "n_carrera": "Ing. Sistemas"
+        },
     ];
 
     actividades = [
@@ -48,11 +56,51 @@ export class AsignarTareaComponent implements OnInit {
             "n_tipoActividad": "Externa",
             "n_responsable": "Alexis Granados",
             "n_dependencia": "CERI"
-        },
+        }
     ];
 
 
     buscar() {
         console.log("Buscar aqui");
+    }
+
+    onChange(actividad) {
+        console.log(actividad);
+        if (actividad === "1: Archivo") {
+            this.mostrar();
+            document.getElementById('tipo').innerHTML ="Administrativa"; 
+            document.getElementById('dependencia').innerHTML ="UIFI"; 
+            document.getElementById('responsable').innerHTML ="Gloria Giraldo"; 
+            
+        }else if(actividad==="2: Monitoria"){
+            this.mostrar();
+            document.getElementById('tipo').innerHTML ="Académica"; 
+            document.getElementById('dependencia').innerHTML ="Coordinación Sistemas"; 
+            document.getElementById('responsable').innerHTML ="Jaquelin Castillo"; 
+        }else if(actividad==="3: Aeropuerto"){
+            this.mostrar();
+            document.getElementById('tipo').innerHTML ="Externa"; 
+            document.getElementById('dependencia').innerHTML ="CERI"; 
+            document.getElementById('responsable').innerHTML ="Alexis Granado"; 
+        }else{
+            this.ocultar();
+        }
+
+    }
+    mostrar() {
+        document.getElementById('tipo').hidden = false;
+        document.getElementById('dependencia').hidden = false;
+        document.getElementById('responsable').hidden = false;
+        document.getElementById('validar').hidden = false;
+    }
+    ocultar(){
+        document.getElementById('tipo').hidden = true;
+        document.getElementById('dependencia').hidden = true;
+        document.getElementById('responsable').hidden = true;
+        document.getElementById('validar').hidden = true;
+    }
+    asignar(codigo){
+        console.log(codigo);
+         this.router.navigate(['/landing']);
     }
 }

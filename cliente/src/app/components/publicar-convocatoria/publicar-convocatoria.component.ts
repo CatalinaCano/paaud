@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 import { LoginService } from './../../services/login.service';
 import { FacultadesService } from './../../services/facultades.service';
+import { CustomFormsModule } from 'ng2-validation';
+
 
 @Component({
     moduleId: module.id,
@@ -28,7 +31,7 @@ export class PublicarConvocatoriaComponent implements OnInit {
     ngOnInit() {
         this.datos_usuario = this.loginService.getDatosUsuario();
         this.facultades = this.facultadesService.getDatosFacultades();
-        
+       //Obtener los Subsidios 
        
     }
     //Array del tipo de Subsidios
@@ -76,9 +79,15 @@ export class PublicarConvocatoriaComponent implements OnInit {
     onChange(estado) {
         console.log(estado);
         if (estado === "1: Abierta") {         
-            document.getElementById("cupos").removeAttribute("readonly");            
+            document.getElementById("Totalnumber").removeAttribute("readonly"); 
+            document.getElementById("Tipo Anumber").removeAttribute("readonly");
+            document.getElementById("Tipo Bnumber").removeAttribute("readonly");
+          
+                 
         }else{
-             document.getElementById("cupos").setAttribute("readonly","readonly");
+             document.getElementById("Totalnumber").setAttribute("readonly","readonly");
+             document.getElementById("Tipo Anumber").setAttribute("readonly","readonly");
+             document.getElementById("Tipo Bnumber").setAttribute("readonly","readonly");
         }
     }
 }

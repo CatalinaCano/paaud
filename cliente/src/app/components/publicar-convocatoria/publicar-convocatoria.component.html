@@ -26,7 +26,7 @@
                     <div class="form-group">
                         <label for="fechaIncioConvocatoria" class="col-lg-2 control-label">Fecha Inicio Convocatoria {{fechaInicioConvocatoria}}</label>
                         <div class="col-lg-4">
-                            <input type="date" class="form-control" id="fechaInicioConvocatoria" required autofocus name="fechaInicioConvocatoria" [(ngModel)]="fechaInicioConvocatoria">
+                            <input type="date" class="form-control" id="fechaInicioConvocatoria" required autofocus name="fechaInicioConvocatoria" [(ngModel)]='fechaInicioConvocatoria'>
                         </div>
                         <label for="fechaFinConvocatoria" class="col-lg-2 control-label">Fecha Fin Convocatoria {{fechaFinConvocatoria}}</label>
                         <div class="col-lg-4">
@@ -86,7 +86,7 @@
 
                     <label for="estado" class="col-md-4 control-label">Estado </label>
                     <div class="col-md-4">
-                        <select class="form-control" name="estado" required autofocus [(ngModel)]="estado" (change)="onChange($event.target.value)">
+                        <select class="form-control" id="estado" name="estado" required autofocus [(ngModel)]="estado" (change)="onChange($event.target.value)">
                               <option value="" selected>Seleccione una Estado</option>
                               <option *ngFor="let e of estados" [ngValue]="e.n_estado">{{e.n_estado}}</option>
                             </select>
@@ -107,7 +107,7 @@
                             <tr *ngFor="let sub of subsidios ; let i=index">
                                 <th class="text-center">Subsidio{{i + 1}}: {{sub.n_tiposubsidio}}</th>
                                 <th class="text-center"> {{sub.t_porcentajesub}} </th>
-                                <th class="text-center"><input style="text-align:center" type="number" class="form-control" placeholder="cupos" name="cupos" id="cupos" required value="sub.cupos" [(ngModel)]="sub.cupos" #cupos="ngModel" readonly /> </th>
+                                <th class="text-center"><input style="text-align:center" type="number" class="form-control" placeholder="cupos" name="cupos" id="{{sub.n_tiposubsidio + 'number'}}" required value="sub.cupos" [(ngModel)]="sub.cupos" #cupos="ngModel" readonly />                                    </th>
                                 {{sub.cupos}}
 
                             </tr>

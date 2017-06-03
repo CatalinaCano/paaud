@@ -11,7 +11,7 @@ import { LoginService } from './../../services/login.service';
 
 export class LandingComponent implements OnInit {
 
-     datos_usuario = {};
+    datos_usuario = {};
 
     constructor(
         private loginService: LoginService

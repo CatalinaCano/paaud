@@ -2,14 +2,17 @@
     <div class="row">
         <div class="col-md-5 col-md-offset-3">
             <div class="page-header text-center">
-                <img src="../assets/logocolor.png" width="230" height="230" />
+                <img src="../assets/logocolor.png" width="200" height="200" />
                 <h1>PAAUD <br> <small>Programa de Apoyo Alimentario UD</small></h1>
             </div>
 
-            <img id="profile-img" class="profile-img-card center-block" src="../assets/avatar_2x.png" />
-
             <form class="form-signin" method="post" #form="ngForm">
                 <h2 class="form-signin-heading text-center">Ingrese sus Datos</h2>
+
+                <div *ngIf="confirm_user_created" class="alert alert-success col-md-12">
+                    * <span class="glyphicon glyphicon-warning"></span>Usuario creado exitosamente. Inicie sesión
+                </div>
+
                 <label for="nombreUsuario" class="sr-only">Nombre de usuario</label>
                 <input type="text" name="nombreUsuario" id="nombreUsuario" class="form-control" placeholder="Nombre de usuario" autofocus [(ngModel)]="credenciales.nombre" #nombreUsuario="ngModel" sin-espacios required>
 
@@ -19,7 +22,7 @@
                         * <span class="glyphicon glyphicon-warning"></span>No se admiten espacios en blanco en el nombre de usuario
                     </div>
                     <div *ngIf=" nombreUsuario.touched &&!nombreUsuario.valid" class="alert alert-danger col-md-6">
-                        * <span class="glyphicon glyphicon-warning"></span>E l nombre de usuario es Requerido
+                        * <span class="glyphicon glyphicon-warning"></span>El nombre de usuario es Requerido
                     </div>
                 </div>
 
@@ -28,19 +31,40 @@
                 <label for="contrasenia" class="sr-only">Contraseña</label>
                 <input type="password" name="contrasenia" id="contrasenia" class="form-control" placeholder="Contraseña" [(ngModel)]="credenciales.password" #contrasenia="ngModel" required>
                 <div *ngIf=" contrasenia.touched &&!contrasenia.valid" class="alert alert-danger col-md-6">
-                    * <span class="glyphicon glyphicon-warning"></span> La contraseaña es Requerida
+                    * <span class="glyphicon glyphicon-warning"></span> La contraseña es Requerida
                 </div>
                 <br>
+
+                <div *ngIf="sigin">
+                    <label for="confirm-password" class="sr-only">Confirmar Contraseña</label>
+                    <input type="password" name="confirm-password" id="confirm-password" class="form-control" placeholder="Confirmar Contraseña" [(ngModel)]="credenciales.confirmpassword" #confirmpassword="ngModel" required>
+                    <div *ngIf="confirmpassword.touched &&!confirmpassword.valid" class="alert alert-danger col-md-6">
+                        * <span class="glyphicon glyphicon-warning"></span> Confirmar contraseña es Requerida
+                    </div>
+                    <br>
+                </div>
+
 
                 <div *ngIf="error != ''" class="alert alert-danger col-md-12">
                     * <span class="glyphicon glyphicon-warning"></span>{{error}}
                 </div>
 
-                <button type="submit" name="enviar" class="btn btn-lg btn-primary center-block" [disabled]="!form.form.valid" (click)="login(); form.reset()"> Ingresar </button>
-                <hr>
+                <div *ngIf="!sigin">
+                    <button type="button" name="enviar" class="btn btn-lg btn-primary center-block" [disabled]="!form.form.valid" (click)="login(); form.reset()"> Ingresar </button>
+                    <hr>
+                </div>
 
-                <button type="submit" name="registrarse" class="btn btn-lg btn-primary center-block" (click)="registrarse(); form.reset()"> Registrarse </button>
-                <br>
+                <div *ngIf="!sigin">
+                    <button type="button" name="registrarse" class="btn btn-lg btn-primary center-block" [disabled]="!form.form.valid" (click)="changeState()"> Registrarse </button>
+                    <br>
+                </div>
+
+                <div *ngIf="sigin">
+                    <button type="button" name="confirmar" class="btn btn-lg btn-primary center-block" [disabled]="!form.form.valid" (click)="sigIn(); form.reset()"> Confirmar </button>
+                    <br>
+                    <button type="button" name="confirmar" class="btn btn-lg btn-primary center-block" (click)="changeState(); form.reset()"> Cancelar </button>
+                    <br>
+                </div>
 
             </form>
         </div>

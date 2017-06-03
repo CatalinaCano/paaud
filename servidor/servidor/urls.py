@@ -4,7 +4,9 @@ from paaud import views
 
 urlpatterns = [
     url(r'^login', views.login, name='login'),
-    url(r'^get_estudiante', views.get_estudiante, name='get_estudiante'),
+    url(r'^datos_estudiante', views.datos_estudiante, name='datos_estudiante'),
+    url(r'^datos_usuario', views.datos_usuario, name='datos_usuario'),
+    url(r'^sigin', views.sigin, name='sigin'),
     url(r'^post_solicitud', views.post_solicitud, name='post_solicitud'),
     url(r'^get_ultimasolicitud', views.get_ultimasolicitud, name='get_ultimasolicitud'),
     url(r'^post_camponumerico', views.post_camponumerico, name='post_camponumerico'),

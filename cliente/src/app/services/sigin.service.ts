@@ -7,24 +7,20 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class LoginService {
+export class SiginService {
 
-    private loginURL = 'http://localhost:8000/login/';
-    datos_usuario = {};
+    private siginURL = 'http://localhost:8000/sigin/';
 
     constructor(private http: Http) { }
 
-    login(usuario:string, password:string): Observable<any>{
+    sigin(usuario:string, password:string): Observable<any>{
         return this.http
-            .get(this.loginURL+'?usuario='+usuario+'&password='+password)
+            .get(this.siginURL+'?usuario='+usuario+'&password='+password)
             .map((res: Response) => {
-                res.json();
-                this.datos_usuario = res.json();
+                let respuesta = res.json();
+                return respuesta || {};
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
     }
 
-    getDatosUsuario() {
-        return this.datos_usuario;
-    }
 }

@@ -40,4 +40,9 @@ export class NavComponent implements OnInit {
                 this.router.navigate(['/publicar-convocatoria']);
             });
     }
+
+    logOut(): void {
+        sessionStorage.removeItem('datos_usuario');
+        this.router.navigate(['/login']);
+    }
 }

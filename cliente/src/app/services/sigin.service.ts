@@ -17,8 +17,7 @@ export class SiginService {
         return this.http
             .get(this.siginURL+'?usuario='+usuario+'&password='+password)
             .map((res: Response) => {
-                let respuesta = res.json();
-                return respuesta || {};
+                return res.json() || {};
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
     }

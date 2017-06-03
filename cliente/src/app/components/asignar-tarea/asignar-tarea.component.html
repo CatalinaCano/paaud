@@ -12,13 +12,14 @@
     </div>
 
     <div class="col-md-12 jumbotron">
+
         <ul class="nav navbar-nav navbar-left">
             <h1><span class="glyphicon glyphicon-dashboard"></span> Asignar Tarea</h1>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <br>
-            <br>        
-             <form class="navbar-form navbar-left" role="search" #barra="ngForm">
+            <br>
+            <form class="navbar-form navbar-left" role="search" #barra="ngForm">
                 <div class="form-group">
                     <input type="text" class="form-control" id="buscar" name="buscar" required placeholder="Buscar...">
                     <button type="button" class="btn btn-primary" (click)="buscar()"><span class="glyphicon glyphicon-search"></span> Buscar</button>
@@ -26,7 +27,7 @@
             </form>
         </ul>
         <div class="row">
-            
+
         </div>
 
         <div class="table-responsive">
@@ -40,33 +41,20 @@
                         <th class="text-center">Apellidos</th>
                         <th class="text-center">Facultad</th>
                         <th class="text-center">Carrera</th>
-                        <th class="text-center">Actividad</th>
-                        <th class="text-center">Tipo Actividad</th>  
-                        <th class="text-center">Dependencia</th>                      
-                        <th class="text-center">Responsable</th>
-                        <th class="text-center">Validar</th>
+                        <th class="text-center">Asignar</th>
                     </tr>
                 </thead>
-                 <tr *ngFor="let e of estudiantes">
-                    <td class="text-center">{{e.n_estudiante}}</td>
-                    <td class="text-center">{{e.n_codigo}} </td>
+                <tr *ngFor="let e of estudiantes;let i=index">
+                    <td class="text-center">{{i+1}}</td>
+                    <td class="text-center">{{e.n_codigo}}</td>
                     <td class="text-center">{{e.n_nombres}} </td>
                     <td class="text-center">{{e.n_apellidos}} </td>
                     <td class="text-center">{{e.n_facultad}} </td>
                     <td class="text-center">{{e.n_carrera}} </td>
-                    <td class="text-center">
-                        <select class="form-control" name="actividad" required autofocus [(ngModel)]="actividad">
-                              <option value="" selected>Seleccione una Actividad</option>
-                              <option *ngFor="let a of actividades" [ngValue]="a.n_actividad">{{a.n_actividad}}</option>
-                            </select>
-                    </td>
-                    <td class="text-center">{{a.n_tipoActividad}} </td>
-                    <td class="text-center">{{a.n_dependencia}}</td>
-                    <td class="text-center">{{a.n_responsable}}</td>                    
-                    
-                    <td class="text-center"><button type="button" class="btn btn-warning btn-xs center-block"><span class="glyphicon glyphicon-check"></span>Asignar</button> </td>
+                    <td class="text-center"><button type="button" class="btn btn-warning btn-xs" (click)="asignar(estudiantes)"><span class="glyphicon glyphicon-pencil"></span> Asignar</button></td>
                 </tr>
             </table>
         </div>
+
     </div>
 </div>

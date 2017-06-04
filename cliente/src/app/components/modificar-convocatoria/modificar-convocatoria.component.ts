@@ -30,11 +30,16 @@ public modificar: boolean;
             "f_inicio": "01/02/2017",
             "f_fin":"20/03/2017",
             "k_idfacultad":"Ingeniería"
-        }
+        },
+        {
+            "f_inicio": "21/04/2017",
+            "f_fin":"05/05/2017",
+            "k_idfacultad":"Artes"
+        },
+        {
+            "f_inicio": "07/05/2017",
+            "f_fin":"12/05/2017",
+            "k_idfacultad":"Macarena"
+        },
     ];
-
-     onChange(estado) {
-        console.log("Se hizo click");
-        this.modificar = true;
-    }
 }

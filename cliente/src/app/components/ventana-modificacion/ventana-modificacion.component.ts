@@ -12,6 +12,7 @@ export class VentanaModificacionComponent {
   }
   
   onClick() {
+    
     this.modal.alert()
         .size('lg')
         .showClose(true)

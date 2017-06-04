@@ -36,6 +36,6 @@ export const routes: Route[] = [
     { path: 'asignar-tarea', component:AsignarTareaComponent},
     { path: 'modificar-tarea', component:ModificarTareaComponent},
     { path: 'eliminar-tarea',component:EliminarTareaComponent},
-    { path: 'ver-tareas-asignadas',component:VerTareasAsignadasComponent}
-     { path: 'modificar-convocatoria',component:ModificarConvocatoriaComponent }
+    { path: 'ver-tareas-asignadas',component:VerTareasAsignadasComponent},
+    { path: 'modificar-convocatoria',component:ModificarConvocatoriaComponent }
 ];

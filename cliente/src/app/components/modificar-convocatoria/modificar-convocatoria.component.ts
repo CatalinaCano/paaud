@@ -14,12 +14,27 @@ import { CustomFormsModule } from 'ng2-validation';
 })
 
 export class ModificarConvocatoriaComponent implements OnInit {
+
+public modificar: boolean;
     constructor(
         private loginService: LoginService,
         private facultadesService: FacultadesService,
         private router: Router,
-        ) { }
+        ) {
+            this.modificar = false;
+        }
 
-    ngOnInit() {
+    ngOnInit() {}
+      convocatorias =[
+         {
+            "f_inicio": "01/02/2017",
+            "f_fin":"20/03/2017",
+            "k_idfacultad":"Ingeniería"
+        }
+    ];
+
+     onChange(estado) {
+        console.log("Se hizo click");
+        this.modificar = true;
     }
 }

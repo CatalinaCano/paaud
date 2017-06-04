@@ -26,6 +26,7 @@ import { ModificarTareaComponent } from "app/components/modificar-tarea/modifica
 import { EliminarTareaComponent } from "app/components/eliminar-tarea/eliminar-tarea.component";
 import { VerSolicitudesRadicadasComponent } from "app/components/ver-solicitudes-radicadas/ver-solicitudes-radicadas.component";
 import { VerTareasAsignadasComponent } from "app/components/ver-tareas-asignadas/ver-tareas-asignadas.component";
+import { ModificarConvocatoriaComponent } from "app/components/modificar-convocatoria/modificar-convocatoria.component";
 
 /**Servicios */
 import { LoginService } from './services/login.service';
@@ -37,6 +38,7 @@ import { FacultadesService } from './services/facultades.service';
 /**Importamos la directiva que valida el login*/
 import { SinEspacios } from "./directives/validacionSinEspacios.directive";
 import { routes } from './app.routes';
+
 
 @NgModule({
   declarations: [
@@ -61,6 +63,7 @@ import { routes } from './app.routes';
     ModificarTareaComponent,
     EliminarTareaComponent,
     VerTareasAsignadasComponent,
+    ModificarConvocatoriaComponent,
   ],
   imports: [
     BrowserModule,

@@ -81,7 +81,7 @@ export class PublicarConvocatoriaComponent implements OnInit {
         if (estado === "1: Abierta") {         
             document.getElementById("Totalnumber").removeAttribute("readonly"); 
             document.getElementById("Tipo Anumber").removeAttribute("readonly");
-            document.getElementById("Tipo Bnumber").removeAttribute("readonly");
+            document.getElementById("Tipo B-number").removeAttribute("readonly");
           
                  
         }else{

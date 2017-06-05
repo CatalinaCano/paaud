@@ -16,6 +16,8 @@ import { AsignarTareaComponent } from "app/components/asignar-tarea/asignar-tare
 import { ModificarTareaComponent } from "app/components/modificar-tarea/modificar-tarea.component";
 import { EliminarTareaComponent } from "app/components/eliminar-tarea/eliminar-tarea.component";
 import { VerTareasAsignadasComponent } from "app/components/ver-tareas-asignadas/ver-tareas-asignadas.component";
+import { ModificarConvocatoriaComponent } from "app/components/modificar-convocatoria/modificar-convocatoria.component";
+import { VentanaModificacionComponent } from "app/components/ventana-modificacion/ventana-modificacion.component";
 
 export const routes: Route[] = [
     { path: '', redirectTo: '/login', pathMatch: 'full'},
@@ -35,5 +37,9 @@ export const routes: Route[] = [
     { path: 'asignar-tarea', component:AsignarTareaComponent},
     { path: 'modificar-tarea', component:ModificarTareaComponent},
     { path: 'eliminar-tarea',component:EliminarTareaComponent},
-    { path: 'ver-tareas-asignadas',component:VerTareasAsignadasComponent}
+    { path: 'ver-tareas-asignadas',component:VerTareasAsignadasComponent},
+    { path: 'modificar-convocatoria',component:ModificarConvocatoriaComponent },
+    { path: 'ventana-modificacion',component:ModificarConvocatoriaComponent },
+    
+    
 ];

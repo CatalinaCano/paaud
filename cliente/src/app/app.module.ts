@@ -26,6 +26,8 @@ import { ModificarTareaComponent } from "app/components/modificar-tarea/modifica
 import { EliminarTareaComponent } from "app/components/eliminar-tarea/eliminar-tarea.component";
 import { VerSolicitudesRadicadasComponent } from "app/components/ver-solicitudes-radicadas/ver-solicitudes-radicadas.component";
 import { VerTareasAsignadasComponent } from "app/components/ver-tareas-asignadas/ver-tareas-asignadas.component";
+import { ModificarConvocatoriaComponent } from "app/components/modificar-convocatoria/modificar-convocatoria.component";
+import { VentanaModificacionComponent } from "app/components/ventana-modificacion/ventana-modificacion.component";
 
 /**Servicios */
 import { LoginService } from './services/login.service';
@@ -38,6 +40,16 @@ import { HistoricoSolicitudesService } from './services/historico-solicitudes.se
 /**Importamos la directiva que valida el login*/
 import { SinEspacios } from "./directives/validacionSinEspacios.directive";
 import { routes } from './app.routes';
+
+
+
+import { ModalModule, ModalComponent } from 'angular2-modal';
+import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap'
+
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -62,14 +74,18 @@ import { routes } from './app.routes';
     ModificarTareaComponent,
     EliminarTareaComponent,
     VerTareasAsignadasComponent,
+    ModificarConvocatoriaComponent,
+    VentanaModificacionComponent
   ],
   imports: [
     BrowserModule,
+    ModalModule.forRoot(),
+    BootstrapModalModule,
     FormsModule,
     HttpModule,
     JsonpModule,
     CustomFormsModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
   ],
   providers: [
     LoginService,

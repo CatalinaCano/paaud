@@ -1,0 +1,21 @@
+<div style="padding-left:10px;padding-top:10px">
+
+    <button type="button" nglButton="neutral" (click)="open()">Open Angular 2 Modal</button>
+    <button type="button" nglButton="neutral" (click)="open('large')">Open large</button>
+
+    <ngl-modal header="Angular 2 Modal Header" [(open)]="opened" [size]="size">
+        <div body>
+
+            <p>
+                When the Modal window is displayed (opened) the Tab button (Keyboard) can be used to navigate inside the Modal window.</p>
+            <p>
+                We can use the ESC button from the keyboard to close the Modal window.
+            </p>
+            <p>
+                Angular 2 Modal dialog developed using The Lightning Design System CSS Framework.
+            </p>
+        </div>
+        <button class="slds-button slds-button--neutral" (click)="cancel()">Cancel</button>
+        <button class="slds-button slds-button--neutral slds-button--brand">Save</button>
+    </ngl-modal>
+</div>

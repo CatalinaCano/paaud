@@ -20,7 +20,8 @@ export class ConvocatoriasService {
         return this.http
             .post(this.post_convocatoriaURL+'?usuario='+this.datos_usuario.usuario+'&password='+this.datos_usuario.password,convocatoria,options)
             .map((res: Response) => {
-                console.log(res);
+                console.log(res.json());
+                return res.json() || {};
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
     }

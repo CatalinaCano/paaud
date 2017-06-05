@@ -12,51 +12,40 @@
             </ul>
         </div>
     </div>
-    <app-informacion></app-informacion>
 
-    <div class="col-md-9">
+    <div class="col-md-12">
         <div class="jumbotron alert alert-dismissible alert-success">
-            <button (click)="volver()" type="button" class="close" data-dismiss="alert">&times;</button>
             <h1><span class="glyphicon glyphicon-check"></span> Convocatorias Activas</h1>
 
             <p>Actualmente se encuentrán activas las siguientes convocatorias</p>
             <br>
 
-            <form class="form-horizontal" #form="ngForm">
-                <fieldset>
-                    <div class="table-responsive">
-                        <table class="table table-hover table-bordered" style="color: gray">
-                            <thead>
-                                <tr class="warning block-center">
-                                    <th class="text-center">FECHA INICIO</th>
-                                    <th class="text-center">FECHA FIN</th>
-                                    <th class="text-center">FACULTAD</th>
-                                    <th class="text-center">MODIFICAR</th>
-                                </tr>
-                            </thead>
-                            <tr *ngFor="let conv of convocatorias ; let i=index">
-                                <td class="text-center active"> {{conv["f_inicio"]}}</td>
-                                <td class="text-center active"> {{conv["f_fin"]}} </td>
-                                <td class="text-center active"> {{conv["k_idfacultad"]}}</td>
-                                <td class="text-center active">
-                                    <ventana-modificacion></ventana-modificacion>
-                                </td>
-                                <!--<button type="submit" class="btn btn-danger btn-xs" id="{{conv['k_idfacultad']}}{{i + 1}}" (click)="onChange($event.target.value)"> <span class="glyphicon glyphicon-cog"></span> Modificar </button>-->
+            <fieldset>
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered" style="color: gray">
+                        <thead>
+                            <tr class="warning block-center">
+                                <th class="text-center">FECHA INICIO</th>
+                                <th class="text-center">FECHA FIN</th>
+                                <th class="text-center">FACULTAD</th>
+                                <th class="text-center">MODIFICAR</th>
                             </tr>
-                        </table>
-                    </div>
-                </fieldset>
-            </form>
-
-
+                        </thead>
+                        <tr *ngFor="let convocatoria of convocatorias ; let i=index">
+                            <td class="text-center active"> {{convocatoria["f_inicio"]}}</td>
+                            <td class="text-center active"> {{convocatoria["f_fin"]}} </td>
+                            <td class="text-center active"> {{convocatoria["k_idfacultad"]}}</td>
+                            <td class="text-center active">
+                                <ventana-modificacion></ventana-modificacion>
+                            </td>
+                            <!--<button type="submit" class="btn btn-danger btn-xs" id="{{conv['k_idfacultad']}}{{i + 1}}" (click)="onChange($event.target.value)"> <span class="glyphicon glyphicon-cog"></span> Modificar </button>-->
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
 
             <hr class="md-4">
 
-
-
-
-
         </div>
-
     </div>
 </div>

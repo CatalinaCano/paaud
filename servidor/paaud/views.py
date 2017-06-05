@@ -169,24 +169,40 @@ def post_convocatoria(request):
 		f_publicacionresultados = str(convocatoria["f_publicacionresultados"])
 		q_periodo = str(convocatoria["q_periodo"])
 		subsidios = convocatoria["cupos"]
+		retorno = {}
 		try:
+			#verifica si existe una convocatoria en el mismo periodo, para la mimsa facultad 
+			#y con estado diferente a cancelada
 			db = cx_Oracle.connect('U'+usuario, password, 'localhost:1522/XE')
 			cursor = db.cursor()
-			cursor.execute("insert into convocatoria (k_facultad,f_inicioconvocatoria,f_iniciopublicacion,f_finpublicacion,f_iniciovalidacion,f_finvalidacion,f_publicacionresultados,i_estadoconvocatoria,q_periodo) values ("+k_facultad+",to_date('"+f_inicioconvocatoria+"','yyyy-mm-dd'),to_date('"+f_iniciopublicacion+"','yyyy-mm-dd'),to_date('"+f_finpublicacion+"','yyyy-mm-dd'),to_date('"+f_iniciovalidacion+"','yyyy-mm-dd'),to_date('"+f_finvalidacion+"','yyyy-mm-dd'),to_date('"+f_publicacionresultados+"','yyyy-mm-dd'),'ABIERTA',"+q_periodo+")")
-			for numero_convocatoria in cursor.execute("select max(k_convocatoria) from convocatoria"):
-				k_convocatoria = {}
-				k_convocatoria['valor'] = numero_convocatoria[0]
-			for subsidio in subsidios:
-				if subsidio['cupos'] > 0:
-					cursor.execute("insert into convocatoriasubsidio values ("+str(subsidio['subsidio'])+","+str(k_convocatoria['valor'])+","+str(subsidio['cupos'])+")")
-				else:
-					print("ignorar statement")
-			db.commit()
+			respuesta = []
+			for atributo in cursor.execute("select k_convocatoria from convocatoria where k_facultad="+k_facultad+" and q_periodo="+q_periodo+" and i_estadoconvocatoria NOT IN ('CANCELADA','CERRADA')"):
+				respuesta.append(atributo[0])
 			db.close()
+			#si no hay convocatorias para esa facultad en el mismo periodo y en estado diferente a cancelada
+			#crea la convocatoria y asigna los cupos para cada subsidio, y retorna true
+			#si ya hay ua convocatoria para ese periodo y esa facultad con estado diferente a cancelada
+			#retorna false
+			if len(respuesta) > 0:
+				retorno['respuesta'] = False
+			else:
+				db = cx_Oracle.connect('U'+usuario, password, 'localhost:1522/XE')
+				cursor = db.cursor()
+				cursor.execute("insert into convocatoria (k_facultad,f_inicioconvocatoria,f_iniciopublicacion,f_finpublicacion,f_iniciovalidacion,f_finvalidacion,f_publicacionresultados,i_estadoconvocatoria,q_periodo) values ("+k_facultad+",to_date('"+f_inicioconvocatoria+"','yyyy-mm-dd'),to_date('"+f_iniciopublicacion+"','yyyy-mm-dd'),to_date('"+f_finpublicacion+"','yyyy-mm-dd'),to_date('"+f_iniciovalidacion+"','yyyy-mm-dd'),to_date('"+f_finvalidacion+"','yyyy-mm-dd'),to_date('"+f_publicacionresultados+"','yyyy-mm-dd'),'ABIERTA',"+q_periodo+")")
+				for numero_convocatoria in cursor.execute("select max(k_convocatoria) from convocatoria"):
+					k_convocatoria = {}
+					k_convocatoria['valor'] = numero_convocatoria[0]
+				for subsidio in subsidios:
+					if subsidio['cupos'] > 0:
+						cursor.execute("insert into convocatoriasubsidio values ("+str(subsidio['subsidio'])+","+str(k_convocatoria['valor'])+","+str(subsidio['cupos'])+")")
+					else:
+						print("ignorar statement")
+				db.commit()
+				db.close()
 		except cx_Oracle.DatabaseError as e:
 			error, = e.args
 			return HttpResponseBadRequest('Error: '+error.message)
-		return HttpResponse('successful') 
+		return JsonResponse(retorno, safe=False) 
 	else:
 		return HttpResponseBadRequest('No post method')
 

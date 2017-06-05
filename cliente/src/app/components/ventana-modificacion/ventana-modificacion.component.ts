@@ -4,9 +4,10 @@ import { Modal } from 'angular2-modal/plugins/bootstrap';
 
 @Component({
   selector: 'ventana-modificacion',
-  template: `<button  class="btn btn-danger btn-xs" (click)="onClick()"><span class="glyphicon glyphicon-cog"></span> Modificar</button>`
+  template: `<button  class="btn btn-danger btn-xs" (click)="onClick()"><span class="glyphicon glyphicon-cog"></span> Modificar </button>`
 })
 export class VentanaModificacionComponent {
+
   constructor(overlay: Overlay, vcRef: ViewContainerRef, public modal: Modal) {
     overlay.defaultViewContainer = vcRef;
   }

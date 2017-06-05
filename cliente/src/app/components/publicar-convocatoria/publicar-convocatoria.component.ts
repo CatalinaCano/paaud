@@ -93,8 +93,14 @@ export class PublicarConvocatoriaComponent implements OnInit {
         }
         this.convocatoriasService.postConvocatoria(this.datos_convocatoria)
             .subscribe(res => {
-                        alert("Convocatoria creada");
-                        this.router.navigate(['/landing']);
+                        let respuesta = res;
+                        console.log(respuesta);
+                        if (respuesta.respuesta){
+                            alert("Convocatoria creada");
+                            this.router.navigate(['/landing']);
+                        } else {
+                            this.error = 'Ya existe una convocatoria para el mismo periodo y la misma facultad en proceso';
+                        }
                     }, err => {
                         this.error = err._body;
                     });

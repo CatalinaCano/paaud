@@ -25,22 +25,30 @@
                     <table class="table table-hover table-bordered" style="color: gray">
                         <thead>
                             <tr class="warning block-center">
+                                <th class="text-center">FACULTAD</th>
+                                <th class="text-center">PERIODO</th>
+                                <th class="text-center">ESTADO</th>
                                 <th class="text-center">FECHA INICIO</th>
                                 <th class="text-center">FECHA FIN</th>
-                                <th class="text-center">FACULTAD</th>
                                 <th class="text-center">MODIFICAR</th>
                             </tr>
                         </thead>
-                        <tr *ngFor="let convocatoria of convocatorias ; let i=index">
-                            <td class="text-center active"> {{convocatoria["f_inicio"]}}</td>
-                            <td class="text-center active"> {{convocatoria["f_fin"]}} </td>
-                            <td class="text-center active"> {{convocatoria["k_idfacultad"]}}</td>
+                        <tr *ngFor="let convocatoria of convocatorias; let i=index">
+                            <td class="text-center active"> {{convocatoria["n_nombrefacultad"]}}</td>
+                            <td class="text-center active"> {{convocatoria["q_periodo"]}} </td>
+                            <td class="text-center active"> {{convocatoria["i_estadoconvocatoria"]}}</td>
+                            <td class="text-center active"> {{convocatoria["f_inicioconvocatoria"]}}</td>
+                            <td class="text-center active"> {{convocatoria["f_publicacionresultados"]}}</td>
                             <td class="text-center active">
                                 <ventana-modificacion></ventana-modificacion>
                             </td>
                             <!--<button type="submit" class="btn btn-danger btn-xs" id="{{conv['k_idfacultad']}}{{i + 1}}" (click)="onChange($event.target.value)"> <span class="glyphicon glyphicon-cog"></span> Modificar </button>-->
                         </tr>
                     </table>
+                </div>
+
+                <div *ngIf="error != ''" class="alert alert-danger col-md-12">
+                    * <span class="glyphicon glyphicon-warning"></span>{{error}}
                 </div>
             </fieldset>
 

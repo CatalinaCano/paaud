@@ -1,14 +1,10 @@
 //angular
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 
 //servicios
 import { FacultadesService } from './../../services/facultades.service';
 import { ConvocatoriasService } from "app/services/convocatorias.service";
-
-//validación formularios
-import { CustomFormsModule } from 'ng2-validation';
 
 @Component({
     moduleId: module.id,
@@ -71,7 +67,7 @@ export class PublicarConvocatoriaComponent implements OnInit {
         this.getDatosIniciales();
     }
 
-    //trae los datos de login
+    //trae los datos de las facultades
     getDatosIniciales() :void {
             this.facultadesService.getFacultades()
                 .subscribe(res => {

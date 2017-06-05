@@ -206,6 +206,39 @@ def post_convocatoria(request):
 	else:
 		return HttpResponseBadRequest('No post method')
 
+#funcion para consultar todas las convocatorias
+def get_convocatorias(request):
+	if request.method == 'GET':
+		r = request.GET.get
+		usuario = (r('usuario'))
+		password = (r('password'))
+		try:
+			db = cx_Oracle.connect('U'+usuario, password, 'localhost:1522/XE')
+			cursor = db.cursor()
+			retorno = {}
+			respuesta = []
+			for convocatoria in cursor.execute("select c.k_convocatoria, c.k_facultad, f.n_nombrefacultad, to_char(c.f_inicioconvocatoria,'yyyy-mm-dd'), to_char(c.f_iniciopublicacion,'yyyy-mm-dd'), to_char(c.f_finpublicacion,'yyyy-mm-dd'), to_char(c.f_iniciovalidacion,'yyyy-mm-dd'), to_char(c.f_finvalidacion,'yyyy-mm-dd'), to_char(c.f_publicacionresultados,'yyyy-mm-dd'), c.i_estadoconvocatoria,c.q_periodo from convocatoria c, facultad f where c.k_facultad=f.k_facultad"):
+				context = {}
+				context['k_convocatoria'] = convocatoria[0]
+				context['k_facultad'] = convocatoria[1]
+				context['n_nombrefacultad'] = convocatoria[2]
+				context['f_inicioconvocatoria'] = convocatoria[3]
+				context['f_iniciopublicacion'] = convocatoria[4]
+				context['f_finpublicacion'] = convocatoria[5]
+				context['f_iniciovalidacion'] = convocatoria[6]
+				context['f_finvalidacion'] = convocatoria[7]
+				context['f_publicacionresultados'] = convocatoria[8]
+				context['i_estadoconvocatoria'] = convocatoria[9]
+				context['q_periodo'] = convocatoria[10]
+				respuesta.append(context)
+			db.close()
+			retorno['datos'] = respuesta
+		except cx_Oracle.DatabaseError as e:
+			error, = e.args
+			return HttpResponseBadRequest('Error: '+error.message)
+		return JsonResponse(retorno, safe=False) 
+	else:
+		return HttpResponseBadRequest('No get method')
 
 def post_solicitud(request):
 	if request.method == 'POST':

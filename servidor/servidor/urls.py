@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^sigin', views.sigin, name='sigin'),
     url(r'^get_facultades', views.get_facultades, name='get_facultades'),
     url(r'^post_convocatoria', views.post_convocatoria, name='post_convocatoria'),
+    url(r'^get_convocatorias', views.get_convocatorias, name='get_convocatorias'),
     url(r'^post_solicitud', views.post_solicitud, name='post_solicitud'),
     url(r'^get_ultimasolicitud', views.get_ultimasolicitud, name='get_ultimasolicitud'),
     url(r'^post_camponumerico', views.post_camponumerico, name='post_camponumerico'),

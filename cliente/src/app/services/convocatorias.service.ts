@@ -9,6 +9,7 @@ import 'rxjs/add/operator/catch';
 export class ConvocatoriasService {
 
     private post_convocatoriaURL = 'http://localhost:8000/post_convocatoria/';
+    private get_convocatoriasURL = 'http://localhost:8000/get_convocatorias/';
     private datos_usuario = JSON.parse(sessionStorage.getItem('datos_login'));
 
     constructor(private http: Http) { }
@@ -22,6 +23,15 @@ export class ConvocatoriasService {
             .map((res: Response) => {
                 console.log(res.json());
                 return res.json() || {};
+            })
+            .catch((error: any) => Observable.throw(error || 'Server error'));
+    }
+
+    getConvocatorias(): Observable<any> {
+        return this.http
+            .get(this.get_convocatoriasURL+'?usuario='+this.datos_usuario.usuario+'&password='+this.datos_usuario.password)
+            .map((res: Response) => {
+                return res.json().datos || {};
             })
             .catch((error: any) => Observable.throw(error || 'Server error'));
     }

@@ -1,11 +1,8 @@
+//angular
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 
-import { LoginService } from './../../services/login.service';
-import { FacultadesService } from './../../services/facultades.service';
-import { CustomFormsModule } from 'ng2-validation';
-
+//servicios
+import { ConvocatoriasService } from "app/services/convocatorias.service";
 
 @Component({
     moduleId: module.id,
@@ -15,31 +12,26 @@ import { CustomFormsModule } from 'ng2-validation';
 
 export class ModificarConvocatoriaComponent implements OnInit {
 
-public modificar: boolean;
-    constructor(
-        private loginService: LoginService,
-        private facultadesService: FacultadesService,
-        private router: Router,
-        ) {
-            this.modificar = false;
-        }
+    error = '';
+    convocatorias = [];
 
-    ngOnInit() {}
-      convocatorias =[
-         {
-            "f_inicio": "01/02/2017",
-            "f_fin":"20/03/2017",
-            "k_idfacultad":"Ingeniería"
-        },
-        {
-            "f_inicio": "21/04/2017",
-            "f_fin":"05/05/2017",
-            "k_idfacultad":"Artes"
-        },
-        {
-            "f_inicio": "07/05/2017",
-            "f_fin":"12/05/2017",
-            "k_idfacultad":"Macarena"
-        },
-    ];
+    constructor(
+        private convocatoriasService : ConvocatoriasService
+    ) {}
+
+    ngOnInit() {
+        this.getDatosIniciales();
+    }
+
+    //trae los datos de las convocatorias
+    getDatosIniciales() :void {
+            this.convocatoriasService.getConvocatorias()
+                .subscribe(res => {
+                        this.convocatorias = res;
+                        console.log(this.convocatorias);
+                    }, err => {
+                        this.error = err._body;
+                    });
+    }
+
 }

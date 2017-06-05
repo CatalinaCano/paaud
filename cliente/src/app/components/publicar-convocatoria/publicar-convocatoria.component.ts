@@ -1,11 +1,14 @@
+//angular
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-import { LoginService } from './../../services/login.service';
+//servicios
 import { FacultadesService } from './../../services/facultades.service';
-import { CustomFormsModule } from 'ng2-validation';
+import { ConvocatoriasService } from "app/services/convocatorias.service";
 
+//validación formularios
+import { CustomFormsModule } from 'ng2-validation';
 
 @Component({
     moduleId: module.id,
@@ -15,79 +18,90 @@ import { CustomFormsModule } from 'ng2-validation';
 
 export class PublicarConvocatoriaComponent implements OnInit {
 
-    datos_usuario = {};
+    error = '';
+
+    datos_convocatoria = {
+        "k_facultad" : null,
+        "f_inicioconvocatoria" : "",
+        "f_iniciopublicacion" : "",
+        "f_finpublicacion" : "",
+        "f_iniciovalidacion" : "",
+        "f_finvalidacion" : "",
+        "f_publicacionresultados" : "",
+        "q_periodo" : null,
+        "cupos" : []
+    };
+
     facultades = [];
-    public editarCupos: boolean;
-    constructor(
-        private loginService: LoginService,
-        private facultadesService: FacultadesService,
-        private router: Router,
 
-    ) {
-        this.editarCupos = false;
-        
-    }
+    periodos = [
+        { "periodo": 1 },
+        { "periodo": 2 }
+    ];
 
-    ngOnInit() {
-        this.datos_usuario = this.loginService.getDatosUsuario();
-        this.facultades = this.facultadesService.getDatosFacultades();
-       //Obtener los Subsidios 
-       
-    }
-    //Array del tipo de Subsidios
     subsidios = [
         {
-            "n_tiposubsidio": "Total",
-            "t_porcentajesub": "100",
-            "cupos": null
+            "k_subsidio": 1,
+            "i_tiposubsidio": "TOTAL",
+            "t_porcentajesub": 100,
+            "n_cupos": 0
         },
         {
-            "n_tiposubsidio": "Tipo A",
-            "t_porcentajesub": "70",
-            "cupos": null
+            "k_subsidio": 2,
+            "i_tiposubsidio": "A",
+            "t_porcentajesub": 75,
+            "n_cupos": 0
         },
         {
-            "n_tiposubsidio": "Tipo B",
-            "t_porcentajesub": "40",
-            "cupos": null
+            "k_subsidio": 3,
+            "i_tiposubsidio": "B",
+            "t_porcentajesub": 50,
+            "n_cupos": 0
         }
     ];
 
-    periodos = [
-        { "n_periodo": "1" },
-        { "n_periodo": "2" }
-    ];
+    constructor(
+        private facultadesService: FacultadesService,
+        private convocatoriasService: ConvocatoriasService,
+        private router: Router
 
-    estados = [
-        { "n_estado": "Abierta" },
-        { "n_estado": "Cancelada" },
-        { "n_estado": "En validación" },
-        { "n_estado": "Cerrada" }
-    ];
+    ) {}
 
-    facultad = "";
-    fechaInicio = "";
-    fechaFin = "";
+    ngOnInit() {
+        this.getDatosIniciales();
+    }
+
+    //trae los datos de login
+    getDatosIniciales() :void {
+            this.facultadesService.getFacultades()
+                .subscribe(res => {
+                        this.facultades = res;
+                    }, err => {
+                        this.error = err._body;
+                    });
+    }
+
+    enviardatos() {
+        this.error = '';
+        this.datos_convocatoria.cupos = []
+        for (let i=0; i < this.subsidios.length; i++){
+            let cupos = {
+                "subsidio" : this.subsidios[i].k_subsidio,
+                "cupos" : this.subsidios[i].n_cupos
+            }
+            this.datos_convocatoria.cupos.push(cupos);
+        }
+        this.convocatoriasService.postConvocatoria(this.datos_convocatoria)
+            .subscribe(res => {
+                        alert("Convocatoria creada");
+                        this.router.navigate(['/landing']);
+                    }, err => {
+                        this.error = err._body;
+                    });
+    }
 
     regresar() {
         this.router.navigate(['/landing']);
     }
 
-    enviardatos() {
-        console.log("AQUI SE ENVIAN LOS DATOS PARA LA BD");
-    }
-    onChange(estado) {
-        console.log(estado);
-        if (estado === "1: Abierta") {         
-            document.getElementById("Totalnumber").removeAttribute("readonly"); 
-            document.getElementById("Tipo Anumber").removeAttribute("readonly");
-            document.getElementById("Tipo Bnumber").removeAttribute("readonly");
-          
-                 
-        }else{
-             document.getElementById("Totalnumber").setAttribute("readonly","readonly");
-             document.getElementById("Tipo Anumber").setAttribute("readonly","readonly");
-             document.getElementById("Tipo Bnumber").setAttribute("readonly","readonly");
-        }
-    }
 }

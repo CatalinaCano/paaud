@@ -30,9 +30,10 @@ import { VerTareasAsignadasComponent } from "app/components/ver-tareas-asignadas
 /**Servicios */
 import { LoginService } from './services/login.service';
 import { SiginService } from './services/sigin.service';
+import { FacultadesService } from './services/facultades.service';
+import { ConvocatoriasService } from "app/services/convocatorias.service";
 import { RegistrarSolicitudService } from './services/registrar-solicitud.service';
 import { HistoricoSolicitudesService } from './services/historico-solicitudes.service';
-import { FacultadesService } from './services/facultades.service';
 
 /**Importamos la directiva que valida el login*/
 import { SinEspacios } from "./directives/validacionSinEspacios.directive";
@@ -73,9 +74,10 @@ import { routes } from './app.routes';
   providers: [
     LoginService,
     SiginService,
+    FacultadesService,
+    ConvocatoriasService,
     RegistrarSolicitudService,
-    HistoricoSolicitudesService,
-    FacultadesService
+    HistoricoSolicitudesService
   ],
   bootstrap: [AppComponent]
 })

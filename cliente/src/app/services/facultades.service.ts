@@ -1,32 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
-import 'rxjs/add/operator/toPromise';
+import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class FacultadesService {
 
     private obtener_facultadesURL = 'http://localhost:8000/get_facultades/';
-    facultades = [];
+    private datos_usuario = JSON.parse(sessionStorage.getItem('datos_login'));
 
-    constructor(private http: Http) { }
+    constructor(
+        private http: Http   
+    ) {}
 
-    getFacultades(usuario:string,password:string){
-        return this.http.get(this.obtener_facultadesURL+'?usuario='+usuario+'&password='+password)
-            .toPromise()
-            .then(response => {
-                response.json();
-                this.facultades = response.json();
+    getFacultades(): Observable<any> {
+        return this.http
+            .get(this.obtener_facultadesURL+'?usuario='+this.datos_usuario.usuario+'&password='+this.datos_usuario.password)
+            .map((res: Response) => {
+                return res.json().datos || {};
             })
-            .catch(this.handleError);
+            .catch((error: any) => Observable.throw(error || 'Server error')); 
     }
 
-    private handleError(error: any) {
-        console.log('An error occurred', error);
-        return Promise.reject(error._body || error);
-    }
-
-    getDatosFacultades() {
-        return this.facultades;
-    }
 }

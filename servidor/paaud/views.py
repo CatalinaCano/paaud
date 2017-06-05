@@ -28,13 +28,13 @@ def login(request):
 				datos_usuario['datos'] = datos_estudiante(usuario)
 			elif "R_ADMIN_PAAUD" in respuesta:
 				datos_usuario['rol'] = "ADMINISTRADOR"
-				datos_usuario['datos'] = datos_usuario(usuario)
+				datos_usuario['datos'] = datosUsuario(usuario)
 			elif "R_ASISTENTE_PAAUD" in respuesta:
 				datos_usuario['rol'] = "ASISTENTE"
-				datos_usuario['datos'] = datos_usuario(usuario)
+				datos_usuario['datos'] = datosUsuario(usuario)
 			elif "R_SUPERIOR_PAAUD" in respuesta:
 				datos_usuario['rol'] = "SUPERIOR"
-				datos_usuario['datos'] = datos_usuario(usuario)
+				datos_usuario['datos'] = datosUsuario(usuario)
 			else:
 				print "Rol no conocido"
 		except cx_Oracle.DatabaseError as e:
@@ -73,16 +73,18 @@ def datos_estudiante(usuario):
 	return context
 
 #funcion para obtener el nombre y apellido de un usuario diferente a un estudiante
-def datos_usuario(usuario):
+def datosUsuario(usuario):
 	try:
 		#Se debe cambiar por el usuario y la contrasenia correctos
 		db = cx_Oracle.connect('paaud', 'paaud', 'localhost:1522/XE')
 		cursor = db.cursor()
 		context = {}
-		for atributo in cursor.execute("select n_nombreusuario, n_apellidousuario from usuario where k_cedula="+usuario):
+		for atributo in cursor.execute("select * from usuario where k_cedula="+usuario):
 			context['estado_consulta'] = "OK"
-			context['nombres'] = atributo[0]
-			context['apellidos'] = atributo[1]
+			context['cedula'] = atributo[0]
+			context['nombres'] = atributo[1]
+			context['apellidos'] = atributo[2]
+			context['rol'] = atributo[3]
 		db.close()
 	except cx_Oracle.DatabaseError as e:
 		error, = e.args
@@ -124,6 +126,69 @@ def sigin(request):
 		return JsonResponse(retorno, safe=False) 
 	else:
 		return HttpResponseBadRequest('No get method')
+
+#funcion para consultar todas las facultades
+def get_facultades(request):
+	if request.method == 'GET':
+		r = request.GET.get
+		usuario = (r('usuario'))
+		password = (r('password'))
+		try:
+			db = cx_Oracle.connect('U'+usuario, password, 'localhost:1522/XE')
+			cursor = db.cursor()
+			retorno = {}
+			respuesta = []
+			for facultad in cursor.execute("select k_facultad,n_nombrefacultad from facultad"):
+				context = {}
+				context['k_facultad'] = facultad[0]
+				context['n_nombrefacultad'] = facultad[1]
+				respuesta.append(context)
+			db.close()
+			retorno['datos'] = respuesta
+		except cx_Oracle.DatabaseError as e:
+			error, = e.args
+			return HttpResponseBadRequest('Error: '+error.message)
+		return JsonResponse(retorno, safe=False) 
+	else:
+		return HttpResponseBadRequest('No get method')
+
+#funcion para agregar una cnvocatoria y los cupos que se le asignaron a esa convocatoria
+def post_convocatoria(request):
+	if request.method == 'POST':
+		r = request.GET.get
+		usuario = (r('usuario'))
+		password = (r('password'))
+		data = request.body
+		convocatoria = json.loads(data)
+		k_facultad = str(convocatoria["k_facultad"])
+		f_inicioconvocatoria = str(convocatoria["f_inicioconvocatoria"])
+		f_iniciopublicacion = str(convocatoria["f_iniciopublicacion"])
+		f_finpublicacion = str(convocatoria["f_finpublicacion"])
+		f_iniciovalidacion = str(convocatoria["f_iniciovalidacion"])
+		f_finvalidacion = str(convocatoria["f_finvalidacion"])
+		f_publicacionresultados = str(convocatoria["f_publicacionresultados"])
+		q_periodo = str(convocatoria["q_periodo"])
+		subsidios = convocatoria["cupos"]
+		try:
+			db = cx_Oracle.connect('U'+usuario, password, 'localhost:1522/XE')
+			cursor = db.cursor()
+			cursor.execute("insert into convocatoria (k_facultad,f_inicioconvocatoria,f_iniciopublicacion,f_finpublicacion,f_iniciovalidacion,f_finvalidacion,f_publicacionresultados,i_estadoconvocatoria,q_periodo) values ("+k_facultad+",to_date('"+f_inicioconvocatoria+"','yyyy-mm-dd'),to_date('"+f_iniciopublicacion+"','yyyy-mm-dd'),to_date('"+f_finpublicacion+"','yyyy-mm-dd'),to_date('"+f_iniciovalidacion+"','yyyy-mm-dd'),to_date('"+f_finvalidacion+"','yyyy-mm-dd'),to_date('"+f_publicacionresultados+"','yyyy-mm-dd'),'ABIERTA',"+q_periodo+")")
+			for numero_convocatoria in cursor.execute("select max(k_convocatoria) from convocatoria"):
+				k_convocatoria = {}
+				k_convocatoria['valor'] = numero_convocatoria[0]
+			for subsidio in subsidios:
+				if subsidio['cupos'] > 0:
+					cursor.execute("insert into convocatoriasubsidio values ("+str(subsidio['subsidio'])+","+str(k_convocatoria['valor'])+","+str(subsidio['cupos'])+")")
+				else:
+					print("ignorar statement")
+			db.commit()
+			db.close()
+		except cx_Oracle.DatabaseError as e:
+			error, = e.args
+			return HttpResponseBadRequest('Error: '+error.message)
+		return HttpResponse('successful') 
+	else:
+		return HttpResponseBadRequest('No post method')
 
 
 def post_solicitud(request):
@@ -247,28 +312,6 @@ def get_solicitudes(request):
 				context['f_solicitud'] = c[1]
 				context['k_idconvocatoria'] = c[2]
 				context['i_estadosolicitud'] = c[3]
-				respuesta.append(context)
-			db.close()
-		except cx_Oracle.DatabaseError as e:
-			error, = e.args
-			return HttpResponseBadRequest('Error: '+error.message)
-		return JsonResponse(respuesta, safe=False) 
-	else:
-		return HttpResponseBadRequest('No get method')
-
-def get_facultades(request):
-	if request.method == 'GET':
-		r = request.GET.get
-		usuario = (r('usuario'))
-		password = (r('password'))
-		try:
-			db = cx_Oracle.connect(usuario, password, 'localhost:1522/XE')
-			cursor = db.cursor()
-			respuesta = []
-			for c in cursor.execute("select k_idfacultad,n_nombrefacultad from facultad"):
-				context = {}
-				context['k_idfacultad'] = c[0]
-				context['n_nombrefacultad'] = c[1]
 				respuesta.append(context)
 			db.close()
 		except cx_Oracle.DatabaseError as e:

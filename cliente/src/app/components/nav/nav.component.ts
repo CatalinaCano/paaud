@@ -33,16 +33,17 @@ export class NavComponent implements OnInit {
                 this.router.navigate(['/ver-historico-solicitudes']);
             });
     }
-
+    /*
     consultarFacultades(usuario:string,password:string) {
         this.facultadesService.getFacultades(usuario,password)
             .then(data => {
                 this.router.navigate(['/publicar-convocatoria']);
             });
     }
-
+    */
     logOut(): void {
         sessionStorage.removeItem('datos_usuario');
+        sessionStorage.removeItem('datos_login');
         this.router.navigate(['/login']);
     }
 }

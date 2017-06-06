@@ -27,7 +27,6 @@ import { EliminarTareaComponent } from "app/components/eliminar-tarea/eliminar-t
 import { VerSolicitudesRadicadasComponent } from "app/components/ver-solicitudes-radicadas/ver-solicitudes-radicadas.component";
 import { VerTareasAsignadasComponent } from "app/components/ver-tareas-asignadas/ver-tareas-asignadas.component";
 import { ModificarConvocatoriaComponent } from "app/components/modificar-convocatoria/modificar-convocatoria.component";
-import { VentanaModificacionComponent } from "app/components/ventana-modificacion/ventana-modificacion.component";
 
 /**Servicios */
 import { LoginService } from './services/login.service';
@@ -74,8 +73,7 @@ import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap'
     ModificarTareaComponent,
     EliminarTareaComponent,
     VerTareasAsignadasComponent,
-    ModificarConvocatoriaComponent,
-    VentanaModificacionComponent
+    ModificarConvocatoriaComponent
   ],
   imports: [
     BrowserModule,

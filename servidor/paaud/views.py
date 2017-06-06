@@ -193,11 +193,12 @@ def post_convocatoria(request):
 					k_convocatoria = {}
 					k_convocatoria['valor'] = numero_convocatoria[0]
 				for subsidio in subsidios:
-					if subsidio['cupos'] > 0:
+					if subsidio['cupos'] >= 0:
 						cursor.execute("insert into convocatoriasubsidio values ("+str(subsidio['subsidio'])+","+str(k_convocatoria['valor'])+","+str(subsidio['cupos'])+")")
 					else:
 						print("ignorar statement")
 				db.commit()
+				retorno['respuesta'] = True
 				db.close()
 		except cx_Oracle.DatabaseError as e:
 			error, = e.args
@@ -217,7 +218,7 @@ def get_convocatorias(request):
 			cursor = db.cursor()
 			retorno = {}
 			respuesta = []
-			for convocatoria in cursor.execute("select c.k_convocatoria, c.k_facultad, f.n_nombrefacultad, to_char(c.f_inicioconvocatoria,'yyyy-mm-dd'), to_char(c.f_iniciopublicacion,'yyyy-mm-dd'), to_char(c.f_finpublicacion,'yyyy-mm-dd'), to_char(c.f_iniciovalidacion,'yyyy-mm-dd'), to_char(c.f_finvalidacion,'yyyy-mm-dd'), to_char(c.f_publicacionresultados,'yyyy-mm-dd'), c.i_estadoconvocatoria,c.q_periodo from convocatoria c, facultad f where c.k_facultad=f.k_facultad"):
+			for convocatoria in cursor.execute("select c.k_convocatoria, c.k_facultad, f.n_nombrefacultad, to_char(c.f_inicioconvocatoria,'yyyy-mm-dd'), to_char(c.f_iniciopublicacion,'yyyy-mm-dd'), to_char(c.f_finpublicacion,'yyyy-mm-dd'), to_char(c.f_iniciovalidacion,'yyyy-mm-dd'), to_char(c.f_finvalidacion,'yyyy-mm-dd'), to_char(c.f_publicacionresultados,'yyyy-mm-dd'), c.i_estadoconvocatoria,c.q_periodo from convocatoria c, facultad f where c.k_facultad=f.k_facultad order by -c.k_convocatoria"):
 				context = {}
 				context['k_convocatoria'] = convocatoria[0]
 				context['k_facultad'] = convocatoria[1]
@@ -239,6 +240,91 @@ def get_convocatorias(request):
 		return JsonResponse(retorno, safe=False) 
 	else:
 		return HttpResponseBadRequest('No get method')
+
+#funcion para consultar los cupos de una convocatoria
+def get_cuposconvocatoria(request):
+	if request.method == 'GET':
+		r = request.GET.get
+		usuario = (r('usuario'))
+		password = (r('password'))
+		convocatoria = (r('convocatoria'))
+		try:
+			db = cx_Oracle.connect('U'+usuario, password, 'localhost:1522/XE')
+			cursor = db.cursor()
+			retorno = {}
+			respuesta = []
+			for subsidio in cursor.execute("select cs.k_subsidio, s.i_tiposubsidio, s.t_porcentajesub, cs.q_cupos from convocatoriasubsidio cs, subsidio s where cs.k_subsidio = s.k_subsidio and cs.k_convocatoria="+str(convocatoria)):
+				context = {}
+				context['k_subsidio'] = subsidio[0]
+				context['i_tiposubsidio'] = subsidio[1]
+				context['t_porcentajesub'] = subsidio[2]
+				context['q_cupos'] = subsidio[3]
+				respuesta.append(context)
+			db.close()
+			retorno['datos'] = respuesta
+		except cx_Oracle.DatabaseError as e:
+			error, = e.args
+			return HttpResponseBadRequest('Error: '+error.message)
+		return JsonResponse(retorno, safe=False) 
+	else:
+		return HttpResponseBadRequest('No get method')
+
+#funcion para actualizar una convocatoria, las fechas o el estado
+def update_convocatoria(request):
+	if request.method == 'PUT':
+		r = request.GET.get
+		usuario = (r('usuario'))
+		password = (r('password'))
+		data = request.body
+		convocatoria = json.loads(data)
+		k_convocatoria = str(convocatoria["k_convocatoria"])
+		f_inicioconvocatoria = str(convocatoria["f_inicioconvocatoria"])
+		f_iniciopublicacion = str(convocatoria["f_iniciopublicacion"])
+		f_finpublicacion = str(convocatoria["f_finpublicacion"])
+		f_iniciovalidacion = str(convocatoria["f_iniciovalidacion"])
+		f_finvalidacion = str(convocatoria["f_finvalidacion"])
+		f_publicacionresultados = str(convocatoria["f_publicacionresultados"])
+		i_estadoconvocatoria = convocatoria["i_estadoconvocatoria"]
+		retorno = {}
+		try:
+			db = cx_Oracle.connect('U'+usuario, password, 'localhost:1522/XE')
+			cursor = db.cursor()
+			cursor.execute("update convocatoria set f_inicioconvocatoria=to_date('"+f_inicioconvocatoria+"','yyyy-mm-dd'),f_iniciopublicacion=to_date('"+f_iniciopublicacion+"','yyyy-mm-dd'),f_finpublicacion=to_date('"+f_finpublicacion+"','yyyy-mm-dd'),f_iniciovalidacion=to_date('"+f_iniciovalidacion+"','yyyy-mm-dd'),f_finvalidacion=to_date('"+f_finvalidacion+"','yyyy-mm-dd'),f_publicacionresultados=to_date('"+f_publicacionresultados+"','yyyy-mm-dd'),i_estadoconvocatoria='"+i_estadoconvocatoria+"' where k_convocatoria="+k_convocatoria)
+			db.commit()
+			retorno['respuesta'] = True
+			db.close()
+		except cx_Oracle.DatabaseError as e:
+			error, = e.args
+			return HttpResponseBadRequest('Error: '+error.message)
+		return JsonResponse(retorno, safe=False) 
+	else:
+		return HttpResponseBadRequest('No put method')
+
+#funcion para actualizar los cupos de una convocatoria
+def update_cuposconvocatoria(request):
+	if request.method == 'PUT':
+		r = request.GET.get
+		usuario = (r('usuario'))
+		password = (r('password'))
+		data = request.body
+		cupos = json.loads(data)
+		k_subsidio = str(cupos["k_subsidio"])
+		k_convocatoria = str(cupos["k_convocatoria"])
+		q_cupos = cupos["q_cupos"]
+		retorno = {}
+		try:
+			db = cx_Oracle.connect('U'+usuario, password, 'localhost:1522/XE')
+			cursor = db.cursor()
+			cursor.execute("update convocatoriasubsidio set q_cupos="+q_cupos+" where k_subsidio="+k_subsidio+" and k_convocatoria="+k_convocatoria)
+			db.commit()
+			retorno['respuesta'] = True
+			db.close()
+		except cx_Oracle.DatabaseError as e:
+			error, = e.args
+			return HttpResponseBadRequest('Error: '+error.message)
+		return JsonResponse(retorno, safe=False) 
+	else:
+		return HttpResponseBadRequest('No put method')
 
 def post_solicitud(request):
 	if request.method == 'POST':

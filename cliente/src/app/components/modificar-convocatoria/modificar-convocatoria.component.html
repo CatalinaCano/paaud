@@ -15,42 +15,142 @@
 
     <div class="col-md-12">
         <div class="jumbotron alert alert-dismissible alert-success">
-            <h1><span class="glyphicon glyphicon-check"></span> Convocatorias Activas</h1>
 
-            <p>Actualmente se encuentrán activas las siguientes convocatorias</p>
-            <br>
+            <div *ngIf="!modificar_convocatoria">
+                <h1><span class="glyphicon glyphicon-check"></span> Convocatorias</h1>
+                <br>
 
-            <fieldset>
+                <fieldset>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-bordered" style="color: gray">
+                            <thead>
+                                <tr class="warning block-center">
+                                    <th class="text-center">CONVOCATORIA</th>
+                                    <th class="text-center">FACULTAD</th>
+                                    <th class="text-center">PERIODO</th>
+                                    <th class="text-center">ESTADO</th>
+                                    <th class="text-center">FECHA INICIO</th>
+                                    <th class="text-center">FECHA FIN</th>
+                                    <th class="text-center">MODIFICAR</th>
+                                </tr>
+                            </thead>
+                            <tr *ngFor="let convocatoria of convocatorias">
+                                <td class="text-center active"> {{convocatoria["k_convocatoria"]}}</td>
+                                <td class="text-center active"> {{convocatoria["n_nombrefacultad"]}}</td>
+                                <td class="text-center active"> {{convocatoria["q_periodo"]}} </td>
+                                <td class="text-center active"> {{convocatoria["i_estadoconvocatoria"]}}</td>
+                                <td class="text-center active"> {{convocatoria["f_inicioconvocatoria"]}}</td>
+                                <td class="text-center active"> {{convocatoria["f_publicacionresultados"]}}</td>
+                                <td class="text-center active">
+                                    <button class="btn btn-danger btn-xs" (click)="elegirConvocatoria(convocatoria,convocatoria['k_convocatoria'])"><span class="glyphicon glyphicon-cog"></span> Modificar </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div *ngIf="modificar_convocatoria">
+                <h1><span class="glyphicon glyphicon-check"></span> Convocatoria {{convocatoria_seleccionada.k_convocatoria}}</h1>
+                <br>
+
+                <form class="form-horizontal" #convocatoriaForm="ngForm">
+                    <fieldset>
+                        <legend><span class="glyphicon glyphicon-time"></span> Fechas de la Convocatoria</legend>
+
+                        <div class="form-group">
+                            <label for="fechaInicioConvocatoria" class="col-lg-2 control-label">Fecha Inicio Convocatoria:</label>
+                            <div class="col-lg-4">
+                                <input type="date" class="form-control" id="fechaInicioConvocatoria" name="fechaInicioConvocatoria" [(ngModel)]='convocatoria_seleccionada.f_inicioconvocatoria' #fechaInicioConvocatoria="ngModel" required>
+                            </div>
+                            <label for="fechaPublicacionResultados" class="col-lg-2 control-label">Fecha de Publicación de Resultados:</label>
+                            <div class="col-lg-4">
+                                <input type="date" class="form-control" id="fechaPublicacionResultados" name="fechaPublicacionResultados" [(ngModel)]="convocatoria_seleccionada.f_publicacionresultados" #fechaPublicacionResultados="ngModel" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fechaInicioPublicacion" class="col-lg-2 control-label">Fecha Inicio Publicación:</label>
+                            <div class="col-lg-4">
+                                <input type="date" class="form-control" id="fechaInicioPublicacion" name="fechaInicioPublicacion" [(ngModel)]="convocatoria_seleccionada.f_iniciopublicacion" #fechaInicioPublicacion="ngModel" required>
+                            </div>
+                            <label for="fechaFinPublicacion" class="col-lg-2 control-label">Fecha Fin Publicación:</label>
+                            <div class="col-lg-4">
+                                <input type="date" class="form-control" id="fechaFinPublicacion" name="fechaFinPublicacion" [(ngModel)]="convocatoria_seleccionada.f_finpublicacion" #fechaFinPublicacion="ngModel" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="fechaIncioValidacion" class="col-lg-2 control-label">Fecha Inicio Validación:</label>
+                            <div class="col-lg-4">
+                                <input type="date" class="form-control" id="fechaInicioValidacion" name="fechaInicioValidacion" [(ngModel)]="convocatoria_seleccionada.f_iniciovalidacion" #fechaInicioValidacion="ngModel" required>
+                            </div>
+                            <label for="fechaFinValidacion" class="col-lg-2 control-label">Fecha Fin Validación:</label>
+                            <div class="col-lg-4">
+                                <input type="date" class="form-control" id="fechaFinValidacion" name="fechaFinValidacion" [(ngModel)]="convocatoria_seleccionada.f_finvalidacion" #fechaFinValidacion="ngModel" required>
+                            </div>
+                        </div>
+                        <br/>
+
+                        <legend><span class="glyphicon glyphicon-book"></span> Estado de la Convocatoria </legend>
+
+                        <div class="form-group">
+                            <label for="estadoConvocatoria" class="col-md-2 col-md-offset-3 control-label">Estado:</label>
+                            <div class="col-md-3">
+                                <select class="form-control" id="estadoConvocatoria" name="estadoConvocatoria" [(ngModel)]="convocatoria_seleccionada.i_estadoconvocatoria" #estadoConvocatoria="ngModel" required>
+                                    <option *ngFor="let estado of estados_convocatoria" [ngValue]="estado">{{estado}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="buton" class="btn btn-danger btn-lg" (click)="cancelarUpdate(); "> <span class="glyphicon glyphicon-remove-sign"></span> Cancelar</button>
+                                <button type="submit" class="btn btn-warning btn-lg" (click)="updateConvocatoria(convocatoria_seleccionada)" [disabled]="!convocatoriaForm.form.valid"> <span class="glyphicon glyphicon-ok-circle"></span> Actualizar</button>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+
+                <legend><span class="glyphicon glyphicon-pencil"></span> Número de Cupos </legend>
+
                 <div class="table-responsive">
-                    <table class="table table-hover table-bordered" style="color: gray">
+                    <table class="table table-striped table-bordered" style="color: gray">
                         <thead>
                             <tr class="warning block-center">
-                                <th class="text-center">FACULTAD</th>
-                                <th class="text-center">PERIODO</th>
-                                <th class="text-center">ESTADO</th>
-                                <th class="text-center">FECHA INICIO</th>
-                                <th class="text-center">FECHA FIN</th>
-                                <th class="text-center">MODIFICAR</th>
+                                <th class="text-center">SUBSIDIO</th>
+                                <th class="text-center">% SUBSIDIADO</th>
+                                <th class="text-center">CUPOS ACTUALES</th>
+                                <th class="text-center">NUEVOS CUPOS</th>
+                                <th class="text-center">ACTUALIZAR</th>
                             </tr>
                         </thead>
-                        <tr *ngFor="let convocatoria of convocatorias; let i=index">
-                            <td class="text-center active"> {{convocatoria["n_nombrefacultad"]}}</td>
-                            <td class="text-center active"> {{convocatoria["q_periodo"]}} </td>
-                            <td class="text-center active"> {{convocatoria["i_estadoconvocatoria"]}}</td>
-                            <td class="text-center active"> {{convocatoria["f_inicioconvocatoria"]}}</td>
-                            <td class="text-center active"> {{convocatoria["f_publicacionresultados"]}}</td>
-                            <td class="text-center active">
-                                <ventana-modificacion></ventana-modificacion>
-                            </td>
-                            <!--<button type="submit" class="btn btn-danger btn-xs" id="{{conv['k_idfacultad']}}{{i + 1}}" (click)="onChange($event.target.value)"> <span class="glyphicon glyphicon-cog"></span> Modificar </button>-->
+                        <tr *ngFor="let subsidio of cupos_convocatoria ; let i=index">
+                            <th class="text-center active">{{subsidio.i_tiposubsidio}}</th>
+                            <th class="text-center active">{{subsidio.t_porcentajesub}}</th>
+                            <th class="text-center active">{{subsidio.q_cupos}}</th>
+                            <th class="text-center active">
+                                <input style="text-align:center" type="number" class="form-control" placeholder="cupos" id="nuevosCupos" name="nuevosCupos" min="0" #nuevosCupos/>
+                            </th>
+                            <th class="text-center active">
+                                <button class="btn btn-success btn-xs" (click)="actualizarCupos(subsidio.k_subsidio,nuevosCupos.value,convocatoria_seleccionada.k_convocatoria)"><span class="glyphicon glyphicon-cog"></span> Actualizar </button>
+                            </th>
                         </tr>
                     </table>
+
+                    <div class="form-group">
+                        <div class="col-md-6 col-md-offset-5">
+                            <button type="buton" class="btn btn-primary btn-lg" (click)="cancelarUpdate(); "> <span class="glyphicon glyphicon-remove-sign"></span> Volver</button>
+                        </div>
+                    </div>
                 </div>
 
-                <div *ngIf="error != ''" class="alert alert-danger col-md-12">
-                    * <span class="glyphicon glyphicon-warning"></span>{{error}}
-                </div>
-            </fieldset>
+            </div>
+
+            <div *ngIf="error != ''" class="alert alert-danger col-md-12">
+                * <span class="glyphicon glyphicon-warning"></span>{{error}}
+            </div>
 
             <hr class="md-4">
 

@@ -1,60 +1,98 @@
 <app-nav></app-nav>
 
 <div class="container">
-    <!--Barra de navegacion-->
-    <div class="col-md-12">
-        <ul class="breadcrumb">
-            <li><a routerLink="/landing"><span class="glyphicon glyphicon-home"></span> PAAUD</a></li>
-            <li><span class="glyphicon glyphicon-duplicate"></span> Solicitud</li>
-            <li class="active"><span class="glyphicon glyphicon-pencil"></span> Registrar Solicitud</li>
-        </ul>
-    </div>
 
+    <!--Barra de navegacion-->
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="breadcrumb">
+                <li><a routerLink="/landing"><span class="glyphicon glyphicon-home"></span> PAAUD</a></li>
+                <li><span class="glyphicon glyphicon-duplicate"></span> Solicitud</li>
+                <li class="active"><span class="glyphicon glyphicon-floppy-saved"></span> Inscribir Solicitud</li>
+            </ul>
+        </div>
+    </div>
     <app-informacion></app-informacion>
 
-    <div class="col-md-9 jumbotron">
+    <div *ngIf="!activar_formulario" class="col-md-9">
+        <div class="jumbotron alert alert-dismissible alert-success">
+            <h1><span class="glyphicon glyphicon-check"></span> Convocatorias Activas</h1>
+
+            <p>Actualmente se encuentrán activas las siguientes convocatorias</p>
+            <br>
+
+            <fieldset>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered  ">
+                        <thead>
+                            <tr class="warning block-center">
+                                <th class="text-center">CONVOCATORIA</th>
+                                <th class="text-center">FECHA INICIO</th>
+                                <th class="text-center">FECHA FIN</th>
+                                <th class="text-center">FACULTAD</th>
+                                <th class="text-center">REGISTRARSE</th>
+                            </tr>
+                        </thead>
+                        <tr *ngFor="let convocatoria of convocatorias" style="color: gray">
+                            <th class="text-center"> {{convocatoria.k_convocatoria}}</th>
+                            <th class="text-center"> {{convocatoria.f_iniciopublicacion}}</th>
+                            <th class="text-center"> {{convocatoria.f_finpublicacion}} </th>
+                            <th class="text-center"> {{convocatoria.n_nombrefacultad}}</th>
+                            <th class="text-center">
+                                <button class="btn btn-primary btn-xs" (click)="registrarse(convocatoria.k_convocatoria)"><span class="glyphicon glyphicon-cutlery"></span> REGISTRARSE </button>
+                            </th>
+                        </tr>
+                    </table>
+                </div>
+            </fieldset>
+
+            <hr class="md-4">
+
+        </div>
+    </div>
+
+    <div *ngIf="activar_formulario" class="col-md-9 jumbotron">
         <h1>Registrar Solicitud </h1>
         <hr class="my-4">
         <br>
 
-        <form class="form-horizontal" #formulario="ngForm">
+        <form class="form-horizontal" #solicitudForm="ngForm">
             <fieldset>
                 <legend><span class="glyphicon glyphicon-user"></span> Datos Personales</legend>
-
 
                 <div class="form-group">
                     <label for="nombres" class="col-lg-2 control-label">Nombres </label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="nombres" id="nombres" readonly [(ngModel)]='datos_usuario.n_nomeestudiante' #nombres="ngModel" />
+                        <input type="text" class="form-control" name="nombres" id="nombres" [(ngModel)]='datos_usuario.datos.nombres' #nombres="ngModel" readonly>
                     </div>
 
                     <label for="apellidos" class="col-lg-2 control-label">Apellidos </label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="apellidos" id="apellidos" readonly [(ngModel)]='datos_usuario.n_apellestudiante' #apellidos="ngModel" />
+                        <input type="text" class="form-control" name="apellidos" id="apellidos" [(ngModel)]='datos_usuario.datos.apellidos' #apellidos="ngModel" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="codigo" class="col-lg-2 control-label">Código </label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="codigo" id="codigo" readonly [(ngModel)]='datos_usuario.k_codeestudiante' #codigo="ngModel" />
+                        <input type="text" class="form-control" name="codigo" id="codigo" [(ngModel)]='datos_usuario.datos.codigo' #codigo="ngModel" readonly>
                     </div>
 
                     <label for="documento" class="col-lg-2 control-label">Documento de Identidad</label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="documento" id="documento" readonly [(ngModel)]='datos_usuario.q_identificacionestu' #documento="ngModel" />
+                        <input type="text" class="form-control" name="documento" id="documento" [(ngModel)]='datos_usuario.datos.identificacion' #documento="ngModel" readonly>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="facultad" class="col-lg-2 control-label">Facultad </label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="facultad" id="facultad" readonly [(ngModel)]='datos_usuario.n_facultad' #facultad="ngModel" />
+                        <input type="text" class="form-control" name="facultad" id="facultad" [(ngModel)]='datos_usuario.datos.facultad' #facultad="ngModel" readonly>
                     </div>
 
                     <label for="proyecto" class="col-lg-2 control-label">Proyecto Curricular</label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="proyecto" id="proyecto" readonly [(ngModel)]='datos_usuario.n_proyectocurric' #proyecto="ngModel" />
+                        <input type="text" class="form-control" name="proyecto" id="proyecto" [(ngModel)]='datos_usuario.datos.proyecto' #proyecto="ngModel" readonly>
                     </div>
                 </div>
 
@@ -63,12 +101,12 @@
                 <div class="form-group">
                     <label for="celular" class="col-lg-2 control-label"><span class="glyphicon glyphicon-phone"></span> Número Celular</label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="celular" id="celular" readonly [(ngModel)]='datos_usuario.q_numcelular' #celular="ngModel" />
+                        <input type="text" class="form-control" name="celular" id="celular" [(ngModel)]='datos_usuario.datos.numero_celular' #celular="ngModel" readonly>
                     </div>
 
                     <label for="fijo" class="col-lg-2 control-label"><span class="glyphicon glyphicon-phone-alt"></span> Número Fijo</label>
                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="fijo" id="fijo" readonly [(ngModel)]='datos_usuario.q_numefijo' #fijo="ngModel" />
+                        <input type="text" class="form-control" name="fijo" id="fijo" [(ngModel)]='datos_usuario.datos.numero_fijo' #fijo="ngModel" readonly>
                     </div>
                 </div>
 
@@ -76,142 +114,136 @@
                     <label for="email" class="col-lg-4 control-label">e-mail</label>
                     <div class="col-lg-6 input-group">
                         <span class="input-group-addon">@</span>
-                        <input type="text" class="form-control" name="email" id="email" readonly [(ngModel)]='datos_usuario.n_email' #email="ngModel" />
+                        <input type="text" class="form-control" name="email" id="email" [(ngModel)]='datos_usuario.datos.email' #email="ngModel" readonly>
                     </div>
                 </div>
 
                 <legend><span class="glyphicon glyphicon-usd"></span> Información Socioeconómica</legend>
 
                 <div class="form-group">
-                    <label for="estadoCivil" class="col-lg-2 control-label">Estado Civil</label>
-                    <div class="col-lg-4">
-                        <select class="form-control" id="estadoCivil" required>
-                            <option value="soltero">Soltero</option>
-                            <option value="casado">Casado</option>
-                            <option value="separado">Separado/Divorciado</option>
-                            <option value="viudo">Viudo</option>
-                            <option value="union libre">Unión Libre</option>
-                        </select>
-                    </div>
-
                     <label for="estrato" class="col-lg-2 control-label">Estrato</label>
                     <div class="col-lg-4">
-                        <select class="form-control" name="estrato" id="estrato" required [(ngModel)]="zona_riesgo.q_numerico" #estrato="ngModel">
+                        <select class="form-control" name="estrato" id="estrato" required [(ngModel)]="zona_riesgo.valor" #estrato="ngModel">
                             <option value="1">1</option>
                             <option value="2">2</option>
                             <option value="3">3</option>
                             <option value="4">4</option>
                         </select>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="matricula" class="col-lg-6 control-label">Valor de la Matrícula</label>
-                    <div class="col-lg-6 input-group">
-                        <span class="input-group-addon">$</span>
-                        <input type="number" class="form-control" name="matricula" id="matricula" readonly [(ngModel)]='datos_usuario.q_valormatricula' #matricula="ngModel">
-                        <span class="input-group-addon">.00</span>
-                    </div>
-                </div>
-                <!--DIV PARA EL MENSAJE DE ALERTA-->
-                <div *ngIf="matricula.errors">
-                    <div *ngIf="matriculaerrors.sinEspacios" class="alert alert-danger col-md-6">
-                        * <span class="glyphicon glyphicon-warning"></span>No se admiten espacios en blanco en el nombre de usuario
-                    </div>
-                    <div *ngIf=" matriculatouched &&!nombreUsuario.valid" class="alert alert-danger col-md-6">
-                        * <span class="glyphicon glyphicon-warning"></span>El nombre de usuario es Requerido
+                    <label for="soporteEstrato" class="col-lg-2 control-label">Soporte</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" id="soporteEstrato" name="soporteEstrato" [(ngModel)]="zona_riesgo.n_soporte" #soporteEstrato="ngModel" required>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="ingresos" class="col-lg-6 control-label">Valor mensual de los ingresos</label>
-                    <div class="col-lg-6 input-group">
-                        <span class="input-group-addon">$</span>
-                        <input type="number" class="form-control" name="ingresos" id="ingresos" required placeholder="100.000" autofocus [(ngModel)]='ingresos_familiares.q_numerico' #ingresos="ngModel" />
-                        <span class="input-group-addon">.00</span>
+                    <label for="ingresos" class="col-lg-2 control-label">Ingresos mensuales</label>
+                    <div class="col-lg-4">
+                        <input type="number" class="form-control" name="ingresos" id="ingresos" placeholder="$100.000" [(ngModel)]='ingresos_familiares.valor' #ingresos="ngModel" required>
                     </div>
 
-                    <!--DIV PARA EL MENSAJE DE ALERTA-->
-                    <div *ngIf="ingresos.errors">
-                        <div *ngIf="ingresos.errors.sinEspacios" class="alert alert-danger col-md-12">
-                            * No se admiten espacios en blanco en el valor de los ingresos_familiares
-                        </div>
-
-                        <div *ngIf="ingresos.touched &&!ingresos.valid" class="alert alert-danger col-md-12">
-                            * El valor de los ingresos es requerido
-                        </div>
-
-                        <div *ngIf="ingresos.touched && ingresos_familiares.q_numerico<=0" class="alert alert-danger col-md-12">
-                            * 0
-                        </div>
-
-
-
-                    </div>
-
-
-                </div>
-
-                <div class="form-group">
-                    <label for="sostenimientoeconomico" class="col-lg-4 control-label">Se sostiene económicamente a si mismo</label>
-                    <div class="col-lg-2">
-                        <select class="form-control" name="sostenimientoeconomico" id="sostenimientoeconomico" required [(ngModel)]="sostenimiento_economico.i_booleano" #sostenimientoeconomico="ngModel">
-                            <option value="f" selected>No</option>
-                            <option value="t">Si</option>
-                        </select>
-                    </div>
-
-                    <label for="sostenimientohogar" class="col-lg-4 control-label">Sostiene actualmente su hogar</label>
-                    <div class="col-lg-2">
-                        <select class="form-control" name="sostenimientohogar" id="sostenimientohogar" required [(ngModel)]="sostiene_su_hogar.i_booleano" #sostenimientohogar="ngModel">
-                            <option value="f" selected>No</option>
-                            <option value="t">Si</option>
-                        </select>
+                    <label for="soporteIngresosMensuales" class="col-lg-2 control-label">Soporte</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" id="soporteIngresosMensuales" name="soporteIngresosMensuales" [(ngModel)]="ingresos_familiares.n_soporte" #soporteIngresosMensuales="ngModel" required>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="vivefuera" class="col-lg-4 control-label">Vive fuera de su núcleo familiar</label>
+                    <label for="sostenimientoEconomico" class="col-lg-4 control-label">Se sostiene económicamente a si mismo</label>
                     <div class="col-lg-2">
-                        <select class="form-control" name="vivefuera" id="vivefuera" required [(ngModel)]="vive_fuera.i_booleano" #vivefuera="ngModel">
-                            <option value="f" selected>No</option>
-                            <option value="t">Si</option>                                        
+                        <select class="form-control" name="sostenimientoEconomico" id="sostenimientoEconomico" [(ngModel)]="sostenimiento_economico.valor" #sostenimientoEconomico="ngModel" required>
+                            <option value="F" selected>No</option>
+                            <option value="T">Si</option>
                         </select>
                     </div>
 
-                    <label for="sostenimientopersonas" class="col-lg-4 control-label">Tiene personas a cargo económicamente</label>
-                    <div class="col-lg-2">
-                        <select class="form-control" name="sostenimientopersonas" id="sostenimientopersonas" required [(ngModel)]="sostenimiento_personas.i_booleano" #sostenimientopersonas="ngModel">
-                            <option value="f" selected>No</option>
-                            <option value="t">Si</option>                                           
-                        </select>
+                    <label for="soporteSostenimientoEconomico" class="col-lg-2 control-label">Soporte</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" id="soporteSostenimientoEconomico" name="soporteSostenimientoEconomico" [(ngModel)]="sostenimiento_economico.n_soporte" [disabled]="sostenimiento_economico.valor == 'F'" #soporteSostenimientoEconomico="ngModel"
+                            [required]="sostenimiento_economico.valor == 'T'">
                     </div>
                 </div>
 
-
                 <div class="form-group">
-                    <label for="pagaarriendo" class="col-lg-4 control-label">Actualmente paga arriendo</label>
+                    <label for="sostenimientoHogar" class="col-lg-4 control-label">Sostiene actualmente su hogar</label>
                     <div class="col-lg-2">
-                        <select class="form-control" name="pagaarriendo" id="pagaarriendo" required [(ngModel)]="vive_en_arriendo.i_booleano" #pagaarriendo="ngModel">
-                            <option value="f" selected>No</option>
-                            <option value="t">Si</option>
+                        <select class="form-control" name="sostenimientoHogar" id="sostenimientoHogar" [(ngModel)]="sostiene_su_hogar.valor" #sostenimientoHogar="ngModel" required>
+                            <option value="F" selected>No</option>
+                            <option value="T">Si</option>
                         </select>
                     </div>
 
+                    <label for="soporteSostenimientoHogar" class="col-lg-2 control-label">Soporte</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" id="soporteSostenimientoHogar" name="soporteSostenimientoHogar" [(ngModel)]="sostiene_su_hogar.n_soporte" [disabled]="sostiene_su_hogar.valor == 'F'" #soporteSostenimientoHogar="ngModel" [required]="sostiene_su_hogar.valor == 'F'">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="viveFuera" class="col-lg-4 control-label">Vive fuera de su núcleo familiar</label>
+                    <div class="col-lg-2">
+                        <select class="form-control" name="viveFuera" id="viveFuera" [(ngModel)]="vive_fuera.valor" #viveFuera="ngModel" required>
+                            <option value="F" selected>No</option>
+                            <option value="T">Si</option>                                        
+                        </select>
+                    </div>
+
+                    <label for="soporteViveFuera" class="col-lg-2 control-label">Soporte</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" id="soporteViveFuera" name="soporteViveFuera" [(ngModel)]="vive_fuera.n_soporte" [disabled]="vive_fuera.valor == 'F'" #soporteViveFuera="ngModel" [required]="vive_fuera.valor == 'T'">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="sostenimientoPersonas" class="col-lg-4 control-label">Tiene personas a cargo económicamente</label>
+                    <div class="col-lg-2">
+                        <select class="form-control" name="sostenimientoPersonas" id="sostenimientoPersonas" [(ngModel)]="sostenimiento_personas.valor" #sostenimientoPersonas="ngModel" required>
+                            <option value="F" selected>No</option>
+                            <option value="T">Si</option>                                           
+                        </select>
+                    </div>
+
+                    <label for="soporteSostenimientoPersonas" class="col-lg-2 control-label">Soporte</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" id="soporteSostenimientoPersonas" name="soporteSostenimientoPersonas" [(ngModel)]="sostenimiento_personas.n_soporte" [disabled]="sostenimiento_personas.valor == 'F'" #soporteViveFuera="ngModel" [required]="sostenimiento_personas.valor == 'T'">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pagaArriendo" class="col-lg-4 control-label">Actualmente paga arriendo</label>
+                    <div class="col-lg-2">
+                        <select class="form-control" name="pagaArriendo" id="pagaArriendo" [(ngModel)]="vive_en_arriendo.valor" #pagaArriendo="ngModel" required>
+                            <option value="F" selected>No</option>
+                            <option value="T">Si</option>
+                        </select>
+                    </div>
+
+                    <label for="soportePagaArriendo" class="col-lg-2 control-label">Soporte</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" id="soportePagaArriendo" name="soportePagaArriendo" [(ngModel)]="vive_en_arriendo.n_soporte" [disabled]="vive_en_arriendo.valor == 'F'" #soportePagaArriendo="ngModel" [required]="vive_en_arriendo.valor == 'T'">
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="origen" class="col-lg-4 control-label">Proviene de Municipios o ciudades distintos a Bogotá</label>
                     <div class="col-lg-2">
-                        <select class="form-control" name="origen" id="origen" required [(ngModel)]="origen.i_booleano" #pagaarriendo="ngModel">
-                            <option value="f" selected>No</option>
-                            <option value="t">Si</option>                                        
+                        <select class="form-control" name="origen" id="origen" [(ngModel)]="origen.valor" #pagaArriendo="ngModel" required>
+                            <option value="F" selected>No</option>
+                            <option value="T">Si</option>
                         </select>
+                    </div>
+
+                    <label for="soporteOrigen" class="col-lg-2 control-label">Soporte</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" id="soporteOrigen" name="soporteOrigen" [(ngModel)]="origen.n_soporte" [disabled]="origen.valor == 'F'" #soporteOrigen="ngModel" [required]="origen.valor == 'T'">
                     </div>
                 </div>
 
-
                 <div class="form-group">
-                    <label for="tipopoblacion" class="col-lg-7 control-label">Usted o su grupo familiar esta certificado como alguna de las siguientes poblaciones </label>
-                    <div class="col-lg-5 input-group">
-                        <select class="form-control" name="tipopoblacion" id="tipopoblacion" required [(ngModel)]="desplazamiento_forzado.n_valorcampo" #tipopoblacion="ngModel">
+                    <label for="desplazamientoForzado" class="col-lg-3 control-label">Usted o su grupo familiar esta certificado como alguna de las siguientes poblaciones </label>
+                    <div class="col-lg-3">
+                        <select class="form-control" name="desplazamientoForzado" id="desplazamientoForzado" [(ngModel)]="desplazamiento_forzado.valor" #desplazamientoForzado="ngModel" required>
                             <option value="ninguna">Ninguna</option>
                             <option value="desplazado">Desplazado</option>
                             <option value="indigena">Indigena</option>      
@@ -220,50 +252,47 @@
                             <option value=" mujer cabeza de hogar">Mujer cabeza de hogar</option>
                         </select>
                     </div>
+
+                    <label for="soporteDesplazamientoForzado" class="col-lg-2 control-label">Soporte</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" id="soporteDesplazamientoForzado" name="soporteDesplazamientoForzado" [(ngModel)]="desplazamiento_forzado.n_soporte" [disabled]="desplazamiento_forzado.valor == 'ninguna'" #soporteDesplazamientoForzado="ngModel"
+                            [required]="desplazamiento_forzado.valor != 'ninguna'">
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label for="discapacidad" class="col-lg-4 control-label">Presenta algún tipo de discapacidad física o mental</label>
                     <div class="col-lg-2">
-                        <select class="form-control" name="discapacidad" id="discapacidad" required [(ngModel)]="discapacidad_fisica.i_booleano" #discapacidad="ngModel">
-                            <option value="f" selected>No</option>
-                            <option value="t">Si</option>                                         
+                        <select class="form-control" name="discapacidad" id="discapacidad" required [(ngModel)]="discapacidad_fisica.valor" #discapacidad="ngModel">
+                            <option value="F" selected>No</option>
+                            <option value="T">Si</option>                                         
                         </select>
                     </div>
 
+                    <label for="soporteDiscapacidad" class="col-lg-2 control-label">Soporte</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" id="soporteDiscapacidad" name="soporteDiscapacidad" [(ngModel)]="discapacidad_fisica.n_soporte" [disabled]="discapacidad_fisica.valor == 'F'" #soporteDiscapacidad="ngModel" [required]="discapacidad_fisica.valor == 'T'">
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label for="patologia" class="col-lg-4 control-label">Presenta alguna patología asociada a su alimentación</label>
                     <div class="col-lg-2">
-                        <select class="form-control" name="patologia" id="patologia" required [(ngModel)]="patologia_medica.i_booleano" #patologia="ngModel">
-                            <option value="f" selected>No</option>
-                            <option value="t">Si</option>                                          
+                        <select class="form-control" name="patologia" id="patologia" [(ngModel)]="patologia_medica.valor" #patologia="ngModel" required>
+                            <option value="F" selected>No</option>
+                            <option value="T">Si</option>                                          
                         </select>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="subsidio" class="col-lg-9 control-label"> Actualmente pertenece a algún programa de subsidio de indole nacional o departamental </label>
-                    <div class="col-lg-2 input-group">
-                        <select class="form-control" id="subsidio" required>
-                            <option>Si</option>
-                            <option>No</option>                           
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="seguridadSocial" class="col-lg-7 control-label">  Que tipo de seguridad social  posee actualmente </label>
-                    <div class="col-lg-5 input-group">
-                        <select class="form-control" id="seguridadSocial" required>
-                            <option>Sisben</option>
-                            <option>EPS</option>      
-                            <option>Médicina Prepagada</option>                      
-                        </select>
+                    <label for="soportePatologia" class="col-lg-2 control-label">Soporte</label>
+                    <div class="col-lg-4">
+                        <input type="text" class="form-control" id="soportePatologia" name="soportePatologia" [(ngModel)]="patologia_medica.n_soporte" [disabled]="patologia_medica.valor == 'F'" #soportePatologia="ngModel" [required]="patologia_medica.valor == 'T'">
                     </div>
                 </div>
 
                 <legend><span class="glyphicon glyphicon-calendar"></span> Horario de Almuerzo</legend>
-                <div class="table-responsive">
 
+                <div class="table-responsive">
                     <table class="table table-striped table-bordered  ">
                         <thead>
                             <tr class="success block-center">
@@ -275,7 +304,6 @@
                                 <th class="text-center">VIERNES</th>
                             </tr>
                         </thead>
-
                         <tr>
                             <th class="text-center"><input type="checkbox" value="LUNES"></th>
                             <th class="text-center"> <input type="checkbox" value="MARTES"></th>
@@ -284,84 +312,20 @@
                             <th class="text-center"><input type="checkbox" value="VIERNES"></th>
                         </tr>
                     </table>
-
                 </div>
 
-
-
-                <legend><span class="glyphicon glyphicon-paperclip"></span> Documentación Requerida</legend>
-                <div class="form-group">
-                    <label for="carta" class="col-lg-5 control-label"> Carta dirigida a la Directora de Bienestar Institucional </label>
-                    <div class="col-lg-7">
-                        <input type="file" class="form-control" id="carta">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="certificadoEstratificacion" class="col-lg-5 control-label">Certificado de Estratifiación (No superior a un Año) </label>
-                    <div class="col-lg-7">
-                        <input type="file" class="form-control" id="certificadoEstratificacion">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="reciboPublico" class="col-lg-5 control-label">Factura de un   recibo de servicio  público (con una vigencia de 3 meses)  </label>
-                    <div class="col-lg-7">
-                        <input type="file" class="form-control" id="reciboPublico">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="reciboUniversidad" class="col-lg-5 control-label">Fotocopia del Recibo de Pago de la Universidad cancelado.</label>
-                    <div class="col-lg-7">
-                        <input type="file" class="form-control" id="reciboUniversidad">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="cerDesplazamiento" class="col-lg-5 control-label">Certificado de desplazamientos forzoso </label>
-                    <div class="col-lg-7">
-                        <input type="file" class="form-control" id="cerDesplazamiento">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="cerNacimiento" class="col-lg-5 control-label">Certificado de Nacimiento de sus hijos</label>
-                    <div class="col-lg-7">
-                        <input type="file" class="form-control" id="cerNacimiento">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="cerIngresos" class="col-lg-5 control-label">Certificado de Ingresos</label>
-                    <div class="col-lg-7">
-                        <input type="file" class="form-control" id="cerIngresos">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="examenes" class="col-lg-5 control-label">Exámenes Médicos</label>
-                    <div class="col-lg-7">
-                        <input type="file" class="form-control" id="examenes">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="conArrendamiento" class="col-lg-5 control-label">Contrato de Arrendamiento</label>
-                    <div class="col-lg-7">
-                        <input type="file" class="form-control" id="conArrendamiento">
-                    </div>
-                </div>
-                &nbsp; &nbsp;
                 <div class="form-group block-center">
-                    <div class="col-lg-10 col-lg-offset-3">
-                        <button type="reset" class="btn btn-default btn-lg" (click)="volver()"> <span class="glyphicon glyphicon-remove-sign"></span> Cancelar</button> &nbsp; &nbsp;
-                        <button type="submit" class="btn btn-success btn-lg" (click)="enviarSolicitud(datos_usuario.n_usuario,datos_usuario.k_codeestudiante)" [disabled]="!formulario.form.valid"> <span class="glyphicon glyphicon-ok-circle"></span> Enviar</button>                        &nbsp; &nbsp;
-                        <button type="reset" class="btn btn-primary btn-lg" (click)="formulario.reset()"> <span class="glyphicon glyphicon-trash"></span> Limpiar</button>
+                    <div class="col-lg-10 col-lg-offset-4">
+                        <button type="button" class="btn btn-default btn-lg" (click)="volver()"> <span class="glyphicon glyphicon-remove-sign"></span> Cancelar</button> &nbsp; &nbsp;
+                        <button type="button" class="btn btn-success btn-lg" (click)="registrarSolicitud()" [disabled]="!solicitudForm.form.valid"> <span class="glyphicon glyphicon-ok-circle"></span> Enviar</button>
                     </div>
                 </div>
+
             </fieldset>
         </form>
     </div>
 
+    <div *ngIf="error != ''" class="alert alert-danger col-md-12">
+        * <span class="glyphicon glyphicon-warning"></span>{{error}}
+    </div>
 </div>

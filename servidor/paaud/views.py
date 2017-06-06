@@ -241,6 +241,40 @@ def get_convocatorias(request):
 	else:
 		return HttpResponseBadRequest('No get method')
 
+#funcion para consultar todas las convocatorias abiertas
+def get_convocatoriasabiertas(request):
+	if request.method == 'GET':
+		r = request.GET.get
+		usuario = (r('usuario'))
+		password = (r('password'))
+		try:
+			db = cx_Oracle.connect('U'+usuario, password, 'localhost:1522/XE')
+			cursor = db.cursor()
+			retorno = {}
+			respuesta = []
+			for convocatoria in cursor.execute("select c.k_convocatoria, c.k_facultad, f.n_nombrefacultad, to_char(c.f_inicioconvocatoria,'yyyy-mm-dd'), to_char(c.f_iniciopublicacion,'yyyy-mm-dd'), to_char(c.f_finpublicacion,'yyyy-mm-dd'), to_char(c.f_iniciovalidacion,'yyyy-mm-dd'), to_char(c.f_finvalidacion,'yyyy-mm-dd'), to_char(c.f_publicacionresultados,'yyyy-mm-dd'), c.i_estadoconvocatoria,c.q_periodo from convocatoria c, facultad f where c.k_facultad=f.k_facultad and c.i_estadoconvocatoria='ABIERTA' order by -c.k_convocatoria"):
+				context = {}
+				context['k_convocatoria'] = convocatoria[0]
+				context['k_facultad'] = convocatoria[1]
+				context['n_nombrefacultad'] = convocatoria[2]
+				context['f_inicioconvocatoria'] = convocatoria[3]
+				context['f_iniciopublicacion'] = convocatoria[4]
+				context['f_finpublicacion'] = convocatoria[5]
+				context['f_iniciovalidacion'] = convocatoria[6]
+				context['f_finvalidacion'] = convocatoria[7]
+				context['f_publicacionresultados'] = convocatoria[8]
+				context['i_estadoconvocatoria'] = convocatoria[9]
+				context['q_periodo'] = convocatoria[10]
+				respuesta.append(context)
+			db.close()
+			retorno['datos'] = respuesta
+		except cx_Oracle.DatabaseError as e:
+			error, = e.args
+			return HttpResponseBadRequest('Error: '+error.message)
+		return JsonResponse(retorno, safe=False) 
+	else:
+		return HttpResponseBadRequest('No get method')
+
 #funcion para consultar los cupos de una convocatoria
 def get_cuposconvocatoria(request):
 	if request.method == 'GET':
@@ -326,25 +360,145 @@ def update_cuposconvocatoria(request):
 	else:
 		return HttpResponseBadRequest('No put method')
 
+#funcion para consultar si el estudiante ya tiene una solicitud para esa convocatoris
+def verify_solicitud(request):
+	if request.method == 'GET':
+		r = request.GET.get
+		usuario = (r('usuario'))
+		password = (r('password'))
+		convocatoria = str((r('convocatoria')))
+		retorno = {}
+		try:
+			#verifica si existe una solicitud del mismo usuario en la misma convocatoria y con estado diferente a cancelada
+			db = cx_Oracle.connect('U'+usuario, password, 'localhost:1522/XE')
+			cursor = db.cursor()
+			respuesta = []
+			for atributo in cursor.execute("select k_solicitud from solicitud where k_codigo="+usuario+" and k_convocatoria="+convocatoria+" and i_estadosolicitud NOT IN ('CANCELADA')"):
+				respuesta.append(atributo[0])
+			db.close()
+			if len(respuesta) > 0:
+				retorno['respuesta'] = False
+			else:
+				retorno['respuesta'] = True
+		except cx_Oracle.DatabaseError as e:
+			error, = e.args
+			return HttpResponseBadRequest('Error: '+error.message)
+		return JsonResponse(retorno, safe=False) 
+	else:
+		return HttpResponseBadRequest('No get method')
+
 def post_solicitud(request):
 	if request.method == 'POST':
+		r = request.GET.get
+		usuario = (r('usuario'))
+		password = (r('password'))
 		data = request.body
 		solicitud = json.loads(data)
-		usuario = solicitud["usuario"]
-		password = solicitud["password"]
-		codigo = solicitud["codigo"]
+		k_convocatoria = str(solicitud['k_convocatoria'])
+		campos_solicitud = solicitud['datos']
+		retorno = {}
 		try:
-			db = cx_Oracle.connect(usuario, password, 'localhost:1522/XE')
+			db = cx_Oracle.connect('U'+usuario, password, 'localhost:1522/XE')
 			cursor = db.cursor()
-			cursor.execute("insert into solicitud (k_codestudiante,k_subsidio,k_idconvocatoria,f_solicitud,i_estadosolicitud) values ("+codigo+",4,1,sysdate,'solicitada')")
+			cursor.execute("insert into solicitud (k_codigo,k_convocatoria,f_solicitud,i_estadosolicitud) values ("+usuario+","+k_convocatoria+",sysdate,'RADICADA')")
+			for numero_solicitud in cursor.execute("select max(k_solicitud) from solicitud"):
+					k_solicitud = {}
+					k_solicitud['valor'] = numero_solicitud[0]
+			for campo in campos_solicitud:
+				if campo['numerico'] == True:
+					cursor.execute("insert into solicitudcamposolicitud (k_solicitud,k_camposolicitud,n_soporte,q_numerico) values ("+str(k_solicitud['valor'])+","+str(campo['k_camposolicitud'])+",'"+str(campo['n_soporte'])+"',"+str(campo['valor'])+")")
+				if campo['booleano'] == True:
+					cursor.execute("insert into solicitudcamposolicitud (k_solicitud,k_camposolicitud,n_soporte,i_booleano) values ("+str(k_solicitud['valor'])+","+str(campo['k_camposolicitud'])+",'"+str(campo['n_soporte'])+"','"+campo['valor']+"')")
+				if campo['caracteres'] == True:
+					cursor.execute("insert into solicitudcamposolicitud (k_solicitud,k_camposolicitud,n_soporte,n_valorcampo) values ("+str(k_solicitud['valor'])+","+str(campo['k_camposolicitud'])+",'"+str(campo['n_soporte'])+"','"+campo['valor']+"')")
 			db.commit()
+			retorno['respuesta'] = True
 			db.close()
 		except cx_Oracle.DatabaseError as e:
 			error, = e.args
 			return HttpResponseBadRequest('Error: '+error.message)
-		return HttpResponse('successful') 
+		return JsonResponse(retorno, safe=False) 
 	else:
 		return HttpResponseBadRequest('No post method')
+
+def get_solicitudes(request):
+	if request.method == 'GET':
+		r = request.GET.get
+		usuario = (r('usuario'))
+		password = (r('password'))
+		try:
+			db = cx_Oracle.connect('U'+usuario, password, 'localhost:1522/XE')
+			cursor = db.cursor()
+			retorno = {}
+			respuesta = []
+			for c in cursor.execute("select k_solicitud,k_codigo,k_convocatoria,i_estadosolicitud from solicitud"):
+				context = {}
+				context['k_solicitud'] = c[0]
+				context['k_codigo'] = c[1]
+				context['k_convocatoria'] = c[2]
+				context['i_estadosolicitud'] = c[3]
+				respuesta.append(context)
+			db.close()
+			retorno['datos'] = respuesta
+		except cx_Oracle.DatabaseError as e:
+			error, = e.args
+			return HttpResponseBadRequest('Error: '+error.message)
+		return JsonResponse(retorno, safe=False) 
+	else:
+		return HttpResponseBadRequest('No get method')
+
+def get_solicitudcamposolicitud(request):
+	if request.method == 'GET':
+		r = request.GET.get
+		usuario = (r('usuario'))
+		password = (r('password'))
+		solicitud = str((r('solicitud')))
+		try:
+			db = cx_Oracle.connect('U'+usuario, password, 'localhost:1522/XE')
+			cursor = db.cursor()
+			retorno = {}
+			respuesta = []
+			for c in cursor.execute("select cs.n_camposolicitud, scs.n_soporte, scs.q_numerico, scs.i_booleano, scs.n_valorcampo from solicitudcamposolicitud scs, camposolicitud cs where scs.k_solicitud="+solicitud+" and scs.k_camposolicitud = cs.k_camposolicitud "):
+				context = {}
+				context['n_camposolicitud'] = c[0]
+				context['n_soporte'] = c[1]
+				context['q_numerico'] = c[2]
+				context['i_booleano'] = c[3]
+				context['n_valorcampo'] = c[4]
+				respuesta.append(context)
+			db.close()
+			retorno['datos'] = respuesta
+		except cx_Oracle.DatabaseError as e:
+			error, = e.args
+			return HttpResponseBadRequest('Error: '+error.message)
+		return JsonResponse(retorno, safe=False) 
+	else:
+		return HttpResponseBadRequest('No get method')
+
+#funcion para actualizar los cupos de una convocatoria
+def update_solicitud(request):
+	if request.method == 'PUT':
+		r = request.GET.get
+		usuario = (r('usuario'))
+		password = (r('password'))
+		data = request.body
+		valores = json.loads(data)
+		k_solicitud = str(valores["k_solicitud"])
+		i_estadosolicitud = str(valores["i_estadosolicitud"])
+		retorno = {}
+		try:
+			db = cx_Oracle.connect('U'+usuario, password, 'localhost:1522/XE')
+			cursor = db.cursor()
+			cursor.execute("update solicitud set k_cedula="+usuario+", i_estadosolicitud='"+i_estadosolicitud+"', f_revision=sysdate where k_solicitud="+k_solicitud)
+			db.commit()
+			retorno['respuesta'] = True
+			db.close()
+		except cx_Oracle.DatabaseError as e:
+			error, = e.args
+			return HttpResponseBadRequest('Error: '+error.message)
+		return JsonResponse(retorno, safe=False) 
+	else:
+		return HttpResponseBadRequest('No put method')
 
 def get_ultimasolicitud(request):
 	if request.method == 'GET':
@@ -430,28 +584,3 @@ def post_campostring(request):
 		return HttpResponse('successful') 
 	else:
 		return HttpResponseBadRequest('No post method')
-
-def get_solicitudes(request):
-	if request.method == 'GET':
-		r = request.GET.get
-		usuario = (r('usuario'))
-		password = (r('password'))
-		codigo = (r('password'))
-		try:
-			db = cx_Oracle.connect(usuario, password, 'localhost:1522/XE')
-			cursor = db.cursor()
-			respuesta = []
-			for c in cursor.execute("select k_solicitud,f_solicitud,k_idconvocatoria,i_estadosolicitud from solicitud where k_codestudiante='"+codigo+"'"):
-				context = {}
-				context['k_solicitud'] = c[0]
-				context['f_solicitud'] = c[1]
-				context['k_idconvocatoria'] = c[2]
-				context['i_estadosolicitud'] = c[3]
-				respuesta.append(context)
-			db.close()
-		except cx_Oracle.DatabaseError as e:
-			error, = e.args
-			return HttpResponseBadRequest('Error: '+error.message)
-		return JsonResponse(respuesta, safe=False) 
-	else:
-		return HttpResponseBadRequest('No get method')

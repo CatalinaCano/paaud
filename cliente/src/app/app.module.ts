@@ -17,8 +17,6 @@ import { NuevasSolicitudesComponent } from './components/nuevas-solicitudes/nuev
 import { PublicarConvocatoriaComponent } from './components/publicar-convocatoria/publicar-convocatoria.component';
 import { ConsultarConvocatoriaComponent } from './components/consultar-convocatoria/consultar-convocatoria.component';
 import { TiqueteraComponent } from './components/tiquetera/tiquetera.component';
-import { InscribirConvocatoriaComponent } from "app/components/inscribir-convocatoria/inscribir-convocatoria.component";
-import { ConfirmacionSolicitudComponent } from "app/components/confirmacion-solicitud/confirmacion-solicitud.component";
 import { VerHistoricoSolicitudesComponent } from "app/components/ver-historico-solicitudes/ver-historico-solicitudes.component";
 import { RegistrarTareaComponent } from "app/components/registrar-tarea/registrar-tarea.component";
 import { AsignarTareaComponent } from "app/components/asignar-tarea/asignar-tarea.component";
@@ -33,7 +31,7 @@ import { LoginService } from './services/login.service';
 import { SiginService } from './services/sigin.service';
 import { FacultadesService } from './services/facultades.service';
 import { ConvocatoriasService } from "app/services/convocatorias.service";
-import { RegistrarSolicitudService } from './services/registrar-solicitud.service';
+import { SolicitudesService } from './services/solicitudes.service';
 import { HistoricoSolicitudesService } from './services/historico-solicitudes.service';
 
 /**Importamos la directiva que valida el login*/
@@ -64,8 +62,6 @@ import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap'
     ConsultarConvocatoriaComponent,
     TiqueteraComponent,
     SinEspacios,
-    InscribirConvocatoriaComponent,
-    ConfirmacionSolicitudComponent,
     VerHistoricoSolicitudesComponent,
     VerSolicitudesRadicadasComponent,
     RegistrarTareaComponent,
@@ -90,7 +86,7 @@ import { BootstrapModalModule } from 'angular2-modal/plugins/bootstrap'
     SiginService,
     FacultadesService,
     ConvocatoriasService,
-    RegistrarSolicitudService,
+    SolicitudesService,
     HistoricoSolicitudesService
   ],
   bootstrap: [AppComponent]

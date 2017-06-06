@@ -7,8 +7,6 @@ import { NuevasSolicitudesComponent } from "app/components/nuevas-solicitudes/nu
 import { PublicarConvocatoriaComponent } from "app/components/publicar-convocatoria/publicar-convocatoria.component";
 import { ConsultarConvocatoriaComponent } from "app/components/consultar-convocatoria/consultar-convocatoria.component";
 import { TiqueteraComponent } from "app/components/tiquetera/tiquetera.component";
-import { InscribirConvocatoriaComponent } from "app/components/inscribir-convocatoria/inscribir-convocatoria.component";
-import { ConfirmacionSolicitudComponent } from "app/components/confirmacion-solicitud/confirmacion-solicitud.component";
 import { VerHistoricoSolicitudesComponent } from "app/components/ver-historico-solicitudes/ver-historico-solicitudes.component";
 import { VerSolicitudesRadicadasComponent } from "app/components/ver-solicitudes-radicadas/ver-solicitudes-radicadas.component";
 import { RegistrarTareaComponent } from "app/components/registrar-tarea/registrar-tarea.component";
@@ -28,8 +26,6 @@ export const routes: Route[] = [
     { path: 'publicar-convocatoria', component: PublicarConvocatoriaComponent },
     { path: 'consultar-convocatoria', component:ConsultarConvocatoriaComponent },
     { path: 'tiquetera', component: TiqueteraComponent },
-    { path: 'inscribir-convocatoria', component: InscribirConvocatoriaComponent },
-    { path: 'confirmacion-solicitud', component: ConfirmacionSolicitudComponent },
     { path: 'ver-historico-solicitudes', component:VerHistoricoSolicitudesComponent},
     { path: 'ver-solicitudes-radicadas', component:VerSolicitudesRadicadasComponent},
     { path: 'registrar-tarea', component:RegistrarTareaComponent},

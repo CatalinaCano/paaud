@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { FormsModule } from '@angular/forms';
 
-import { LoginService } from './../../services/login.service';
-import { RegistrarSolicitudService } from './../../services/registrar-solicitud.service';
-import { CustomFormsModule } from 'ng2-validation';
+//servicios
+import { ConvocatoriasService } from "app/services/convocatorias.service";
+import { SolicitudesService } from 'app/services/solicitudes.service';
 
 
 @Component({
@@ -15,244 +14,172 @@ import { CustomFormsModule } from 'ng2-validation';
 
 export class RegistrarSolicitudComponent implements OnInit {
 
+    error = '';
+    convocatorias = [];
     datos_usuario = {};
+    activar_formulario : boolean = false;
+
+    datos_solicitud = {
+        "k_convocatoria" : null,
+        "datos": []
+    };
 
     constructor(
-        private loginService: LoginService,
-        private registrarSolicitudService: RegistrarSolicitudService,
-        private router: Router
-    ) { }
+        private router: Router,
+        private convocatoriasService : ConvocatoriasService,
+        private solicitudesService : SolicitudesService
+        ) { }
 
     ngOnInit() {
-        this.datos_usuario = this.loginService.getDatosUsuario();
-        console.log(this.datos_usuario);
+        this.getConvocatorias();
+        this.datos_usuario = JSON.parse(sessionStorage.getItem('datos_usuario'));
      }
 
-    volver(){
-        this.router.navigate(['/landing']);
+    //trae los datos de las convocatorias
+    getConvocatorias() :void {
+            this.convocatoriasService.getConvocatoriasAbiertas()
+                .subscribe(res => {
+                        this.convocatorias = res;
+                    }, err => {
+                        this.error = err._body;
+                    });
     }
 
-     error = "";
-     valor_ultima_solicitud = null;
+    //función para ingresar al formulario de una convocatoria
+    registrarse(convocatoria: number):void{
+        this.error = '';
+        this.solicitudesService.verifySolicitud(convocatoria)
+            .subscribe(res => {
+                        if(res.respuesta){
+                            this.datos_solicitud.k_convocatoria = convocatoria;
+                            this.activar_formulario = true;
+                        } else {
+                            this.error = 'Usted ya tiene una solicitud pendiente para esta convocatoria';
+                        }
+                    }, err => {
+                        this.error = err._body;
+                    });
+    }
 
-     ingresos_familiares = {
+    //función para registrar una solicitud
+    registrarSolicitud():void {
+        this.error = ''
+        this.datos_solicitud.datos = [];
+        //llenamos la variable datos con todos los campo solicitud
+        this.datos_solicitud.datos.push(this.ingresos_familiares,this.sostiene_su_hogar,this.sostenimiento_economico,this.vive_fuera,
+            this.sostenimiento_personas,this.vive_en_arriendo,this.desplazamiento_forzado,this.origen,this.zona_riesgo,
+            this.discapacidad_fisica,this.patologia_medica);
+        this.solicitudesService.postSolicitud(this.datos_solicitud)
+            .subscribe(res => {
+                        alert("Solicitud registrada");
+                        this.activar_formulario = false;
+                    }, err => {
+                        this.error = err._body;
+                    });
+
+    }
+
+    ingresos_familiares = {
          "k_camposolicitud": 1,
-         "q_numerico": null,
-         "url": 'http://localhost:8000/post_camponumerico/'
+         "valor": null,
+         "n_soporte": "",
+         "numerico": true,
+         "booleano": false,
+         "caracteres": false
      }
 
      sostiene_su_hogar = {
          "k_camposolicitud": 2,
-         "i_booleano": 'f',
-         "url": 'http://localhost:8000/post_campobooleano/'
+         "valor": 'F',
+         "n_soporte": "n/a",
+         "numerico": false,
+         "booleano": true,
+         "caracteres": false
      }
 
      sostenimiento_economico = {
          "k_camposolicitud": 3,
-         "i_booleano": 'f',
-         "url": 'http://localhost:8000/post_campobooleano/'
+         "valor": 'F',
+         "n_soporte": "n/a",
+         "numerico": false,
+         "booleano": true,
+         "caracteres": false
      }
 
      vive_fuera = {
          "k_camposolicitud": 4,
-         "i_booleano": 'f',
-         "url": 'http://localhost:8000/post_campobooleano/'
+         "valor": 'F',
+         "n_soporte": "n/a",
+         "numerico": false,
+         "booleano": true,
+         "caracteres": false
      }
 
      sostenimiento_personas = {
          "k_camposolicitud": 5,
-         "i_booleano": 'f',
-         "url": 'http://localhost:8000/post_campobooleano/'
+         "valor": 'F',
+         "n_soporte": "n/a",
+         "numerico": false,
+         "booleano": true,
+         "caracteres": false
      }
 
      vive_en_arriendo = {
          "k_camposolicitud": 6,
-         "i_booleano": 'f',
-         "url": 'http://localhost:8000/post_campobooleano/'
+         "valor": 'F',
+         "n_soporte": "n/a",
+         "numerico": false,
+         "booleano": true,
+         "caracteres": false
      }
 
      desplazamiento_forzado = {
          "k_camposolicitud": 7,
-         "n_valorcampo": "ninguna",
-         "url": 'http://localhost:8000/post_campostring/'
+         "valor": 'ninguna',
+         "n_soporte": "n/a",
+         "numerico": false,
+         "booleano": false,
+         "caracteres": true
      }
 
      origen = {
          "k_camposolicitud": 8,
-         "i_booleano": 'f',
-         "url": 'http://localhost:8000/post_campobooleano/'
+         "valor": 'F',
+         "n_soporte": "n/a",
+         "numerico": false,
+         "booleano": true,
+         "caracteres": false
      }
 
      zona_riesgo = {
          "k_camposolicitud": 9,
-         "q_numerico": 1,
-         "url": 'http://localhost:8000/post_camponumerico/' 
+         "valor": 1,
+         "n_soporte": "",
+         "numerico": true,
+         "booleano": false,
+         "caracteres": false
      }
 
      discapacidad_fisica = {
          "k_camposolicitud": 10,
-         "i_booleano": 'f',
-         "url": 'http://localhost:8000/post_campobooleano/'
+         "valor": 'F',
+         "n_soporte": "n/a",
+         "numerico": false,
+         "booleano": true,
+         "caracteres": false
      }
 
      patologia_medica = {
          "k_camposolicitud": 11,
-         "i_booleano": 'f',
-         "url": 'http://localhost:8000/post_campobooleano/'
+         "valor": 'F',
+         "n_soporte": "n/a",
+         "numerico": false,
+         "booleano": true,
+         "caracteres": false
      }
-
-     //envia la solicitud
-     enviarSolicitud(usuario, codigo){
-         let solicitud = {
-            "usuario": usuario,
-            "password": String(codigo),
-            "codigo": String(codigo)
-         }
-
-         this.registrarSolicitudService
-            .postSolicitud(solicitud)
-            .then(data => {
-                //obtiene la ultima solicitud
-                this.registrarSolicitudService
-                    .getUltimaSolicitud(usuario,String(codigo))
-                    .then(data => {
-                        
-                        this.valor_ultima_solicitud = this.registrarSolicitudService.getValorUltimaSolicitud();
-                        console.log(this.valor_ultima_solicitud.max);
-                        //ingresos_familiares
-                        this.registrarSolicitudService
-                            .postSolicitudCampo(usuario,String(codigo),String(this.valor_ultima_solicitud.max),String(this.ingresos_familiares.k_camposolicitud),String(this.ingresos_familiares.q_numerico),String(this.ingresos_familiares.url))
-                            .then(data => {
-                                console.log("ingresado ingresos_familiares")
-                            })
-                            .catch( error => {
-                                this.error = error;
-                                console.log("Error ingresos familiares: "+error)
-                            })
-
-                        //sostiene_su_hogar
-                        this.registrarSolicitudService
-                            .postSolicitudCampo(usuario,String(codigo),String(this.valor_ultima_solicitud.max),String(this.sostiene_su_hogar.k_camposolicitud),String(this.sostiene_su_hogar.i_booleano),String(this.sostiene_su_hogar.url))
-                            .then(data => {
-                                console.log("ingresado sostiene_su_hogar")
-                            })
-                            .catch( error => {
-                                this.error = error;
-                                console.log("Error sostiene_su_hogar: "+error)
-                            })
-
-                        //sostenimiento_economico
-                        this.registrarSolicitudService
-                            .postSolicitudCampo(usuario,String(codigo),String(this.valor_ultima_solicitud.max),String(this.sostenimiento_economico.k_camposolicitud),String(this.sostenimiento_economico.i_booleano),String(this.sostenimiento_economico.url))
-                            .then(data => {
-                                console.log("ingresado sostenimiento_economico")
-                            })
-                            .catch( error => {
-                                this.error = error;
-                                console.log("Error sostenimiento_economico: "+error)
-                            })
-
-                        //vive_fuera
-                        this.registrarSolicitudService
-                            .postSolicitudCampo(usuario,String(codigo),String(this.valor_ultima_solicitud.max),String(this.vive_fuera.k_camposolicitud),String(this.vive_fuera.i_booleano),String(this.vive_fuera.url))
-                            .then(data => {
-                                console.log("ingresado vive_fuera")
-                            })
-                            .catch( error => {
-                                this.error = error;
-                                console.log("Error vive_fuera: "+error)
-                            })
-
-                        //sostenimiento_personas
-                        this.registrarSolicitudService
-                            .postSolicitudCampo(usuario,String(codigo),String(this.valor_ultima_solicitud.max),String(this.sostenimiento_personas.k_camposolicitud),String(this.sostenimiento_personas.i_booleano),String(this.sostenimiento_personas.url))
-                            .then(data => {
-                                console.log("ingresado sostenimiento_personas")
-                            })
-                            .catch( error => {
-                                this.error = error;
-                                console.log("Error sostenimiento_personas: "+error)
-                            })
-
-                        //vive_en_arriendo
-                        this.registrarSolicitudService
-                            .postSolicitudCampo(usuario,String(codigo),String(this.valor_ultima_solicitud.max),String(this.vive_en_arriendo.k_camposolicitud),String(this.vive_en_arriendo.i_booleano),String(this.vive_en_arriendo.url))
-                            .then(data => {
-                                console.log("ingresado vive_en_arriendo")
-                            })
-                            .catch( error => {
-                                this.error = error;
-                                console.log("Error vive_en_arriendo: "+error)
-                            })
-
-                        //desplazamiento_forzado
-                        this.registrarSolicitudService
-                            .postSolicitudCampo(usuario,String(codigo),String(this.valor_ultima_solicitud.max),String(this.desplazamiento_forzado.k_camposolicitud),String(this.desplazamiento_forzado.n_valorcampo),String(this.desplazamiento_forzado.url))
-                            .then(data => {
-                                console.log("ingresado desplazamiento_forzado")
-                            })
-                            .catch( error => {
-                                this.error = error;
-                                console.log("Error desplazamiento_forzado: "+error)
-                            })
-
-                        //origen
-                        this.registrarSolicitudService
-                            .postSolicitudCampo(usuario,String(codigo),String(this.valor_ultima_solicitud.max),String(this.origen.k_camposolicitud),String(this.origen.i_booleano),String(this.origen.url))
-                            .then(data => {
-                                console.log("ingresado origen")
-                            })
-                            .catch( error => {
-                                this.error = error;
-                                console.log("Error origen: "+error)
-                            })
-
-                        //zona_riesgo
-                        this.registrarSolicitudService
-                            .postSolicitudCampo(usuario,String(codigo),String(this.valor_ultima_solicitud.max),String(this.zona_riesgo.k_camposolicitud),String(this.zona_riesgo.q_numerico),String(this.zona_riesgo.url))
-                            .then(data => {
-                                console.log("ingresado zona_riesgo")
-                            })
-                            .catch( error => {
-                                this.error = error;
-                                console.log("Error zona_riesgo: "+error)
-                            })
-
-                        //discapacidad_fisica
-                        this.registrarSolicitudService
-                            .postSolicitudCampo(usuario,String(codigo),String(this.valor_ultima_solicitud.max),String(this.discapacidad_fisica.k_camposolicitud),String(this.discapacidad_fisica.i_booleano),String(this.discapacidad_fisica.url))
-                            .then(data => {
-                                console.log("ingresado discapacidad_fisica")
-                            })
-                            .catch( error => {
-                                this.error = error;
-                                console.log("Error discapacidad_fisica: "+error)
-                            })
-
-                        //patologia_medica
-                        this.registrarSolicitudService
-                            .postSolicitudCampo(usuario,String(codigo),String(this.valor_ultima_solicitud.max),String(this.patologia_medica.k_camposolicitud),String(this.patologia_medica.i_booleano),String(this.patologia_medica.url))
-                            .then(data => {
-                                console.log("ingresado patologia_medica")
-                            })
-                            .catch( error => {
-                                this.error = error;
-                                console.log("Error patologia_medica: "+error)
-                            })
-                        
-                            this.router.navigate(['/confirmacion-solicitud']);
-
-                    })
-                    .catch( error => {
-                        this.error = error;
-                        console.log("Error obteniendo ultima solicitud: "+error)
-                    })
-
-            })
-            .catch( error => {
-                this.error = error;
-                console.log("Error en crear solicitud: "+error)
-            })
-     }
+    
+    volver(){
+        this.activar_formulario = false;
+    }
 
 }

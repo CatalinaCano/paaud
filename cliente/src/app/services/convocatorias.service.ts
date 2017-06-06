@@ -10,6 +10,7 @@ export class ConvocatoriasService {
 
     private post_convocatoriaURL = 'http://localhost:8000/post_convocatoria/';
     private get_convocatoriasURL = 'http://localhost:8000/get_convocatorias/';
+    private get_convocatoriasabiertasURL = 'http://localhost:8000/get_convocatoriasabiertas/';
     private get_cuposconvocatoriaURL = 'http://localhost:8000/get_cuposconvocatoria/';
     private update_convocatoriaURL = 'http://localhost:8000/update_convocatoria/';
     private update_cuposconvocatoriaURL = 'http://localhost:8000/update_cuposconvocatoria/';
@@ -32,6 +33,15 @@ export class ConvocatoriasService {
     getConvocatorias(): Observable<any> {
         return this.http
             .get(this.get_convocatoriasURL+'?usuario='+this.datos_usuario.usuario+'&password='+this.datos_usuario.password)
+            .map((res: Response) => {
+                return res.json().datos || {};
+            })
+            .catch((error: any) => Observable.throw(error || 'Server error'));
+    }
+
+    getConvocatoriasAbiertas(): Observable<any> {
+        return this.http
+            .get(this.get_convocatoriasabiertasURL+'?usuario='+this.datos_usuario.usuario+'&password='+this.datos_usuario.password)
             .map((res: Response) => {
                 return res.json().datos || {};
             })

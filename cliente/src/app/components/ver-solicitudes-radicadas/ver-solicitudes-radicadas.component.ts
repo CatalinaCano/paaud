@@ -1,4 +1,9 @@
+//angular
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+//servicios
+import { SolicitudesService } from "app/services/solicitudes.service";
 
 @Component({
     moduleId: module.id,
@@ -7,43 +12,68 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class VerSolicitudesRadicadasComponent implements OnInit {
-    constructor() { }
 
-    ngOnInit() { }
+    error = '';
+    solicitudes = [];
+    ver_solicitud = false;
+    solicitud_campo = [];
+    solicitud_seleccionada = {};
 
-    convocatorias =[
-        {
-            "n_solicitud": "1",
-            "n_codigo":"20121020079",
-            "n_nombres":"Diana Catalina",
-            "n_apellidos":"Cano Narvaez",
-            "n_facultad":"Ingeniería",
-            "n_carrera":"Ing. Sistemas",
-            "n_fecha_r":"01/02/2015",
-            "n_estado":"Aprobada",
-            "n_responsable": "Maria Castillo"
-        },
-         {
-            "n_solicitud": "2",
-            "n_codigo":"20121020079",
-            "n_nombres":"Diana Catalina",
-            "n_apellidos":"Cano Narvaez",
-            "n_facultad":"Ingeniería",
-            "n_carrera":"Ing. Sistemas",
-            "n_fecha_r":"16/08/2016",
-            "n_estado":"Aprobada",
-            "n_responsable": "Camilo Velandia"
-        },
-         {
-            "n_solicitud": "3",
-            "n_codigo":"20121020079",
-            "n_nombres":"Diana Catalina",
-            "n_apellidos":"Cano Narvaez",
-            "n_facultad":"Ingeniería",
-            "n_carrera":"Ing. Sistemas",
-            "n_fecha_r":"10/03/2017",
-            "n_estado":"En proceso",
-            "n_responsable": "Nicolas Bernal"
-        }
-    ];
+    constructor(
+        private solicitudesService: SolicitudesService
+    ) { }
+
+    ngOnInit() {
+        this.getDatosIniciales();
+     }
+
+    //trae los datos de las facultades
+    getDatosIniciales() :void {
+            this.solicitudesService.getSolicitudes()
+                .subscribe(res => {
+                        this.solicitudes = res;
+                        console.log(this.solicitudes);
+                    }, err => {
+                        this.error = err._body;
+                    });
+    }
+
+    getSolicitudCampoSolicitud(solicitud:number) : void {
+        this.solicitudesService.get_solicitudCampoSolicitud(solicitud)
+                .subscribe(res => {
+                        this.solicitud_campo = res;
+                        console.log(this.solicitud_campo);
+                    }, err => {
+                        this.error = err._body;
+                    });
+    }
+
+    verSolicitud(solicitud:Object,id:number): void {
+        this.ver_solicitud = true;
+        this.solicitud_seleccionada = solicitud;
+        this.getSolicitudCampoSolicitud(id);
+    }
+
+    actualizarSolicitud(solicitud:number, estado: string) : void {
+        let valores = {
+            "k_solicitud" : solicitud,
+            "i_estadosolicitud" : estado
+        };
+        this.solicitudesService.updateSolicitud(valores)
+                .subscribe(res => {
+                            if(res.respuesta){
+                                this.getDatosIniciales();
+                                this.solicitud_seleccionada = {};
+                                this.ver_solicitud = false;
+                                alert('Solicitud actualizada');
+                            }
+                        }, err => {
+                            this.error = err._body;
+                        });
+    }
+
+    cancelarValidacion() : void{
+        this.solicitud_seleccionada = {};
+        this.ver_solicitud = false;
+    }
 }
